@@ -1204,16 +1204,16 @@ export function MiniNav({ w = 20, h = 3.5, homeEvent = () => { window.open("http
 
         `}</style>
       <div className="button-container">
-        <button onClick={handlHomeSVGClick} className="button">
+        <button aria-label="navbar-button" onClick={handlHomeSVGClick} className="button">
           {homeSVG}
         </button>
-        <button onClick={handlePersonSVGClick} className="button">
+        <button aria-label="navbar-button" onClick={handlePersonSVGClick} className="button">
           {searchSVG}
         </button>
-        <button onClick={handleSearchSVGClick} className="button">
+        <button aria-label="navbar-button" onClick={handleSearchSVGClick} className="button">
           {personSVG}
         </button>
-        <button onClick={handleShopSVGClick} className="button">
+        <button aria-label="navbar-button" onClick={handleShopSVGClick} className="button">
           {shopSVG}
         </button>
       </div>
