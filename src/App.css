@@ -8,13 +8,48 @@
   background: #070707;
   color: white;
   font-weight: bold;
+  background: linear-gradient(-45deg, #111213, #000000, #050505);
+  background-size: 400% 400%;
+  animation: gradient 8s ease infinite;
 }
-.alert{
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.title {
+  font-size: 6vw;
+  font-weight: 600;
+  background: linear-gradient(
+    45deg,
+    #ff007f,
+    #ff00ff,
+    #ff1493,
+    #ff69b4,
+    #ff69b4,
+    #ff1493,
+    #ff00ff,
+    #ff007f
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+.alert {
   position: fixed;
   top: 5%;
   right: 5%;
 }
-img{
+img {
   height: 20rem;
   width: 24rem;
   object-fit: contain;

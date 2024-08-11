@@ -189,7 +189,7 @@ export function CounterDown({ start, end, time, size }) {
   }, [start]);
 
   return (
-    <div style={{ fontSize: `${size}rem` }}>{number}</div>
+    <div style={{ fontSize: `${size}rem` }}>{number}s</div>
   );
 }
 
@@ -1636,6 +1636,25 @@ export function IconsGroup({ firstSVG = <svg version="1.1" viewBox="0 0 100 100"
 
       </ul>
 
+    </>
+  );
+}
+
+export function LaRoseText({ text, fontSize = 2, fontWeight = 600, gradientText = 'linear-gradient(45deg, #ff007f, #ff00ff, #ff1493, #ff69b4, #ff69b4, #ff1493, #ff00ff, #ff007f)' }) {
+  return (
+    <>
+      <style>{`
+        .title {
+          font-size: ${fontSize}rem;
+          font-weight: ${fontWeight};
+          background: ${gradientText};
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          text-fill-color: transparent;
+        }
+      `}</style>
+      <div className="title">{text}</div>
     </>
   );
 }

@@ -1,12 +1,20 @@
 import React from "react";
 import "./App.css";
-import { Ak_Alert, CounterDown, MiniNav, ModernBtn, Slider } from "./LaRose";
+import {
+  Ak_Alert,
+  CounterDown,
+  LaRoseText,
+  MiniNav,
+  ModernBtn,
+  Slider,
+} from "./LaRose";
 import LaRose from "./LaRose.png";
 function App() {
   return (
     <>
       <div className="App">
         <img src={LaRose} alt="LaRose_Logo" />
+        <LaRoseText text={"welcome at LaRose.js"} fontSize={1.9} />
         <div className="alert">
           <Ak_Alert
             JSX={<CounterDown start={2} end={0} time={0.9} />}
