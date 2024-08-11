@@ -1,20 +1,42 @@
 import React from "react";
 import "./App.css";
-import { Ak_Alert } from "./LaRose";
+import { Ak_Alert, CounterDown, MiniNav, ModernBtn, Slider } from "./LaRose";
+import LaRose from "./LaRose.png";
 function App() {
   return (
     <>
-      <style>{`
-    .App{
-    display:"flex";
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 1rem;
-    }
-    `}</style>
       <div className="App">
-        <Ak_Alert time={10000} title={"hello from LaRose"} />
+        <img src={LaRose} alt="LaRose_Logo" />
+        <div className="alert">
+          <Ak_Alert
+            JSX={<CounterDown start={2} end={0} time={0.9} />}
+            title={"Simple To Customize "}
+            time={2000}
+          />
+        </div>
+        <div className="sliderStyle">
+          <Slider autoplayInterval={2000} autoplay>
+            <ModernBtn
+              title={"Documentation"}
+              allColor={"rgb(80, 154, 248)"}
+              color={"white"}
+              hoverColor={"black"}
+              clickEvent={() => {
+                window.open("#");
+              }}
+            />
+            <ModernBtn
+              title={"Repository"}
+              allColor={"rgb(80, 154, 248)"}
+              color={"white"}
+              hoverColor={"black"}
+              clickEvent={() => {
+                window.open("https://github.com/hamdymohamedak/LaRose.js");
+              }}
+            />
+          </Slider>
+        </div>
+        <MiniNav h={3} w={20} />
       </div>
     </>
   );

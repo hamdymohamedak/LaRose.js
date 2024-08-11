@@ -5,7 +5,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: black;
 }
 
 code {
@@ -42,8 +41,14 @@ html {
   }
 }
 
-@media (min-width: 1601px) {
+@media (min-width: 1601px) and (max-width: 2000px) {
   html {
     font-size: 21px;
+  }
+}
+
+@media (min-width: 2000px) and (max-width: 2600px) {
+  html {
+    font-size: 24px;
   }
 }
