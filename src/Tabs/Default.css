@@ -1,5 +1,5 @@
 .App {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,7 +9,7 @@
   font-weight: bold;
 }
 .register {
-  z-index: 999;
+  z-index: 0;
 }
 .alert {
   position: absolute;
@@ -17,6 +17,7 @@
   right: 5%;
   animation: moveAlert 5s ease;
   overflow: hidden;
+  z-index: 9999;
 }
 .alert2 {
   position: absolute;
@@ -25,6 +26,7 @@
   animation: moveAlert2 5s ease;
   animation-delay: 2s;
   overflow: hidden;
+  z-index: 9999;    
 }
 @keyframes moveAlert {
   0% {

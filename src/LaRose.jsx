@@ -31,7 +31,8 @@ export function Ak_Alert({ title, time, JSX }) {
       background: "#509AF8",
       borderRadius: "8px",
       boxShadow: "0px 0px 5px -3px #111",
-      position: "relative" // Add position relative to properly position the close button
+      position: "relative", // Add position relative to properly position the close button
+      zIndex: "999"
     },
     infoIcon: {
       width: "20px",
@@ -1040,6 +1041,9 @@ export function Slider({ children, autoplay = false, autoplayInterval = 3000 }) 
         border-radius: 10px;
         box-shadow: 1px 1px 19px -1px #1193d2;
         font-weight: bold;
+        display: flex;
+        justify-content: center;
+      align-items: center;
       }
 
       .slider-button.prev {

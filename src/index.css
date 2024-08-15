@@ -19,9 +19,9 @@ html {
 }
 @media (max-width: 425px) {
   html {
-    font-size: 10px;
+    font-size: 11px;
   }
-  .alert,.alert2{
+  .alert2 {
     display: none;
   }
 }
@@ -29,6 +29,9 @@ html {
 @media (min-width: 426px) and (max-width: 768px) {
   html {
     font-size: 13px;
+  }
+  .alert2 {
+    display: none;
   }
 }
 
