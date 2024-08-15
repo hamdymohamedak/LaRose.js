@@ -62,40 +62,41 @@ export function Ak_Alert({ title, time, JSX }) {
   };
 
   return (
-    <div style={styles.info}>
-      <div style={styles.infoIcon}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={24}
-          viewBox="0 0 24 24"
-          height={24}
-          fill="none"
-        >
-          <path
-            fill="#fff"
-            d="m12 1.5c-5.79844 0-10.5 4.70156-10.5 10.5 0 5.7984 4.70156 10.5 10.5 10.5 5.7984 0 10.5-4.7016 10.5-10.5 0-5.79844-4.7016-10.5-10.5-10.5zm.75 15.5625c0 .1031-.0844.1875-.1875.1875h-1.125c-.1031 0-.1875-.0844-.1875-.1875v-6.375c0-.1031.0844-.1875.1875-.1875h1.125c.1031 0 .1875.0844.1875.1875zm-.75-8.0625c-.2944-.00601-.5747-.12718-.7808-.3375-.206-.21032-.3215-.49305-.3215-.7875s.1155-.57718.3215-.7875c.2061-.21032.4864-.33149.7808-.3375.2944.00601.5747.12718.7808.3375.206.21032.3215.49305.3215.7875s-.1155.57718-.3215.7875c-.2061.21032-.4864.33149-.7808.3375z"
-          />
-        </svg>
+    <>
+      <div style={styles.info}>
+        <div style={styles.infoIcon}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width={24}
+            viewBox="0 0 24 24"
+            height={24}
+            fill="none"
+          >
+            <path
+              fill="#fff"
+              d="m12 1.5c-5.79844 0-10.5 4.70156-10.5 10.5 0 5.7984 4.70156 10.5 10.5 10.5 5.7984 0 10.5-4.7016 10.5-10.5 0-5.79844-4.7016-10.5-10.5-10.5zm.75 15.5625c0 .1031-.0844.1875-.1875.1875h-1.125c-.1031 0-.1875-.0844-.1875-.1875v-6.375c0-.1031.0844-.1875.1875-.1875h1.125c.1031 0 .1875.0844.1875.1875zm-.75-8.0625c-.2944-.00601-.5747-.12718-.7808-.3375-.206-.21032-.3215-.49305-.3215-.7875s.1155-.57718.3215-.7875c.2061-.21032.4864-.33149.7808-.3375.2944.00601.5747.12718.7808.3375.206.21032.3215.49305.3215.7875s-.1155.57718-.3215.7875c-.2061.21032-.4864.33149-.7808.3375z"
+            />
+          </svg>
+        </div>
+        <div style={styles.infoTitle}>{title}</div>
+        <div onClick={handleClose} style={styles.infoClose}>
+          <svg
+            height={20}
+            viewBox="0 0 20 20"
+            width={20}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"
+              fill="#fff"
+            />
+          </svg>
+        </div>
+        <div style={{ marginLeft: "1rem" }}>{JSX}</div>
       </div>
-      <div style={styles.infoTitle}>{title}</div>
-      <div onClick={handleClose} style={styles.infoClose}>
-        <svg
-          height={20}
-          viewBox="0 0 20 20"
-          width={20}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"
-            fill="#fff"
-          />
-        </svg>
-      </div>
-      <div style={{ marginLeft: "1rem" }}>{JSX}</div>
-    </div>
+    </>
   );
 }
-
 export function Button({ h, w, event }) {
   const [hover, setHover] = useState(false);
 
@@ -135,20 +136,18 @@ export function Button({ h, w, event }) {
   };
 
   return (
-    <button
-      style={combinedStyle}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      onClick={handleEvent}
-    >
-      button
-    </button>
+    <>
+      <button
+        style={combinedStyle}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        onClick={handleEvent}
+      >
+        button
+      </button>
+    </>
   );
 }
-
-
-
-
 export function CounterUp({ start, end, time, size, weight }) {
   const [number, setNumber] = useState(start);
 
@@ -170,7 +169,6 @@ export function CounterUp({ start, end, time, size, weight }) {
     <div style={{ fontSize: `${size}rem`, fontWeight: `${weight}` }}>{number}</div>
   );
 }
-
 export function CounterDown({ start, end, time, size }) {
   const [number, setNumber] = useState(start);
 
@@ -189,11 +187,9 @@ export function CounterDown({ start, end, time, size }) {
   }, [start]);
 
   return (
-    <div style={{ fontSize: `${size}rem` }}>{number}s</div>
+    <div style={{ fontSize: `${size}rem` }}>{number}</div>
   );
 }
-
-
 export function ModernBtn({ title, allColor, fontSize, color, hoverColor, clickEvent, h = "4", w = "11" }) {
 
   let handleClick = () => {
@@ -300,7 +296,6 @@ export function ModernBtn({ title, allColor, fontSize, color, hoverColor, clickE
     </>
   );
 }
-
 export function SwitchCase({ w, h }) {
   return (
     <>
@@ -431,10 +426,7 @@ export function SwitchCase({ w, h }) {
 
   )
 }
-
-
-
-export function ChecOut({ title, clickEvent }) {
+export function CheckOut({ title, clickEvent }) {
   let handleEvent = () => {
     if (typeof clickEvent === "function") {
       clickEvent();
@@ -708,7 +700,6 @@ export function ChecOut({ title, clickEvent }) {
     </>
   )
 }
-
 export function Loader() {
   return (
     <>
@@ -971,7 +962,6 @@ export function Loader() {
           <div className="e8 color" />
         </div>
       </div>
-      <CounterUp size={2} weight={"bold"} start={0} end={100} time={12} />
     </>
 
   )
@@ -1007,55 +997,85 @@ export function Slider({ children, autoplay = false, autoplayInterval = 3000 }) 
     <>
       <style>{`
       .slider-container {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  height:100%;
-}
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+      }
 
-.slider-wrapper {
-  width: 100%;
-  overflow: hidden;
-}
+      .slider-wrapper {
+        width: 100%;
+        min-height: 100vh;
+        overflow: hidden;
+      }
 
-.slider-content {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-}
+      .slider-content {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
 
-.slider-slide {
-  flex: 0 0 100%;
-  box-sizing: border-box;
-  width: 100%;
-  height:100%;
-  padding: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+      .slider-slide {
+        flex: 0 0 100%;
+        box-sizing: border-box;
+        width: 100%;
+        min-height: 100vh;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
-.slider-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  z-index: 1;
-}
+      .slider-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #1193d2;
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 1;
+        height: 2rem;
+        width: 3rem;
+        border-radius: 10px;
+        box-shadow: 1px 1px 19px -1px #1193d2;
+        font-weight: bold;
+      }
 
-.slider-pagination {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-}
+      .slider-button.prev {
+        left: 10px;
+      }
 
+      .slider-button.next {
+        right: 10px;
+      }
+
+      .slider-pagination {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+      }
+
+      .pagination-dot {
+        height: 10px;
+        width: 10px;
+        margin: 0 5px;
+        background-color: white;
+        border-radius: 50%;
+        display: inline-block;
+        cursor: pointer;
+      }
+
+      .pagination-dot.active {
+        background-color: black;
+      }
       `}</style>
+
       <div className="slider-container">
+        <button className="slider-button prev" onClick={handlePrev}><i class="fa-solid fa-angles-left"></i></button>
+        <button className="slider-button next" onClick={handleNext}><i class="fa-solid fa-angles-right"></i></button>
 
         <div className="slider-wrapper">
           <div className="slider-content" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
@@ -1080,8 +1100,6 @@ export function Slider({ children, autoplay = false, autoplayInterval = 3000 }) 
     </>
   );
 }
-
-
 export function MiniNav({ w = 20, h = 3.5, homeEvent = () => { window.open("https://askander.vercel.app") }, homeSVG = <svg
   className="icon"
   stroke="currentColor"
@@ -1221,14 +1239,6 @@ export function MiniNav({ w = 20, h = 3.5, homeEvent = () => { window.open("http
 
   )
 }
-
-
-
-
-
-
-
-
 export function Register({ Name, Pass }) {
   return (
     <>
@@ -1377,7 +1387,7 @@ font-size: 0.5625rem; /* 9px */
 }
       `}</style>
       <div className="container">
-        <div className="heading">Sign In</div>
+        <div className="heading">Register</div>
         <form action="" className="form">
           <input
             required=""
@@ -1400,12 +1410,12 @@ font-size: 0.5625rem; /* 9px */
           <span className="forgot-password">
             <a href="#">Forgot Password ?</a>
           </span>
-          <input className="login-button" type="submit" defaultValue="Sign In" />
+          <input onClick={() => { window.open("https://github.com/hamdymohamedak") }} className="login-button" type="submit" defaultValue="Sign In" />
         </form>
         <div className="social-account-container">
           <span className="title">Or Sign in with</span>
           <div className="social-accounts">
-            <button className="social-button google">
+            <button onClick={() => { window.open("https://mohameddhamdy407@gmail.com") }} className="social-button google">
               <svg
                 className="svg"
                 xmlns="http://www.w3.org/2000/svg"
@@ -1415,17 +1425,7 @@ font-size: 0.5625rem; /* 9px */
                 <path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
               </svg>
             </button>
-            <button className="social-button apple">
-              <svg
-                className="svg"
-                xmlns="http://www.w3.org/2000/svg"
-                height="1em"
-                viewBox="0 0 384 512"
-              >
-                <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z" />
-              </svg>
-            </button>
-            <button className="social-button twitter">
+            <button onClick={() => { window.open("https://x.com/HamdyMohamedd1") }} className="social-button twitter">
               <svg
                 className="svg"
                 xmlns="http://www.w3.org/2000/svg"
@@ -1444,7 +1444,6 @@ font-size: 0.5625rem; /* 9px */
     </>
   )
 }
-
 export function IconsGroup({ firstSVG = <svg version="1.1" viewBox="0 0 100 100">
   <path
     d="M50,4C24.7,4,4,24.7,4,50s20.6,46,46,46s46-20.6,46-46S75.4,4,50,4z M71.6,71.5c0,0,0,0.1-0.1,0.1c-0.8,1.2-2,1.8-3.2,1.8  c-0.7,0-1.4-0.2-2-0.6c-10.2-6.3-23.3-7.7-38.8-4.1c-2.1,0.6-4-0.9-4.5-2.7c-0.6-2.3,0.9-4.1,2.7-4.6c17.7-4,32.6-2.3,44.4,5  c0.9,0.4,1.5,1,1.8,1.9C72.2,69.3,72.1,70.5,71.6,71.5z M76.9,59.3L76.9,59.3c-0.8,1.1-1.9,1.9-3.2,2.1c-0.2,0-0.5,0.1-0.7,0.1  c-0.8,0-1.6-0.3-2.3-0.7c-12-7.3-30.1-9.4-43.9-5c-2.5,0.6-5-0.7-5.6-3c-0.6-2.5,0.7-4.9,3-5.5c16.5-5,37.2-2.5,51.4,6.2  c0.8,0.4,1.5,1.3,1.8,2.5C77.9,57,77.6,58.3,76.9,59.3z M83.2,45.6c-1,1.4-2.7,2.1-4.4,2.1c-0.9,0-1.9-0.2-2.7-0.7c0,0,0,0,0,0  c-13.9-8.3-37.8-9.3-51.4-5.1c-2.7,0.8-5.5-0.7-6.4-3.3c-0.8-2.7,0.7-5.6,3.3-6.4c16.2-4.8,43-3.8,59.8,6.2  C83.8,39.6,84.7,42.9,83.2,45.6C83.3,45.5,83.3,45.5,83.2,45.6z"
@@ -1639,8 +1638,7 @@ export function IconsGroup({ firstSVG = <svg version="1.1" viewBox="0 0 100 100"
     </>
   );
 }
-
-export function LaRoseText({ text, fontSize = 2, fontWeight = 600, gradientText = 'linear-gradient(45deg, #ff007f, #ff00ff, #ff1493, #ff69b4, #ff69b4, #ff1493, #ff00ff, #ff007f)' }) {
+export function LaRoseText({ children, fontSize = 2, fontWeight = 600, gradientText = 'linear-gradient(45deg, #ff007f, #ff00ff, #ff1493, #ff69b4, #ff69b4, #ff1493, #ff00ff, #ff007f)' }) {
   return (
     <>
       <style>{`
@@ -1654,7 +1652,7 @@ export function LaRoseText({ text, fontSize = 2, fontWeight = 600, gradientText 
           text-fill-color: transparent;
         }
       `}</style>
-      <div className="title">{text}</div>
+      <div className="title">{children}</div>
     </>
   );
 }

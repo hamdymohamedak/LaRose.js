@@ -1,4 +1,4 @@
-import { CounterUp } from '../../AMT_Package'
+import { CounterUp } from '../../larose_Package'
 
 export default function Loader() {
     return (

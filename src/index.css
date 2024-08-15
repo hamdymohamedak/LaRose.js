@@ -21,6 +21,9 @@ html {
   html {
     font-size: 10px;
   }
+  .alert,.alert2{
+    display: none;
+  }
 }
 
 @media (min-width: 426px) and (max-width: 768px) {
