@@ -1,69 +1,70 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #141a22;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+* {
+  transition: 0.2s;
 }
 html {
   font-size: 16px;
 }
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  transition: 0.2s;
-  color: white;
-  outline: none;
-  text-decoration: none;
-}
-span{
-  background: rgba(3, 185, 209, 0.2);
-  font-weight: bold;
-}
-section {
-  min-height: 100vh;
-  background: #141a22;
-  overflow: hidden;
-}
-#copyIcon{
-  padding-right: 1rem;
-}
-@media (max-width:325px) {
+@media (max-width: 425px) {
   html {
-    font-size: 12px;
+    font-size: 11px;
+  }
+  .alert2 {
+    display: none;
   }
 }
 
-@media (min-width:326px) and (max-width:425px) {
+@media (min-width: 426px) and (max-width: 768px) {
   html {
-    font-size: 12px;
+    font-size: 13px;
+  }
+  .alert2 {
+    display: none;
   }
 }
 
-@media (min-width:426px) and (max-width:768px) {
-  html {
-    font-size: 14px;
-  }
-}
-
-@media (min-width:769px) and (max-width:1200px) {
+@media (min-width: 769px) and (max-width: 1200px) {
   html {
     font-size: 16px;
   }
 }
 
-@media (min-width:1201px) and (max-width:1600px) {
+@media (min-width: 1201px) and (max-width: 1600px) {
   html {
     font-size: 18px;
   }
 }
 
-@media (min-width:1601px) {
+@media (min-width: 1601px) and (max-width: 2000px) {
   html {
-    font-size: 20px;
+    font-size: 21px;
   }
+}
+
+@media (min-width: 2000px) and (max-width: 2600px) {
+  html {
+    font-size: 24px;
+  }
+}
+
+.askander {
+  /* display: none; */
+  background: red;
+  height: 2rem;
+  width: 6rem;
+  color: blue;
+  font-size: 2rem;
+  border-radius: 10px;
 }

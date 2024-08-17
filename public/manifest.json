@@ -1,19 +1,19 @@
 {
-  "short_name": "AK-Macros",
-  "name": "AK-Macros.docs",
+  "short_name": "LaRose.js",
+  "name": "LaRose",
   "icons": [
     {
-      "src": "",
+      "src": "./LaRose.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "",
+      "src": "./LaRose.ico",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "",
+      "src": "./LaRose.ico",
       "type": "image/png",
       "sizes": "512x512"
     }
