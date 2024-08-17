@@ -18,6 +18,7 @@ html {
   transition: 0.2s;
   color: white;
   outline: none;
+  user-select: none;
   text-decoration: none;
 }
 span{
