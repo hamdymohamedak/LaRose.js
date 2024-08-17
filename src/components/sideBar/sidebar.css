@@ -1,0 +1,83 @@
+.sideBar {
+  background: #141a22;
+  height: 100vh;
+  width: 15rem;
+  overflow: scroll;
+  overflow-x: hidden;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  padding-top: 2rem;
+  text-align: center;
+  padding-bottom: 2rem;
+  transition: transform 0.3s ease;
+  transform: translateX(-100%);
+  z-index: 999;
+}
+
+.sideBar.visible {
+  transform: translateX(0);
+}
+
+.sideBar.hidden {
+  transform: translateX(-100%);
+}
+
+.sideBar :nth-child(n):hover {
+  cursor: pointer;
+  scale: 1.1;
+}
+
+.sideBar::-webkit-scrollbar {
+  width: 0.7rem;
+}
+
+/* Track */
+.sideBar::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+.sideBar::-webkit-scrollbar-thumb {
+  background: #0077e5;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.sideBar::-webkit-scrollbar-thumb:hover {
+  background: #034c91;
+}
+
+@media (max-width: 878px) {
+  .sideBar {
+    position: fixed;
+    z-index: 999;
+  }
+}
+
+.toggleButton {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1;
+  background: #0077e5;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.toggleButton:hover {
+  background: #034c91;
+}
+
+.AMT_btn {
+  position: fixed;
+  bottom: 6%;
+  right: 1%;
+}

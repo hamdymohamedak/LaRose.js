@@ -19,15 +19,14 @@ import This_year from "./components/macrosUI/All_Macros/this_year.jsx";
 import Ram_size from "./components/macrosUI/All_Macros/ Ram_size.jsx";
 import This_month from "./components/macrosUI/All_Macros/this_month.jsx";
 import Remove_all_folders from "./components/macrosUI/All_Macros/remove_all_folders.jsx";
-import Remove_file from "./components/macrosUI/All_Macros/remove_file.jsx";
+import Remove_file from "./components/macrosUI/remove_file.jsx";
 import Remove_folder from "./components/macrosUI/All_Macros/remove_folder.jsx";
 import Use_fetch from "./components/macrosUI/All_Macros/Use_fetch.jsx";
 import Use_loopat from "./components/macrosUI/All_Macros/Use_loopat.jsx";
 import Use_lower_case from "./components/macrosUI/All_Macros/Use_lower_case.jsx";
 import Use_rand from "./components/macrosUI/All_Macros/Use_rand.jsx";
 import Use_upper_case from "./components/macrosUI/All_Macros/Use_upper_case.jsx";
-import Chatbot from "./components/chatbot/ChatBot.jsx";
-import Use_time from "./components/macrosUI/All_Macros/Use_time.jsx";
+
 function App() {
   const api = "https://count-website-views.onrender.com/count";
   useEffect(() => {
@@ -74,8 +73,6 @@ function App() {
         <Route path="/use_lower_case" element={<Use_lower_case />} />
         <Route path="/use_rand" element={<Use_rand />} />
         <Route path="/use_upper_case" element={<Use_upper_case />} />
-        <Route path="/chatbot" element={<Chatbot />} />
-        <Route path="/use_time" element={<Use_time />} />
       </Routes>
     </main>
   );

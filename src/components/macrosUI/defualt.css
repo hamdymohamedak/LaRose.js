@@ -1,0 +1,27 @@
+.sec-Default {
+    background: #141a22;
+    display: flex;
+    gap: 1rem;
+    overflow: hidden;
+}
+
+.Defualt-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 2rem;
+    padding-left: 1rem;
+}
+
+.Defualt-des {
+    font-weight: bold;
+    margin: 1rem;
+    font-size: 1.1rem;
+    width: 80%;
+}
+
+.Defualt-p {
+    margin: 1rem;
+    width: 80%;
+    font-size: 1rem;
+    font-weight: 500;
+}
