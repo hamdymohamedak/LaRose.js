@@ -58,3 +58,13 @@ html {
     font-size: 24px;
   }
 }
+
+.askander {
+  /* display: none; */
+  background: red;
+  height: 2rem;
+  width: 6rem;
+  color: blue;
+  font-size: 2rem;
+  border-radius: 10px;
+}
