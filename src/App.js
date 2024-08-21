@@ -8,17 +8,19 @@ export default function App() {
   const customAnimation = `
     .route {
         opacity: 0;
-        transform: scale(0.95);
+        transform: scale(0.90);
         transition: opacity 0.4s ease, transform 0.4s ease;
+        transform:translateX(100%);
     }
 
     .route-active {
         opacity: 1;
         transform: scale(1);
+        transform:translateX(0);
     }
 `;
   return (
-    <RoseRouter>
+    <RoseRouter customStyles={customAnimation}>
       <BgSvg />
       <Route path="/" element={<Default />} />
       <Route path="/Home" element={<Home />} />
