@@ -20,7 +20,7 @@ export default function RoseBox({
     role,
     lazy = false,
     AutoHandling = false,
-    outlineOffset = 0
+    outlineOffset = 0,
 }) {
     const [isLoaded, setIsLoaded] = useState(!lazy);
 
@@ -69,8 +69,6 @@ export default function RoseBox({
         outlineWidth: "2px",
         cursor: "pointer"
     } : {};
-
-    // Apply the hover class conditionally
     const hoverClass = atHover ? 'rosebox-hover' : '';
 
     const handleClick = () => {
@@ -78,7 +76,6 @@ export default function RoseBox({
             onClick();
         }
     }
-
     return (
         <>
             <style>{`

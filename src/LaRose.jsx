@@ -1,8 +1,8 @@
 // LaRose is a Library was built with "Hamdy Mohamed Askander" 
-// for More About Team Visit website =>  https://askander.vercel.app
+// for More Visit => https://askander.vercel.app
 // Happy Hacking (˶ˆᗜˆ˵)
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createContext, useContext } from 'react';
 export function Ak_Alert({ title, time, JSX }) {
   const [display, setDisplay] = useState("flex");
 
@@ -1661,87 +1661,87 @@ export function LaRoseText({ children, fontSize = 2, fontWeight = 600, gradientT
 }
 
 export default function RoseBox({
-    children,
-    edit = {},
-    background = "",
-    RoseName = "",
-    RoseID = "",
-    autoLayout = false,
-    shadow = false,
-    shadowColor = "black",
-    aspectRatio = null,
-    atHover = false,
-    grid = false,
-    flex = false,
-    scaleAnimate = false,
-    childrenVisible = true,
-    onClick,
-    ariaLabel,
-    role,
-    lazy = false,
-    AutoHandling = false,
-    outlineOffset = 0
+  children,
+  edit = {},
+  background = "",
+  RoseName = "",
+  RoseID = "",
+  autoLayout = false,
+  shadow = false,
+  shadowColor = "black",
+  aspectRatio = null,
+  atHover = false,
+  grid = false,
+  flex = false,
+  scaleAnimate = false,
+  childrenVisible = true,
+  onClick,
+  ariaLabel,
+  role,
+  lazy = false,
+  AutoHandling = false,
+  outlineOffset = 0
 }) {
-    const [isLoaded, setIsLoaded] = useState(!lazy);
+  const [isLoaded, setIsLoaded] = useState(!lazy);
 
-    useEffect(() => {
-        if (lazy) {
-            const timer = setTimeout(() => {
-                setIsLoaded(true);
-            }, 200); // Adjust the delay as needed
-            return () => clearTimeout(timer);
-        }
-    }, [lazy]);
-
-    const layoutStyle = autoLayout
-        ? { padding: '0.8rem', margin: '0 auto', overflow: 'hidden' }
-        : {};
-    const shadowStyle = shadow
-        ? { boxShadow: `0px 0px 9px 1px ${shadowColor}` }
-        : {};
-    const aspectStyle = aspectRatio
-        ? { aspectRatio }
-        : {};
-
-    const displayLayoutStyle = grid
-        ? { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))' }
-        : flex
-            ? { display: 'flex', justifyContent: 'space-between', alignItems: 'center' }
-            : {};
-    const backgroundStyle = background
-        ? { background }
-        : {};
-
-    const autoHandleStyle = AutoHandling ? {
-        background: "#1b85db",
-        height: "3rem",
-        minWidth: "11rem",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        border: "1px solid #1b85db",
-        borderRadius: "7px",
-        fontWeight: "bold",
-        boxShadow: "#1b85db 0px 50px 100px -20px, #1b85db 0px 30px 60px -30px, #1b85db 0px -2px 6px 0px inset",
-        outlineOffset: `${outlineOffset}`,
-        outlineStyle: "solid",
-        outlineColor: "#1b85db",
-        outlineWidth: "2px",
-        cursor: "pointer"
-    } : {};
-
-    // Apply the hover class conditionally
-    const hoverClass = atHover ? 'rosebox-hover' : '';
-
-    const handleClick = () => {
-        if (typeof onClick === "function") {
-            onClick();
-        }
+  useEffect(() => {
+    if (lazy) {
+      const timer = setTimeout(() => {
+        setIsLoaded(true);
+      }, 200); // Adjust the delay as needed
+      return () => clearTimeout(timer);
     }
+  }, [lazy]);
 
-    return (
-        <>
-            <style>{`
+  const layoutStyle = autoLayout
+    ? { padding: '0.8rem', margin: '0 auto', overflow: 'hidden' }
+    : {};
+  const shadowStyle = shadow
+    ? { boxShadow: `0px 0px 9px 1px ${shadowColor}` }
+    : {};
+  const aspectStyle = aspectRatio
+    ? { aspectRatio }
+    : {};
+
+  const displayLayoutStyle = grid
+    ? { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))' }
+    : flex
+      ? { display: 'flex', justifyContent: 'space-between', alignItems: 'center' }
+      : {};
+  const backgroundStyle = background
+    ? { background }
+    : {};
+
+  const autoHandleStyle = AutoHandling ? {
+    background: "#1b85db",
+    height: "3rem",
+    minWidth: "11rem",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    border: "1px solid #1b85db",
+    borderRadius: "7px",
+    fontWeight: "bold",
+    boxShadow: "#1b85db 0px 50px 100px -20px, #1b85db 0px 30px 60px -30px, #1b85db 0px -2px 6px 0px inset",
+    outlineOffset: `${outlineOffset}`,
+    outlineStyle: "solid",
+    outlineColor: "#1b85db",
+    outlineWidth: "2px",
+    cursor: "pointer"
+  } : {};
+
+  // Apply the hover class conditionally
+  const hoverClass = atHover ? 'rosebox-hover' : '';
+
+  const handleClick = () => {
+    if (typeof onClick === "function") {
+      onClick();
+    }
+  }
+
+  return (
+    <>
+      <style>{`
                 .rosebox-hover {
                     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
                 }
@@ -1765,19 +1765,71 @@ export default function RoseBox({
                     }
                 }
             `}</style>
-            {childrenVisible && (
-                <div
-                    aria-label={ariaLabel}
-                    role={role}
-                    onClick={handleClick}
-                    id={RoseID}
-                    className={`${RoseName} ${hoverClass} ${scaleAnimate ? 'rosebox-scale-animate' : ''}`}
-                    style={{ ...edit, ...layoutStyle, ...shadowStyle, ...aspectStyle, ...displayLayoutStyle, ...backgroundStyle, ...autoHandleStyle }}
-                >
-                    {isLoaded ? children : <div>Loading...</div>}
-                </div>
-            )}
-        </>
-    );
+      {childrenVisible && (
+        <div
+          aria-label={ariaLabel}
+          role={role}
+          onClick={handleClick}
+          id={RoseID}
+          className={`${RoseName} ${hoverClass} ${scaleAnimate ? 'rosebox-scale-animate' : ''}`}
+          style={{ ...edit, ...layoutStyle, ...shadowStyle, ...aspectStyle, ...displayLayoutStyle, ...backgroundStyle, ...autoHandleStyle }}
+        >
+          {isLoaded ? children : <div>Loading...</div>}
+        </div>
+      )}
+    </>
+  );
 }
 
+// Router
+const RouterContext = createContext();
+
+export const useRouter = () => useContext(RouterContext);
+
+export const RoseRouter = ({ children, customStyles = "" }) => {
+  const [route, setRoute] = useState(window.location.pathname);
+
+  const navigate = (path) => {
+    if (path !== route) {
+      setRoute(path);
+      window.history.pushState({}, '', path);
+    }
+  };
+
+  useEffect(() => {
+    const handlePopState = () => setRoute(window.location.pathname);
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  return (
+    <>
+      <style>{`
+                .route {
+                    opacity: 0;
+                    transform: translateY(20px);
+                    transition: opacity 0.5s ease, transform 0.5s ease;
+                }
+
+                .route-active {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+                ${customStyles}
+            `}</style>
+      <RouterContext.Provider value={{ route, navigate }}>
+        {children}
+      </RouterContext.Provider>
+    </>
+  );
+};
+
+export const Route = ({ path, element }) => {
+  const { route } = useRouter();
+  return (
+    <div className={`route ${route === path ? 'route-active' : ''}`}>
+      {route === path ? element : null}
+    </div>
+  );
+};
