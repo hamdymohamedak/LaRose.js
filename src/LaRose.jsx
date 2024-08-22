@@ -1078,8 +1078,8 @@ export function Slider({ children, autoplay = false, autoplayInterval = 3000 }) 
       `}</style>
 
       <div className="slider-container">
-        <button className="slider-button prev" onClick={handlePrev}><i class="fa-solid fa-angles-left"></i></button>
-        <button className="slider-button next" onClick={handleNext}><i class="fa-solid fa-angles-right"></i></button>
+        <button className="slider-button prev" onClick={handlePrev}><i className="fa-solid fa-angles-left"></i></button>
+        <button className="slider-button next" onClick={handleNext}><i className="fa-solid fa-angles-right"></i></button>
 
         <div className="slider-wrapper">
           <div className="slider-content" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
@@ -1661,7 +1661,7 @@ export function LaRoseText({ children, fontSize = 2, fontWeight = 600, gradientT
   );
 }
 
-export default function RoseBox({
+export function RoseBox({
   children,
   edit = {},
   background = "",
@@ -1782,7 +1782,7 @@ export default function RoseBox({
   );
 }
 
-// Router
+// RoseRouter
 const RouterContext = createContext();
 
 export const useRouter = () => useContext(RouterContext);
@@ -1834,3 +1834,46 @@ export const Route = ({ path, element }) => {
     </div>
   );
 };
+
+
+
+
+
+export function SplitText({ children, RoseName, RoseId, edit = {}, speed = 0.5, delay = 0.05 }) {
+  // Split the text into individual characters
+  const splitText = children.split('').map((char, index) => (
+    <span
+      key={index}
+      className="char"
+      style={{ '--char-index': index }}
+    >
+      {char === ' ' ? '\u00A0' : char} {/* Replace spaces with non-breaking spaces */}
+    </span>
+  ));
+
+  return (
+    <>
+      <style>{`
+              .char {
+                  display: inline-block;
+                  opacity: 0;
+                  transform: translateY(20px);
+                  animation: splitAnimation ${speed}s forwards;
+                  animation-delay: calc(var(--char-index) * ${delay}s);
+              }
+
+              @keyframes splitAnimation {
+                  to {
+                      opacity: 1;
+                      transform: translateY(0);
+                  }
+              }
+          `}</style>
+      <div style={{
+        ...edit
+      }} id={RoseId} className={RoseName}>
+        {splitText}
+      </div>
+    </>
+  );
+}
