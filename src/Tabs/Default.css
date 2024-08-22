@@ -116,3 +116,11 @@
     display: none;
   }
 }
+#table thead{
+  background: red;
+  margin: 1rem;
+  padding: 1rem;
+}
+#table tbody{
+  background: green;
+}
