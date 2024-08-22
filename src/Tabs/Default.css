@@ -1,4 +1,4 @@
-.App {
+#App {
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -26,7 +26,7 @@
   animation: moveAlert2 5s ease;
   animation-delay: 2s;
   overflow: hidden;
-  z-index: 9999;    
+  z-index: 9999;
 }
 @keyframes moveAlert {
   0% {
@@ -109,4 +109,10 @@
   min-height: 100vh;
   width: 100%;
   position: absolute;
+}
+
+@media (max-width: 700px) {
+  #mousePointer {
+    display: none;
+  }
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-export default function Ak_Alert({ title, time }) {
+export default function Ak_Alert({ title, time,edit }) {
   const [display, setDisplay] = useState("flex");
   const [timeDown, setTimeDown] = useState(time);
 
@@ -21,7 +21,8 @@ export default function Ak_Alert({ title, time }) {
       background: "#509AF8",
       borderRadius: "8px",
       boxShadow: "0px 0px 5px -3px #111",
-      position: "relative" // Add position relative to properly position the close button
+      position: "relative",
+      ...edit
     },
     infoIcon: {
       width: "20px",

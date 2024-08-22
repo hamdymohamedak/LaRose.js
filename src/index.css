@@ -60,26 +60,3 @@ html {
     font-size: 24px;
   }
 }
-
-/* 
-.btn{
-  background: #1b85db;
-  height: 3rem;
-  min-width: 11rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #1b85db;
-  border-radius: 7px;
-  font-weight: bold;
-  box-shadow: #1b85db 0px 50px 100px -20px, #1b85db 0px 30px 60px -30px, #1b85db 0px -2px 6px 0px inset;
-  outline-offset: 5px solid #1b85db;
-  border: 1px solid #1b85db;
-  outline-style: solid;
-  outline-color: #1b85db;
-  outline-width: 2px;
-  cursor: pointer;
-}
-.btn:hover{
-  outline-offset: 5px;
-} */
