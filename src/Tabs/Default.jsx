@@ -17,7 +17,6 @@ import {
 } from "../LaRose";
 import Table from "../components/Table/Table";
 import { useEffect, useState } from "react";
-import SmallNav from "../components/SmallNav/SmallNav";
 function Default() {
   const { navigate } = useRouter();
 
@@ -99,7 +98,6 @@ function Default() {
       <RoseBox autoLayout AutoHandling>
         <Table RoseID={"table"} data={data} columns={columns} />
       </RoseBox>
-        <SmallNav/>
     </RoseParent>
   );
 }
