@@ -17,10 +17,11 @@ export default function App() {
         opacity: 1;
         transform: scale(1);
         transform:translateX(0);
+        
     }
 `;
   return (
-    <RoseRouter customStyles={customAnimation}>
+    <RoseRouter>
       <BgSvg />
       <Route path="/" element={<Default />} />
       <Route path="/Home" element={<Home />} />

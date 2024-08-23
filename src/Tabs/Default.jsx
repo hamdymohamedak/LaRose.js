@@ -13,11 +13,11 @@ import {
   SplitText,
   WaveText,
   RoseParent,
-  Notification
+  Notification,
 } from "../LaRose";
 import Table from "../components/Table/Table";
 import { useEffect, useState } from "react";
-
+import SmallNav from "../components/SmallNav/SmallNav";
 function Default() {
   const { navigate } = useRouter();
 
@@ -29,7 +29,7 @@ function Default() {
     fetch(api)
       .then((res) => {
         if (!res.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         return res.text();
       })
@@ -37,20 +37,18 @@ function Default() {
         if (text) {
           return JSON.parse(text);
         }
-        throw new Error('Empty response body');
+        throw new Error("Empty response body");
       })
       .then((json) => setApiData(json))
-      .catch((error) => console.error('Error fetching API:', error));
+      .catch((error) => console.error("Error fetching API:", error));
   }, []);
 
-  const data = [
-    { id: apiData.id, title: apiData.title, price: apiData.price },
-  ];
+  const data = [{ id: apiData.id, title: apiData.title, price: apiData.price }];
 
   const columns = [
-    { header: 'ID', accessor: 'id' },
-    { header: 'Title', accessor: 'title' },
-    { header: 'Price', accessor: 'price' },
+    { header: "ID", accessor: "id" },
+    { header: "Title", accessor: "title" },
+    { header: "Price", accessor: "price" },
   ];
   return (
     <RoseParent RoseID="App">
@@ -61,7 +59,11 @@ function Default() {
       >
         <CounterUp start={0} end={1000} time={10} />{" "}
       </Ak_Alert>
-      <Notification delay={20000} Message="Hello Devs" DesMessage="Front End Devs" />
+      <Notification
+        delay={20000}
+        Message="Hello Devs"
+        DesMessage="Front End Devs"
+      />
 
       <ModernBtn
         color={"white"}
@@ -70,7 +72,9 @@ function Default() {
         clickEvent={() => navigate("/Home")}
       />
       <ShinyButton
-        ShinyButtonEvent={() => { window.location.reload() }}
+        ShinyButtonEvent={() => {
+          window.location.reload();
+        }}
         edit={{ fontSize: "1rem", height: "3rem", minWidth: "2rem" }}
       >
         <ShinyText
@@ -80,7 +84,7 @@ function Default() {
           Shiny Animation | Reload
         </ShinyText>
       </ShinyButton>
-      <WaveText>Wave Text</WaveText>
+      <WaveText RoseName={"wavetext"}>Wave Text</WaveText>
       <SplitText>Split Text</SplitText>
       <AnimatedText animationType="zoomIn">Animated Text</AnimatedText>
       <RoseMouse mouseShadow mouseShadowColor="white" />
@@ -95,7 +99,7 @@ function Default() {
       <RoseBox autoLayout AutoHandling>
         <Table RoseID={"table"} data={data} columns={columns} />
       </RoseBox>
-
+        <SmallNav/>
     </RoseParent>
   );
 }

@@ -2237,3 +2237,24 @@ export function Notification({
     </>
   );
 }
+
+let CSS_PROPRTY_ROOT = () => {
+  return (
+    <>
+      <style>{`
+
+    @property --RoseMainColor {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #509af8;
+  }
+    @property --ShinyColor {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #111111;
+  }
+
+  `}</style>
+    </>
+  )
+}

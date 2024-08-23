@@ -6,15 +6,30 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-
 }
+
+@property --RoseMainColor {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #509af8;
+}
+
+@property --ShinyColor {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #111111;
+}
+
+:root {
+  --RoseMainColor: #509af8;
+  --ShinyColor: #111111;
+}
+
 * {
   transition: 0.2s;
-
 }
 html {
   font-size: 16px;
