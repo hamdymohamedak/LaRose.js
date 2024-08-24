@@ -2102,20 +2102,82 @@ export const Route = ({ path, element }) => {
   );
 };
 
-export const RoseParent = ({ children, edit, RoseID, RoseName }) => {
+
+
+export const RoseParent = ({
+  children,
+  edit,
+  RoseID,
+  RoseName,
+  display = 'flex',
+  flexDirection = 'row',
+  flexDirectionMobile = 'column',
+  justifyContent = 'space-around',
+  alignItems = 'center',
+  alignContent = 'center',
+  flexWrap = 'wrap',
+  gap = '1rem',
+  padding = '1rem',
+  minHeight = '100vh',
+  width = '100%',
+  flexBasis = 'auto',
+  flexGrow = '1',
+  flexShrink = '1',
+  gridTemplateColumns = '',
+  gridTemplateRows = '',
+  gridColumnGap = '',
+  gridRowGap = '',
+  placeItems = 'center',
+  alignContentGrid = '',
+  justifyItems = '',
+  gridAutoFlow = '',
+  gridAutoColumns = '',
+  gridAutoRows = '',
+  gridTemplateAreas = '',
+  alignSelf = '',
+  justifySelf = '',
+  gridArea = '',
+}) => {
+  const isGrid = display === 'grid';
+
   return (
     <>
       <style>{`
                 .rose-parent {
-                    display: flex;
-                    justify-content: space-around;
-                    align-items: center;
-                    flex-wrap: wrap;
-                    gap: 1rem;
-                    padding: 1rem;
+                    display: ${display};
+                    ${isGrid ? `
+                        grid-template-columns: ${gridTemplateColumns};
+                        grid-template-rows: ${gridTemplateRows};
+                        grid-column-gap: ${gridColumnGap};
+                        grid-row-gap: ${gridRowGap};
+                        place-items: ${placeItems};
+                        align-content: ${alignContentGrid};
+                        justify-items: ${justifyItems};
+                        grid-auto-flow: ${gridAutoFlow};
+                        grid-auto-columns: ${gridAutoColumns};
+                        grid-auto-rows: ${gridAutoRows};
+                        grid-template-areas: ${gridTemplateAreas};
+                    ` : `
+                        flex-direction: ${flexDirection};
+                        justify-content: ${justifyContent};
+                        align-items: ${alignItems};
+                        align-content: ${alignContent};
+                        flex-wrap: ${flexWrap};
+                        gap: ${gap};
+                    `}
+                    padding: ${padding};
                     box-sizing: border-box;
-                    width: 100%;
-                    min-height: 100vh;
+                    width: ${width};
+                    min-height: ${minHeight};
+                }
+
+                .rose-parent > * {
+                    flex-basis: ${flexBasis};
+                    flex-grow: ${flexGrow};
+                    flex-shrink: ${flexShrink};
+                    align-self: ${alignSelf};
+                    justify-self: ${justifySelf};
+                    grid-area: ${gridArea};
                 }
 
                 @media (min-width: 768px) {
@@ -2127,7 +2189,7 @@ export const RoseParent = ({ children, edit, RoseID, RoseName }) => {
 
                 @media (max-width: 767px) {
                     .rose-parent {
-                        flex-direction: column;
+                        flex-direction: ${flexDirectionMobile};
                         align-items: center;
                     }
                 }
