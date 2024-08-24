@@ -1,35 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function WaveText({ 
-    children, 
-    RoseName, 
-    RoseId, 
-    edit = {}, 
-    speed = 0.5, 
-    delay = 0.05, 
-    amplitude = 10, 
-    frequency = 0.5 
+export default function WaveText({
+    children,
+    RoseName,
+    RoseId,
+    initialWaveType = 'character', // Initial waveType, defaults to 'character'
+    edit = {},
+    speed = 0.5,
+    delay = 0.05,
+    amplitude = 10,
+    frequency = 0.5
 }) {
-    // Split the text into individual characters
-    const waveText = children.split('').map((WaveTextChar, index) => (
+    const [waveType, setWaveType] = useState(initialWaveType);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setWaveType('word'); // Change to 'word' after AnimatedEnd
+        }, speed * 1000 + 200);
+
+        return () => clearTimeout(timer); // Cleanup timer on component unmount
+    }, [speed]);
+
+    // Split the text based on waveType (word or character)
+    const splitText = waveType === 'word' ? children.split(/(\s+)/) : children.split('');
+
+    // Map through the split text to create the wave effect
+    const waveText = splitText.map((item, index) => (
         <span
             key={index}
-            className="WaveTextChar"
-            style={{ '--WaveTextChar-index': index }}
+            className="WaveTextItem"
+            style={{ '--WaveTextItem-index': index }}
         >
-            {WaveTextChar === ' ' ? '\u00A0' : WaveTextChar} {/* Replace spaces with non-breaking spaces */}
+            {item === ' ' ? '\u00A0' : item} {/* Handle spaces */}
         </span>
     ));
 
     return (
         <>
             <style>{`
-                .WaveTextChar {
+                .WaveTextItem {
                     display: inline-block;
                     opacity: 0;
                     transform: translateY(${amplitude}px);
                     animation: waveAnimation ${speed}s forwards;
-                    animation-delay: calc(var(--WaveTextChar-index) * ${delay}s);
+                    animation-delay: calc(var(--WaveTextItem-index) * ${delay}s);
                 }
 
                 @keyframes waveAnimation {

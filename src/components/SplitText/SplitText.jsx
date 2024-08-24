@@ -1,25 +1,47 @@
+import React, { useState, useEffect } from 'react';
 
-export default function SplitText({ children, RoseName, RoseId, edit = {}, speed = 0.5, delay = 0.05 }) {
-    // Split the text into individual characters
-    const splitText = children.split('').map((char, index) => (
+export default function SplitText({
+    children,
+    RoseName,
+    RoseId,
+    initialAnimateTypeStyle = 'character', 
+    edit = {},
+    speed = 0.5,
+    delay = 0.05,
+}) {
+    const [animateTypeStyle, setAnimateTypeStyle] = useState(initialAnimateTypeStyle);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setAnimateTypeStyle('word'); // Change to 'word' after speed
+        }, speed * 1000 + 600); // Adjust duration as needed
+
+        return () => clearTimeout(timer); // Cleanup timer on component unmount
+    }, [speed]);
+
+    // Split the text based on animateTypeStyle (word or character)
+    const splitText = animateTypeStyle === 'word' ? children.split(/(\s+)/) : children.split('');
+
+    // Map through the split text to create the animation effect
+    const animatedText = splitText.map((item, index) => (
         <span
             key={index}
-            className="char"
-            style={{ '--char-index': index }}
+            className="SplitTextItem"
+            style={{ '--SplitTextItem-index': index }}
         >
-            {char === ' ' ? '\u00A0' : char} {/* Replace spaces with non-breaking spaces */}
+            {item === ' ' ? '\u00A0' : item} {/* Handle spaces */}
         </span>
     ));
 
     return (
         <>
             <style>{`
-                .char {
+                .SplitTextItem {
                     display: inline-block;
                     opacity: 0;
                     transform: translateY(20px);
                     animation: splitAnimation ${speed}s forwards;
-                    animation-delay: calc(var(--char-index) * ${delay}s);
+                    animation-delay: calc(var(--SplitTextItem-index) * ${delay}s);
                 }
 
                 @keyframes splitAnimation {
@@ -29,10 +51,8 @@ export default function SplitText({ children, RoseName, RoseId, edit = {}, speed
                     }
                 }
             `}</style>
-            <div style={{
-                ...edit
-            }} id={RoseId} className={RoseName}>
-                {splitText}
+            <div style={{ ...edit }} id={RoseId} className={RoseName}>
+                {animatedText}
             </div>
         </>
     );

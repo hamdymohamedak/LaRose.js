@@ -6,17 +6,17 @@ import {
   ShinyText,
   ModernBtn,
   Ak_Alert,
-  AnimatedText,
   CounterUp,
   RoseBox,
   RoseMouse,
-  SplitText,
-  WaveText,
   RoseParent,
   Notification,
 } from "../LaRose";
 import Table from "../components/Table/Table";
 import { useEffect, useState } from "react";
+import WaveText from "../components/WaveText/WaveText";
+import AnimatedText from "../components/AnimatedText/AnimatedText";
+import SplitText from "../components/SplitText/SplitText";
 function Default() {
   const { navigate } = useRouter();
 
@@ -49,6 +49,7 @@ function Default() {
     { header: "Title", accessor: "title" },
     { header: "Price", accessor: "price" },
   ];
+
   return (
     <RoseParent RoseID="App">
       <BgSvg />
@@ -83,21 +84,10 @@ function Default() {
           Shiny Animation | Reload
         </ShinyText>
       </ShinyButton>
-      <WaveText RoseName={"wavetext"}>Wave Text</WaveText>
+      <WaveText initialWaveType={"character"} edit={{ fontSize: "3rem" }}>Wave Text</WaveText>
       <SplitText>Split Text</SplitText>
-      <AnimatedText animationType="zoomIn">Animated Text</AnimatedText>
+      <AnimatedText animationType="zoomIn" initialAnimateTypeStyle={"character"} speed={1}>Animated Text</AnimatedText>
       <RoseMouse mouseShadow mouseShadowColor="white" />
-
-      <RoseBox flex autoLayout AutoHandling>
-        <WaveText>Wave Text</WaveText>
-        <SplitText>Split Text</SplitText>
-        <AnimatedText animationType="zoomIn">Animated Text</AnimatedText>
-        <RoseMouse RoseId="mousePointer" mouseShadow mouseShadowColor="white" />
-      </RoseBox>
-
-      <RoseBox autoLayout AutoHandling>
-        <Table RoseID={"table"} data={data} columns={columns} />
-      </RoseBox>
     </RoseParent>
   );
 }

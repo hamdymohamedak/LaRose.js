@@ -1606,27 +1606,51 @@ export function RoseBox({
     </>
   );
 }
-export function SplitText({ children, RoseName, RoseId, edit = {}, speed = 0.5, delay = 0.05 }) {
-  // Split the text into individual characters
-  const splitText = children.split('').map((char, index) => (
+
+export function SplitText({
+  children,
+  RoseName,
+  RoseId,
+  initialAnimateTypeStyle = 'character',
+  edit = {},
+  speed = 0.5,
+  delay = 0.05,
+}) {
+  const [animateTypeStyle, setAnimateTypeStyle] = useState(initialAnimateTypeStyle);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAnimateTypeStyle('word'); // Change to 'word' after speed
+    }, speed * 1000 + 600); // Adjust duration as needed
+
+    return () => clearTimeout(timer); // Cleanup timer on component unmount
+  }, [speed]);
+
+  // Split the text based on animateTypeStyle (word or character)
+  const splitText = animateTypeStyle === 'word' ? children.split(/(\s+)/) : children.split('');
+
+  // Map through the split text to create the animation effect
+  const animatedText = splitText.map((item, index) => (
     <span
       key={index}
-      className="char"
-      style={{ '--char-index': index }}
+      className="SplitTextItem"
+      style={{ '--SplitTextItem-index': index }}
     >
-      {char === ' ' ? '\u00A0' : char} {/* Replace spaces with non-breaking spaces */}
+      {item === ' ' ? '\u00A0' : item} {/* Handle spaces */}
     </span>
   ));
+
   return (
     <>
       <style>{`
-              .char {
+              .SplitTextItem {
                   display: inline-block;
                   opacity: 0;
                   transform: translateY(20px);
                   animation: splitAnimation ${speed}s forwards;
-                  animation-delay: calc(var(--char-index) * ${delay}s);
+                  animation-delay: calc(var(--SplitTextItem-index) * ${delay}s);
               }
+
               @keyframes splitAnimation {
                   to {
                       opacity: 1;
@@ -1634,14 +1658,13 @@ export function SplitText({ children, RoseName, RoseId, edit = {}, speed = 0.5, 
                   }
               }
           `}</style>
-      <div style={{
-        ...edit
-      }} id={RoseId} className={RoseName}>
-        {splitText}
+      <div style={{ ...edit }} id={RoseId} className={RoseName}>
+        {animatedText}
       </div>
     </>
   );
 }
+
 export const RoseMouse = ({
   children,
   title = "",
@@ -1860,36 +1883,53 @@ export function ShinyButton({
     </>
   );
 }
+
 export function WaveText({
   children,
   RoseName,
   RoseId,
+  initialWaveType = 'character', // Initial waveType, defaults to 'character'
   edit = {},
   speed = 0.5,
   delay = 0.05,
   amplitude = 10,
   frequency = 0.5
 }) {
-  // Split the text into individual characters
-  const waveText = children.split('').map((WaveTextChar, index) => (
+  const [waveType, setWaveType] = useState(initialWaveType);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setWaveType('word'); // Change to 'word' after AnimatedEnd
+    }, speed * 1000 + 200);
+
+    return () => clearTimeout(timer); // Cleanup timer on component unmount
+  }, [speed]);
+
+  // Split the text based on waveType (word or character)
+  const splitText = waveType === 'word' ? children.split(/(\s+)/) : children.split('');
+
+  // Map through the split text to create the wave effect
+  const waveText = splitText.map((item, index) => (
     <span
       key={index}
-      className="WaveTextChar"
-      style={{ '--WaveTextChar-index': index }}
+      className="WaveTextItem"
+      style={{ '--WaveTextItem-index': index }}
     >
-      {WaveTextChar === ' ' ? '\u00A0' : WaveTextChar} {/* Replace spaces with non-breaking spaces */}
+      {item === ' ' ? '\u00A0' : item} {/* Handle spaces */}
     </span>
   ));
+
   return (
     <>
       <style>{`
-              .WaveTextChar {
+              .WaveTextItem {
                   display: inline-block;
                   opacity: 0;
                   transform: translateY(${amplitude}px);
                   animation: waveAnimation ${speed}s forwards;
-                  animation-delay: calc(var(--WaveTextChar-index) * ${delay}s);
+                  animation-delay: calc(var(--WaveTextItem-index) * ${delay}s);
               }
+
               @keyframes waveAnimation {
                   0% {
                       opacity: 0;
@@ -1911,6 +1951,8 @@ export function WaveText({
     </>
   );
 }
+
+
 export function AnimatedText({
   children,
   RoseName,
@@ -1918,18 +1960,36 @@ export function AnimatedText({
   edit = {},
   speed = 0.5,
   delay = 0.05,
-  animationType = 'blur'
+  animationType = 'blur',  // Type of animation: 'blur', 'fadeIn', 'slideIn', 'zoomIn'
+  initialAnimateTypeStyle = 'character',  // Initial prop for animating by 'word' or 'character'
 }) {
-  // Split the text into individual characters
-  const animatedText = children.split('').map((char, index) => (
+  const [animateTypeStyle, setAnimateTypeStyle] = useState(initialAnimateTypeStyle);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAnimateTypeStyle('word'); // Change to 'word' after the animation ends
+    }, speed * 1000 + 600); // Adjust duration as needed
+
+    return () => clearTimeout(timer); // Cleanup timer on component unmount
+  }, [speed]);
+
+  // Split the text based on animateTypeStyle (word or character)
+  const splitText = animateTypeStyle === 'word'
+    ? children.split(/(\s+)/) // Split by spaces and preserve them
+    : children.split('');
+
+  // Map through the split text to create the animation effect
+  const animatedText = splitText.map((item, index) => (
     <span
       key={index}
-      className="BlurTextChar"
-      style={{ '--BlurTextChar-index': index }}
+      className="AnimatedTextItem"
+      style={{ '--AnimatedTextItem-index': index }}
     >
-      {char === ' ' ? '\u00A0' : char} {/* Replace spaces with non-breaking spaces */}
+      {item === ' ' ? '\u00A0' : item} {/* Handle spaces */}
+      {animateTypeStyle === 'word' && item === ' ' && ' '} {/* Ensure space rendering if animating words */}
     </span>
   ));
+
   const animations = {
     blur: `
           filter: blur(15px);
@@ -1950,15 +2010,18 @@ export function AnimatedText({
           animation: zoomInAnimation ${speed}s forwards;
       `,
   };
+
   const selectedAnimation = animations[animationType] || animations.blur;
+
   return (
     <>
       <style>{`
-              .BlurTextChar {
+              .AnimatedTextItem {
                   display: inline-block;
                   ${selectedAnimation}
-                  animation-delay: calc(var(--BlurTextChar-index) * ${delay}s);
+                  animation-delay: calc(var(--AnimatedTextItem-index) * ${delay}s);
               }
+
               @keyframes blurAnimation {
                   to {
                       opacity: 1;
@@ -1966,17 +2029,20 @@ export function AnimatedText({
                       filter: blur(0);
                   }
               }
+
               @keyframes fadeInAnimation {
                   to {
                       opacity: 1;
                   }
               }
+
               @keyframes slideInAnimation {
                   to {
                       opacity: 1;
                       transform: translateX(0);
                   }
               }
+
               @keyframes zoomInAnimation {
                   to {
                       opacity: 1;
@@ -1990,6 +2056,7 @@ export function AnimatedText({
     </>
   );
 }
+
 // RoseRouter
 const RouterContext = createContext();
 export const useRouter = () => useContext(RouterContext);

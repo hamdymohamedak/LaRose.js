@@ -1,22 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default function AnimatedText({ 
-    children, 
-    RoseName, 
-    RoseId, 
-    edit = {}, 
-    speed = 0.5, 
-    delay = 0.05, 
-    animationType = 'blur' 
+export default function AnimatedText({
+    children,
+    RoseName,
+    RoseId,
+    edit = {},
+    speed = 0.5,
+    delay = 0.05,
+    animationType = 'blur',  // Type of animation: 'blur', 'fadeIn', 'slideIn', 'zoomIn'
+    initialAnimateTypeStyle = 'character',  // Initial prop for animating by 'word' or 'character'
 }) {
-    // Split the text into individual characters
-    const animatedText = children.split('').map((char, index) => (
+    const [animateTypeStyle, setAnimateTypeStyle] = useState(initialAnimateTypeStyle);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setAnimateTypeStyle('word'); // Change to 'word' after the animation ends
+        }, speed * 1000 + 600); // Adjust duration as needed
+
+        return () => clearTimeout(timer); // Cleanup timer on component unmount
+    }, [speed]);
+
+    // Split the text based on animateTypeStyle (word or character)
+    const splitText = animateTypeStyle === 'word'
+        ? children.split(/(\s+)/) // Split by spaces and preserve them
+        : children.split('');
+
+    // Map through the split text to create the animation effect
+    const animatedText = splitText.map((item, index) => (
         <span
             key={index}
-            className="BlurTextChar"
-            style={{ '--BlurTextChar-index': index }}
+            className="AnimatedTextItem"
+            style={{ '--AnimatedTextItem-index': index }}
         >
-            {char === ' ' ? '\u00A0' : char} {/* Replace spaces with non-breaking spaces */}
+            {item === ' ' ? '\u00A0' : item} {/* Handle spaces */}
+            {animateTypeStyle === 'word' && item === ' ' && ' '} {/* Ensure space rendering if animating words */}
         </span>
     ));
 
@@ -46,10 +63,10 @@ export default function AnimatedText({
     return (
         <>
             <style>{`
-                .BlurTextChar {
+                .AnimatedTextItem {
                     display: inline-block;
                     ${selectedAnimation}
-                    animation-delay: calc(var(--BlurTextChar-index) * ${delay}s);
+                    animation-delay: calc(var(--AnimatedTextItem-index) * ${delay}s);
                 }
 
                 @keyframes blurAnimation {
