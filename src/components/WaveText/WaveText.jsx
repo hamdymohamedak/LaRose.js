@@ -16,7 +16,7 @@ export default function WaveText({
     useEffect(() => {
         const timer = setTimeout(() => {
             setWaveType('word'); // Change to 'word' after AnimatedEnd
-        }, speed * 1000 + 600);
+        }, speed * 1000 + 200);
 
         return () => clearTimeout(timer); // Cleanup timer on component unmount
     }, [speed]);

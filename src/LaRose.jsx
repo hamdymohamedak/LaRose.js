@@ -2103,44 +2103,44 @@ export const Route = ({ path, element }) => {
 };
 
 export const RoseParent = ({
-    children,
-    edit,
-    RoseID,
-    RoseName,
-    display = 'flex',
-    flexDirection = 'row',
-    flexDirectionMobile = 'column',
-    justifyContent = 'space-around',
-    alignItems = 'center',
-    alignContent = 'center',
-    flexWrap = 'wrap',
-    gap = '1rem',
-    padding = '1rem',
-    minHeight = '100vh',
-    width = '100%',
-    flexBasis = 'auto',
-    flexGrow = '1',
-    flexShrink = '1',
-    gridTemplateColumns = '',
-    gridTemplateRows = '',
-    gridColumnGap = '',
-    gridRowGap = '',
-    placeItems = 'center',
-    alignContentGrid = '',
-    justifyItems = '',
-    gridAutoFlow = '',
-    gridAutoColumns = '',
-    gridAutoRows = '',
-    gridTemplateAreas = '',
-    alignSelf = '',
-    justifySelf = '',
-    gridArea = '',
+  children,
+  edit,
+  RoseID,
+  RoseName,
+  display = 'flex',
+  flexDirection = 'row',
+  flexDirectionMobile = 'column',
+  justifyContent = 'space-around',
+  alignItems = 'center',
+  alignContent = 'center',
+  flexWrap = 'wrap',
+  gap = '1rem',
+  padding = '1rem',
+  minHeight = '100vh',
+  width = '100%',
+  flexBasis = 'auto',
+  flexGrow = '1',
+  flexShrink = '1',
+  gridTemplateColumns = '',
+  gridTemplateRows = '',
+  gridColumnGap = '',
+  gridRowGap = '',
+  placeItems = 'center',
+  alignContentGrid = '',
+  justifyItems = '',
+  gridAutoFlow = '',
+  gridAutoColumns = '',
+  gridAutoRows = '',
+  gridTemplateAreas = '',
+  alignSelf = '',
+  justifySelf = '',
+  gridArea = '',
 }) => {
-    const isGrid = display === 'grid';
+  const isGrid = display === 'grid';
 
-    return (
-        <>
-            <style>{`
+  return (
+    <>
+      <style>{`
                 .rose-parent {
                     display: ${display};
                     ${isGrid ? `
@@ -2192,11 +2192,11 @@ export const RoseParent = ({
                     }
                 }
             `}</style>
-            <div id={RoseID} className={`rose-parent ${RoseName}`} style={edit}>
-                {children}
-            </div>
-        </>
-    );
+      <div id={RoseID} className={`rose-parent ${RoseName}`} style={edit}>
+        {children}
+      </div>
+    </>
+  );
 };
 export const Table = ({ data, columns, edit, RoseID, RoseName }) => (
   <table style={edit} className={RoseName} id={RoseID}>
@@ -2359,6 +2359,350 @@ export function Notification({
             fillRule="evenodd"
           />
         </svg>
+        {children}
+      </div>
+    </>
+  );
+}
+
+export function Spring({
+  rotate = 360,  // Default rotation to 360 degrees
+  scale = 1,     // Default scale to 1 (normal size)
+  speed = 0.8,   // Default speed to 0.8 seconds
+  x = "0",     // Default x translation
+  y = "0",     // Default y translation
+  children,
+  RoseID,
+  RoseName = "RotatingSpringComponentStyle",
+  edit
+}) {
+  return (
+    <>
+      <style>{`
+              .${RoseName}{
+                  min-height: 7rem;
+                  width: 7rem;
+                  background: #ffffff;
+                  border-radius: 26px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  animation: LaRoseRotatingAnimated ${speed}s ease-in-out forwards;
+                  transform: rotate(0deg) scale(0);
+                  opacity: 0;
+                  overflow: hidden;
+                  translate: ${x} ${y};
+              }
+              
+              @keyframes LaRoseRotatingAnimated {
+                  to {
+                      transform: rotate(${rotate}deg) scale(${scale});
+                      opacity: 1;
+                  }
+              }
+          `}</style>
+      <div style={edit} className={RoseName} id={RoseID}>
+        {children}
+      </div>
+    </>
+  );
+}
+
+export function Variants({
+  rotate = 0,
+  scale = 1,
+  speed = 0.8,
+  x = "0",
+  y = "0",
+  children,
+  RoseID,
+  RoseName = "RotatingVariantsComponentStyle",
+  edit,
+  childDisplay = "grid",
+}) {
+  return (
+    <>
+      <style>{`
+              .${RoseName} {
+                  min-height: 7rem;
+                  width: 7rem;
+                  background:#380eff;
+                  border-radius: 26px;
+                  display: grid;
+                  grid-template-columns: auto auto;
+                  grid-gap: 1rem;
+                  justify-content: center;
+                  align-items: center;
+                  animation: ${RoseName}Animated ${speed}s ease-in-out forwards;
+                  transform: rotate(${rotate}deg) scale(${scale});
+                  opacity: 0;
+                  overflow: hidden;
+                  transform: translate(${x}, ${y});
+              }
+              
+              @keyframes ${RoseName}Animated {
+                  to {
+                      opacity: 1;
+                      transform: rotate(${rotate}deg) scale(${scale});
+                  }
+              }
+          `}</style>
+      <div style={edit} className={RoseName} id={RoseID}>
+        {children}
+        <div
+          style={{ height: "2rem", width: "2rem", background: "#EEE", borderRadius: "50%", display: childDisplay, }}
+        ></div>
+        <div
+          style={{ height: "2rem", width: "2rem", background: "#EEE", borderRadius: "50%", display: childDisplay, }}
+        ></div>
+        <div
+          style={{ height: "2rem", width: "2rem", background: "#EEE", borderRadius: "50%", display: childDisplay, }}
+        ></div>
+        <div
+          style={{ height: "2rem", width: "2rem", background: "#EEE", borderRadius: "50%", display: childDisplay, }}
+        ></div>
+      </div>
+    </>
+  );
+}
+
+export function RandomAnimate({
+  children,
+  RoseID,
+  RoseName = "random-animate",
+  edit = {
+    backgroundColor: "#EEE",
+    height: "12rem",
+    width: "12rem",
+    borderRadius: "20px",
+    padding: "1rem"
+  },
+  AnimatedType,
+}) {
+  const [animationClass, setAnimationClass] = useState('');
+
+  useEffect(() => {
+    // List of possible animations
+    const animations = [
+      'fadeIn',
+      'slideInLeft',
+      'zoomIn',
+      'rotateIn',
+      'bounceIn',
+      'flipInX',
+      'flipInY',
+      'lightSpeedIn',
+      'rollIn',
+      'jackInTheBox',
+    ];
+
+    if (AnimatedType) {
+      // If AnimatedType is provided, use it as the animation class
+      setAnimationClass(AnimatedType);
+    } else {
+      // Randomly pick an animation if AnimatedType is not provided
+      const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
+      setAnimationClass(randomAnimation);
+    }
+  }, [AnimatedType]);
+
+  return (
+    <>
+      <style>{`
+              .random-animate {
+                  display: inline-block;
+              }
+
+              /* Add your keyframe animations here */
+              /* Fade In Animation */
+              @keyframes fadeIn {
+                  from { opacity: 0; }
+                  to { opacity: 1; }
+              }
+
+              .fadeIn {
+                  animation: fadeIn 1s ease-in-out;
+              }
+
+              /* Slide In Left Animation */
+              @keyframes slideInLeft {
+                  from { transform: translateX(-100%); opacity: 0; }
+                  to { transform: translateX(0); opacity: 1; }
+              }
+
+              .slideInLeft {
+                  animation: slideInLeft 1s ease-in-out;
+              }
+
+              /* Zoom In Animation */
+              @keyframes zoomIn {
+                  from { transform: scale(0.5); opacity: 0; }
+                  to { transform: scale(1); opacity: 1; }
+              }
+
+              .zoomIn {
+                  animation: zoomIn 1s ease-in-out;
+              }
+
+              /* Rotate In Animation */
+              @keyframes rotateIn {
+                  from { transform: rotate(-200deg); opacity: 0; }
+                  to { transform: rotate(0); opacity: 1; }
+              }
+
+              .rotateIn {
+                  animation: rotateIn 1s ease-in-out;
+              }
+
+              /* Bounce In Animation */
+              @keyframes bounceIn {
+                  0%, 20%, 40%, 60%, 80%, 100% {
+                      transform: translateY(0);
+                  }
+                  50% {
+                      transform: translateY(-20px);
+                  }
+              }
+
+              .bounceIn {
+                  animation: bounceIn 1s ease-in-out;
+              }
+
+              /* Flip In X Animation */
+              @keyframes flipInX {
+                  from {
+                      transform: perspective(400px) rotateX(90deg);
+                      opacity: 0;
+                  }
+                  to {
+                      transform: perspective(400px) rotateX(0deg);
+                      opacity: 1;
+                  }
+              }
+
+              .flipInX {
+                  animation: flipInX 1s ease-in-out;
+              }
+
+              /* Flip In Y Animation */
+              @keyframes flipInY {
+                  from {
+                      transform: perspective(400px) rotateY(90deg);
+                      opacity: 0;
+                  }
+                  to {
+                      transform: perspective(400px) rotateY(0deg);
+                      opacity: 1;
+                  }
+              }
+
+              .flipInY {
+                  animation: flipInY 1s ease-in-out;
+              }
+
+              /* Light Speed In Animation */
+              @keyframes lightSpeedIn {
+                  from { transform: translateX(100%) skewX(-30deg); opacity: 0; }
+                  to { transform: translateX(0) skewX(0deg); opacity: 1; }
+              }
+
+              .lightSpeedIn {
+                  animation: lightSpeedIn 1s ease-out;
+              }
+
+              /* Roll In Animation */
+              @keyframes rollIn {
+                  from { transform: translateX(-100%) rotate(-120deg); opacity: 0; }
+                  to { transform: translateX(0) rotate(0deg); opacity: 1; }
+              }
+
+              .rollIn {
+                  animation: rollIn 1s ease-in-out;
+              }
+
+              /* Jack In The Box Animation */
+              @keyframes jackInTheBox {
+                  from {
+                      opacity: 0;
+                      transform: scale(0.1) rotate(30deg);
+                  }
+                  50% {
+                      transform: rotate(-10deg);
+                  }
+                  70% {
+                      transform: rotate(3deg);
+                  }
+                  to {
+                      opacity: 1;
+                      transform: scale(1);
+                  }
+              }
+
+              .jackInTheBox {
+                  animation: jackInTheBox 1s ease-in-out;
+              }
+          `}</style>
+      <div
+        id={RoseID}
+        style={edit}
+        className={`${RoseName} ${children ? '' : animationClass}`}
+      >
+        {children}
+        {!children && animationClass}
+      </div>
+    </>
+  );
+}
+
+export function SideText({
+  children,
+  RoseID,
+  RoseName = "side-textAnimatedLarose",
+  edit = {},
+  direction = 'left', // Default direction is 'left'
+}) {
+  const animationDirection = direction === 'right' ? 'sideTextRight' : 'sideTextLeft';
+
+  return (
+    <>
+      <style>{`
+              .side-text {
+                  display: inline-block;
+              }
+
+              /* SideTextLeft Animation */
+              @keyframes sideTextLeft {
+                  from {
+                      transform: translateX(-100%);
+                      opacity: 0;
+                  }
+                  to {
+                      transform: translateX(0);
+                      opacity: 1;
+                  }
+              }
+
+              /* SideTextRight Animation */
+              @keyframes sideTextRight {
+                  from {
+                      transform: translateX(100%);
+                      opacity: 0;
+                  }
+                  to {
+                      transform: translateX(0);
+                      opacity: 1;
+                  }
+              }
+
+              .sideTextLeft {
+                  animation: sideTextLeft 1s ease-in-out;
+              }
+
+              .sideTextRight {
+                  animation: sideTextRight 1s ease-in-out;
+              }
+          `}</style>
+      <div id={RoseID} style={edit} className={`${RoseName} ${animationDirection}`}>
         {children}
       </div>
     </>

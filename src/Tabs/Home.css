@@ -6,3 +6,11 @@
   flex-direction: column;
   gap: 1.1rem;
 }
+
+.a {
+  background: green;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
