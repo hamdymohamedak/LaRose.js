@@ -2102,47 +2102,45 @@ export const Route = ({ path, element }) => {
   );
 };
 
-
-
 export const RoseParent = ({
-  children,
-  edit,
-  RoseID,
-  RoseName,
-  display = 'flex',
-  flexDirection = 'row',
-  flexDirectionMobile = 'column',
-  justifyContent = 'space-around',
-  alignItems = 'center',
-  alignContent = 'center',
-  flexWrap = 'wrap',
-  gap = '1rem',
-  padding = '1rem',
-  minHeight = '100vh',
-  width = '100%',
-  flexBasis = 'auto',
-  flexGrow = '1',
-  flexShrink = '1',
-  gridTemplateColumns = '',
-  gridTemplateRows = '',
-  gridColumnGap = '',
-  gridRowGap = '',
-  placeItems = 'center',
-  alignContentGrid = '',
-  justifyItems = '',
-  gridAutoFlow = '',
-  gridAutoColumns = '',
-  gridAutoRows = '',
-  gridTemplateAreas = '',
-  alignSelf = '',
-  justifySelf = '',
-  gridArea = '',
+    children,
+    edit,
+    RoseID,
+    RoseName,
+    display = 'flex',
+    flexDirection = 'row',
+    flexDirectionMobile = 'column',
+    justifyContent = 'space-around',
+    alignItems = 'center',
+    alignContent = 'center',
+    flexWrap = 'wrap',
+    gap = '1rem',
+    padding = '1rem',
+    minHeight = '100vh',
+    width = '100%',
+    flexBasis = 'auto',
+    flexGrow = '1',
+    flexShrink = '1',
+    gridTemplateColumns = '',
+    gridTemplateRows = '',
+    gridColumnGap = '',
+    gridRowGap = '',
+    placeItems = 'center',
+    alignContentGrid = '',
+    justifyItems = '',
+    gridAutoFlow = '',
+    gridAutoColumns = '',
+    gridAutoRows = '',
+    gridTemplateAreas = '',
+    alignSelf = '',
+    justifySelf = '',
+    gridArea = '',
 }) => {
-  const isGrid = display === 'grid';
+    const isGrid = display === 'grid';
 
-  return (
-    <>
-      <style>{`
+    return (
+        <>
+            <style>{`
                 .rose-parent {
                     display: ${display};
                     ${isGrid ? `
@@ -2194,11 +2192,11 @@ export const RoseParent = ({
                     }
                 }
             `}</style>
-      <div id={RoseID} className={`rose-parent ${RoseName}`} style={edit}>
-        {children}
-      </div>
-    </>
-  );
+            <div id={RoseID} className={`rose-parent ${RoseName}`} style={edit}>
+                {children}
+            </div>
+        </>
+    );
 };
 export const Table = ({ data, columns, edit, RoseID, RoseName }) => (
   <table style={edit} className={RoseName} id={RoseID}>

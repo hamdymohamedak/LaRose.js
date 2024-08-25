@@ -9,7 +9,6 @@ import {
   CounterUp,
   RoseBox,
   RoseMouse,
-  RoseParent,
   Notification,
 } from "../LaRose";
 import Table from "../components/Table/Table";
@@ -17,6 +16,7 @@ import { useEffect, useState } from "react";
 import WaveText from "../components/WaveText/WaveText";
 import AnimatedText from "../components/AnimatedText/AnimatedText";
 import SplitText from "../components/SplitText/SplitText";
+import RoseParent from "../components/RoseParent/RoseParent";
 function Default() {
   const { navigate } = useRouter();
 
@@ -51,7 +51,7 @@ function Default() {
   ];
 
   return (
-    <RoseParent RoseID="App">
+    <div id="App">
       <BgSvg />
       <Ak_Alert
         edit={{ position: "fixed", top: "10%", right: "5%", width: "7rem" }}
@@ -88,7 +88,8 @@ function Default() {
       <SplitText>Split Text</SplitText>
       <AnimatedText animationType="zoomIn" initialAnimateTypeStyle={"character"} speed={1}>Animated Text</AnimatedText>
       <RoseMouse mouseShadow mouseShadowColor="white" />
-    </RoseParent>
+    </div>
+
   );
 }
 
