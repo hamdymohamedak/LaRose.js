@@ -1,17 +1,11 @@
 import "./Default.css";
-import BgSvg from "../components/bg_svg";
 import { useRouter } from "../components/RoseRouter/RoseRouter";
 import {
-  ShinyButton,
-  ShinyText,
-  ModernBtn,
   Ak_Alert,
   CounterUp,
-  RoseBox,
   RoseMouse,
   Notification,
   SideText,
-  WaveText,
   AnimatedText,
   useDocumentTitle,
   useRand,
@@ -27,6 +21,7 @@ function Default() {
   const [title, setTitle] = useState("LaRose.js");
   const [springBgColor, setSpringBgColor] = useState("white");
 
+
   useDocumentTitle(title);
 
   useEffect(() => {
@@ -41,11 +36,10 @@ function Default() {
 
   return (
     <div id="App">
-      <RoseMouse mouseShadow mouseShadowColor="black" />
       <div className="navbar">
         <SideText direction="left">
           <Ak_Alert edit={{ background: "black" }} time={Infinity}>
-            <CounterUp start={0} end={1000} time={1} />
+            <CounterUp start={0} end={randomNumber} time={1} />
           </Ak_Alert>
         </SideText>
         <SideText direction="right">
@@ -60,17 +54,17 @@ function Default() {
         </SideText>
       </div>
       <div className="titleParent">
-        <SplitText RoseName={"title"} delay={0.5} direction="left" >LaRose</SplitText>
+        <SplitText RoseName={"title"} delay={0.5} direction="left" >{title}</SplitText>
         <AnimatedText edit={{
           margin: "1rem",
           width: "width: 92%",
           textAlign: "center",
         }} animationType="zoomIn">
-          At LaRose, you'll find everything you need to speed up your development process. Our React library offers a comprehensive collection of hooks and components designed to make your development easier and more efficient.        </AnimatedText>
+          At LaRose, you'll find everything you need to speed up your development process. Our React library offers a comprehensive collection of hooks and components designed to make your development easier and more efficient.</AnimatedText>
       </div>
       <div className="downBar">
-        <Spring delay={1} edit={{ height: "6rem", width: "7rem", background: springBgColor }} />
-        <Variants edit={{ background: "black" }} />
+        <Spring drag edit={{ background: springBgColor }} />
+        <Variants edit={{ background: "black", }} />
       </div>
     </div>
   );

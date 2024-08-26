@@ -1752,7 +1752,8 @@ export function SplitText({
   );
 
   useEffect(() => {
-    const fullAnimationDuration = speed + delay * (children.split("").length || 1);
+    const fullAnimationDuration =
+      speed + delay * (children.split("").length || 1);
     const timer = setTimeout(() => {
       setAnimateTypeStyle("word"); // Change to 'word' after full animation duration
     }, fullAnimationDuration * 1000); // Convert duration to milliseconds
@@ -2037,7 +2038,8 @@ export function WaveText({
   const [waveType, setWaveType] = useState(initialWaveType);
 
   useEffect(() => {
-    const totalAnimationDuration = speed + delay * (children.split("").length || 1);
+    const totalAnimationDuration =
+      speed + delay * (children.split("").length || 1);
     const timer = setTimeout(() => {
       setWaveType("word"); // Change to 'word' after the full animation duration
     }, totalAnimationDuration * 1000 + 200); // Adjust timing to ensure it starts after animation
@@ -2103,11 +2105,14 @@ export function AnimatedText({
   animationType = "blur", // Type of animation: 'blur', 'fadeIn', 'slideIn', 'zoomIn'
   initialAnimateTypeStyle = "character", // Initial prop for animating by 'word' or 'character'
 }) {
-  const [animateTypeStyle, setAnimateTypeStyle] = useState(initialAnimateTypeStyle);
+  const [animateTypeStyle, setAnimateTypeStyle] = useState(
+    initialAnimateTypeStyle
+  );
 
   useEffect(() => {
     // Calculate total duration of animation including delay
-    const totalAnimationDuration = speed + delay * (children.split("").length || 1);
+    const totalAnimationDuration =
+      speed + delay * (children.split("").length || 1);
     const timer = setTimeout(() => {
       setAnimateTypeStyle("word"); // Change to 'word' after the animation ends
     }, totalAnimationDuration * 1000 + 600); // Adjust timing as needed
@@ -2410,7 +2415,6 @@ export function Notification({
     }
   }, [delay]);
 
-
   return (
     <>
       <style>{`
@@ -2526,22 +2530,64 @@ export function Notification({
     </>
   );
 }
-
 export function Spring({
   rotate = 360, // Default rotation to 360 degrees
   scale = 1, // Default scale to 1 (normal size)
   speed = 0.8, // Default speed to 0.8 seconds
   x = "0", // Default x translation
   y = "0", // Default y translation
+  z = "0",
   children,
   RoseID,
   RoseName = "RotatingSpringComponentStyle",
   edit,
+  drag = false, // Default to allow dragging
 }) {
+  const elementRef = useRef(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [isDragged, setIsDragged] = useState(false);
+  const [startOffset, setStartOffset] = useState({ x: 0, y: 0 });
+
+  // UseEffect to set initial position based on the element's location
+  useEffect(() => {
+    if (elementRef.current) {
+      const rect = elementRef.current.getBoundingClientRect();
+      setPosition({ x: rect.left, y: rect.top });
+    }
+  }, []);
+
+  const handleMouseDown = (e) => {
+    if (drag) {
+      const rect = e.target.getBoundingClientRect();
+      setStartOffset({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      });
+      setIsDragging(true);
+      setIsDragged(true);
+    }
+  };
+
+  const handleMouseMove = (e) => {
+    if (isDragging && drag) {
+      setPosition({
+        x: e.clientX - startOffset.x,
+        y: e.clientY - startOffset.y,
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    if (drag) {
+      setIsDragging(false);
+    }
+  };
+
   return (
     <>
       <style>{`
-              .${RoseName}{
+              .${RoseName} {
                   min-height: 7rem;
                   width: 7rem;
                   background: #ffffff;
@@ -2553,100 +2599,191 @@ export function Spring({
                   transform: rotate(0deg) scale(0);
                   opacity: 0;
                   overflow: hidden;
-                  translate: ${x} ${y};
+                  translate: ${x} ${y} ${z};
+                  position: relative; /* Default position */
+                  cursor: ${drag ? "grab" : "default"};
               }
               
+              .${RoseName}:active {
+                  cursor: ${drag ? "grabbing" : "default"};
+              }
+
               @keyframes LaRoseRotatingAnimated {
                   to {
+                                    translate: ${x} ${y} ${z};
                       transform: rotate(${rotate}deg) scale(${scale});
                       opacity: 1;
                   }
               }
           `}</style>
-      <div style={edit} className={RoseName} id={RoseID}>
+      <div
+        ref={elementRef}
+        style={{
+          ...edit,
+          left: isDragged ? `${position.x}px` : "auto",
+          top: isDragged ? `${position.y}px` : "auto",
+          position: isDragged ? "absolute" : "relative",
+        }}
+        className={RoseName}
+        id={RoseID}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+      >
         {children}
       </div>
     </>
   );
 }
-
 export function Variants({
-  rotate = 0,
-  scale = 1,
-  speed = 0.8,
-  x = "0",
-  y = "0",
+  rotate = 0, // Default rotation to 0 degrees
+  scale = 1, // Default scale to 1 (normal size)
+  speed = 0.8, // Default speed to 0.8 seconds
+  x = "0", // Default x translation
+  y = "0", // Default y translation
+  z = "0",
   children,
   RoseID,
   RoseName = "RotatingVariantsComponentStyle",
   edit,
-  childDisplay = "grid",
+  childDisplay = "grid", // Default child display
+  drag = false, // Default to allow dragging
 }) {
+  const elementRef = useRef(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [isDragged, setIsDragged] = useState(false);
+  const [startOffset, setStartOffset] = useState({ x: 0, y: 0 });
+
+  // Set initial position based on the element's location
+  useEffect(() => {
+    if (elementRef.current) {
+      const rect = elementRef.current.getBoundingClientRect();
+      setPosition({ x: rect.left, y: rect.top });
+    }
+  }, []);
+
+  const handleMouseDown = (e) => {
+    if (drag) {
+      const rect = e.target.getBoundingClientRect();
+      setStartOffset({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      });
+      setIsDragging(true);
+      setIsDragged(true);
+    }
+  };
+
+  const handleMouseMove = (e) => {
+    if (isDragging && drag) {
+      setPosition({
+        x: e.clientX - startOffset.x,
+        y: e.clientY - startOffset.y,
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    if (drag) {
+      setIsDragging(false);
+    }
+  };
+
   return (
     <>
       <style>{`
               .${RoseName} {
                   min-height: 7rem;
                   width: 7rem;
-                  background:#380eff;
+                  background: #380eff;
                   border-radius: 26px;
-                  display: grid;
+                  display:grid;
                   grid-template-columns: auto auto;
                   grid-gap: 1rem;
                   justify-content: center;
                   align-items: center;
                   animation: ${RoseName}Animated ${speed}s ease-in-out forwards;
                   transform: rotate(${rotate}deg) scale(${scale});
+                  translate: ${x} ${y} ${z};
                   opacity: 0;
                   overflow: hidden;
-                  transform: translate(${x}, ${y});
+                  position: relative; /* Default position */
+                  cursor: ${drag ? "grab" : "default"};
               }
               
+              .${RoseName}:active {
+                  cursor: ${drag ? "grabbing" : "default"};
+              }
+
               @keyframes ${RoseName}Animated {
                   to {
-                      opacity: 1;
+                      translate: ${x} ${y} ${z};
                       transform: rotate(${rotate}deg) scale(${scale});
+                      opacity: 1;
                   }
               }
           `}</style>
-      <div style={edit} className={RoseName} id={RoseID}>
+      <div
+        ref={elementRef}
+        style={{
+          ...edit,
+          left: isDragged ? `${position.x}px` : "auto",
+          top: isDragged ? `${position.y}px` : "auto",
+          position: isDragged ? "absolute" : "relative",
+        }}
+        className={RoseName}
+        id={RoseID}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+      >
         {children}
-        <div
-          style={{
-            height: "2rem",
-            width: "2rem",
-            background: "#EEE",
-            borderRadius: "50%",
-            display: childDisplay,
-          }}
-        ></div>
-        <div
-          style={{
-            height: "2rem",
-            width: "2rem",
-            background: "#EEE",
-            borderRadius: "50%",
-            display: childDisplay,
-          }}
-        ></div>
-        <div
-          style={{
-            height: "2rem",
-            width: "2rem",
-            background: "#EEE",
-            borderRadius: "50%",
-            display: childDisplay,
-          }}
-        ></div>
-        <div
-          style={{
-            height: "2rem",
-            width: "2rem",
-            background: "#EEE",
-            borderRadius: "50%",
-            display: childDisplay,
-          }}
-        ></div>
+        <SideText direction="left">
+          {" "}
+          <div
+            style={{
+              height: "2rem",
+              width: "2rem",
+              background: "#EEE",
+              borderRadius: "50%",
+              display: childDisplay,
+            }}
+          ></div>
+        </SideText>
+        <SideText direction="right">
+          <div
+            style={{
+              height: "2rem",
+              width: "2rem",
+              background: "#EEE",
+              borderRadius: "50%",
+              display: childDisplay,
+            }}
+          ></div>
+        </SideText>
+        <SideText direction="left">
+          <div
+            style={{
+              height: "2rem",
+              width: "2rem",
+              background: "#EEE",
+              borderRadius: "50%",
+              display: childDisplay,
+            }}
+          ></div>
+        </SideText>
+        <SideText direction="right">
+          <div
+            style={{
+              height: "2rem",
+              width: "2rem",
+              background: "#EEE",
+              borderRadius: "50%",
+              display: childDisplay,
+            }}
+          ></div>
+        </SideText>
       </div>
     </>
   );
@@ -2920,7 +3057,6 @@ export function useDocumentTitle(title) {
   }, [title]);
 }
 
-
 export function useLocalStorage(key, initialValue) {
   const [storedValue, setStoredValue] = useState(() => {
     try {
@@ -2934,7 +3070,8 @@ export function useLocalStorage(key, initialValue) {
 
   const setValue = (value) => {
     try {
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value;
       setStoredValue(valueToStore);
       window.localStorage.setItem(key, JSON.stringify(valueToStore));
     } catch (error) {
@@ -2952,12 +3089,12 @@ export function useOnlineStatus() {
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
 
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
 
     return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
     };
   }, []);
 
@@ -2965,7 +3102,8 @@ export function useOnlineStatus() {
 }
 
 export function useRand(from, to) {
-  const getRandomValue = () => Math.floor(Math.random() * (to - from + 1)) + from;
+  const getRandomValue = () =>
+    Math.floor(Math.random() * (to - from + 1)) + from;
 
   const [RandValue, setRandValue] = useState(getRandomValue());
 
@@ -2976,11 +3114,19 @@ export function useRand(from, to) {
   return [RandValue, refreshRandValue];
 }
 
-export function SeeMore({ children, maxCharacters = 100, edit, RoseName, RoseId, editButton = {} }) {
+export function SeeMore({
+  children,
+  maxCharacters = 100,
+  edit,
+  RoseName,
+  RoseId,
+  editButton = {},
+}) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   // Convert children to string
-  const text = typeof children === 'string' ? children : children?.props?.children;
+  const text =
+    typeof children === "string" ? children : children?.props?.children;
 
   // Determine if the text needs to be truncated
   const isTruncated = text?.length > maxCharacters;
@@ -3001,10 +3147,11 @@ export function SeeMore({ children, maxCharacters = 100, edit, RoseName, RoseId,
             border: "none",
             fontWeight: "bold",
             color: "blue",
-            ...editButton
+            ...editButton,
           }}
-          onClick={toggleExpand}>
-          {isExpanded ? 'Show Less' : 'Show More'}
+          onClick={toggleExpand}
+        >
+          {isExpanded ? "Show Less" : "Show More"}
         </button>
       )}
     </div>
