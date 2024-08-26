@@ -2886,6 +2886,116 @@ export function SideText({
   );
 }
 
+export function useClipboard() {
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
+  return [copied, copyToClipboard];
+}
+
+export function useDocumentTitle(title) {
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+}
+
+
+export function useLocalStorage(key, initialValue) {
+  const [storedValue, setStoredValue] = useState(() => {
+    try {
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      console.error(error);
+      return initialValue;
+    }
+  });
+
+  const setValue = (value) => {
+    try {
+      const valueToStore = value instanceof Function ? value(storedValue) : value;
+      setStoredValue(valueToStore);
+      window.localStorage.setItem(key, JSON.stringify(valueToStore));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return [storedValue, setValue];
+}
+
+export function useOnlineStatus() {
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
+  return isOnline;
+}
+
+export function useRand(from, to) {
+  const getRandomValue = () => Math.floor(Math.random() * (to - from + 1)) + from;
+
+  const [RandValue, setRandValue] = useState(getRandomValue());
+
+  const refreshRandValue = () => {
+    setRandValue(getRandomValue());
+  };
+
+  return [RandValue, refreshRandValue];
+}
+
+export function SeeMore({ children, maxCharacters = 100, edit, RoseName, RoseId, editButton = {} }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  // Convert children to string
+  const text = typeof children === 'string' ? children : children?.props?.children;
+
+  // Determine if the text needs to be truncated
+  const isTruncated = text?.length > maxCharacters;
+
+  // Handle the toggling of the text visibility
+  const toggleExpand = () => setIsExpanded(!isExpanded);
+
+  return (
+    <div style={edit} className={RoseName} id={RoseId}>
+      {/* Render truncated or full text based on state */}
+      {isTruncated && !isExpanded ? `${text.slice(0, maxCharacters)}...` : text}
+
+      {/* Show "Show More" button if the text is truncated */}
+      {isTruncated && (
+        <button
+          style={{
+            background: "none",
+            border: "none",
+            fontWeight: "bold",
+            color: "blue",
+            ...editButton
+          }}
+          onClick={toggleExpand}>
+          {isExpanded ? 'Show Less' : 'Show More'}
+        </button>
+      )}
+    </div>
+  );
+}
+
 let CSS_PROPRTY_ROOT = () => {
   return (
     <>
