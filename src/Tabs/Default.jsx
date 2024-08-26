@@ -69,7 +69,7 @@ function Default() {
           At LaRose, you'll find everything you need to speed up your development process. Our React library offers a comprehensive collection of hooks and components designed to make your development easier and more efficient.        </AnimatedText>
       </div>
       <div className="downBar">
-        <Spring edit={{ height: "6rem", width: "7rem", background: springBgColor }} />
+        <Spring delay{0.6} edit={{ height: "6rem", width: "7rem", background: springBgColor }} />
         <Variants edit={{ background: "black" }} />
       </div>
     </div>
