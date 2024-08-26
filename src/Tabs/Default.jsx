@@ -10,86 +10,70 @@ import {
   RoseBox,
   RoseMouse,
   Notification,
+  SideText,
+  WaveText,
+  AnimatedText,
+  useDocumentTitle,
+  useRand,
+  SplitText,
+  Spring,
+  Variants,
 } from "../LaRose";
-import Table from "../components/Table/Table";
 import { useEffect, useState } from "react";
-import WaveText from "../components/WaveText/WaveText";
-import AnimatedText from "../components/AnimatedText/AnimatedText";
-import SplitText from "../components/SplitText/SplitText";
-import RoseParent from "../components/RoseParent/RoseParent";
+
 function Default() {
   const { navigate } = useRouter();
+  const [randomNumber, setRandomNumber] = useRand(1000, 10000);
+  const [title, setTitle] = useState("LaRose.js");
+  const [springBgColor, setSpringBgColor] = useState("white");
 
-  const [apiData, setApiData] = useState({});
+  useDocumentTitle(title);
 
   useEffect(() => {
-    const api = "https://fakestoreapi.com/products/3";
+    const timer = setTimeout(() => {
+      setTitle("LaRose.jsx");
+      setSpringBgColor("black");
+    }, randomNumber);
 
-    fetch(api)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return res.text();
-      })
-      .then((text) => {
-        if (text) {
-          return JSON.parse(text);
-        }
-        throw new Error("Empty response body");
-      })
-      .then((json) => setApiData(json))
-      .catch((error) => console.error("Error fetching API:", error));
-  }, []);
-
-  const data = [{ id: apiData.id, title: apiData.title, price: apiData.price }];
-
-  const columns = [
-    { header: "ID", accessor: "id" },
-    { header: "Title", accessor: "title" },
-    { header: "Price", accessor: "price" },
-  ];
+    // Clean up the timer on component unmount
+    return () => clearTimeout(timer);
+  }, [randomNumber]);
 
   return (
     <div id="App">
-      <BgSvg />
-      <Ak_Alert
-        edit={{ position: "fixed", top: "10%", right: "5%", width: "7rem" }}
-        time={Infinity}
-      >
-        <CounterUp start={0} end={1000} time={10} />{" "}
-      </Ak_Alert>
-      <Notification
-        delay={20000}
-        Message="Hello Devs"
-        DesMessage="Front End Devs"
-      />
-
-      <ModernBtn
-        color={"white"}
-        allColor={"red"}
-        title={"Go To Home"}
-        clickEvent={() => navigate("/Home")}
-      />
-      <ShinyButton
-        ShinyButtonEvent={() => {
-          window.location.reload();
-        }}
-        edit={{ fontSize: "1rem", height: "3rem", minWidth: "2rem" }}
-      >
-        <ShinyText
-          speed={3}
-          edit={{ color: "white", background: "transparent" }}
-        >
-          Shiny Animation | Reload
-        </ShinyText>
-      </ShinyButton>
-      <WaveText initialWaveType={"character"} edit={{ fontSize: "3rem" }}>Wave Text</WaveText>
-      <SplitText>Split Text</SplitText>
-      <AnimatedText animationType="zoomIn" initialAnimateTypeStyle={"character"} speed={1}>Animated Text</AnimatedText>
-      <RoseMouse mouseShadow mouseShadowColor="white" />
+      <RoseMouse mouseShadow mouseShadowColor="black" />
+      <div className="navbar">
+        <SideText direction="left">
+          <Ak_Alert edit={{ background: "black" }} time={Infinity}>
+            <CounterUp start={0} end={1000} time={1} />
+          </Ak_Alert>
+        </SideText>
+        <SideText direction="right">
+          <Notification
+            CrossIconColor="white"
+            edit={{ background: "black", color: "white" }}
+            delay={Infinity}
+            iconDisplay="none"
+            Message="Hello Devs"
+            DesMessage="LaRose is: React library To speed up the development process and make it easy"
+          />
+        </SideText>
+      </div>
+      <div className="titleParent">
+        <div className="title">
+          <WaveText delay={0.6}>LaRose</WaveText>
+        </div>
+        <AnimatedText edit={{
+          width: "38rem",
+          textAlign: "center",
+        }} animationType="zoomIn">
+          At LaRose, you'll find everything you need to speed up your development process. Our React library offers a comprehensive collection of hooks and components designed to make your development easier and more efficient.        </AnimatedText>
+      </div>
+      <div className="downBar">
+        <Spring edit={{ height: "6rem", width: "7rem", background: springBgColor }} />
+        <Variants edit={{ background: "black" }} />
+      </div>
     </div>
-
   );
 }
 

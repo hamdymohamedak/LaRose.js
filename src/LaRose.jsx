@@ -2383,7 +2383,14 @@ export function Notification({
   ),
   RoseName = "card",
   Message = "Hello LaRose Devs",
+  MessageColor = "white",
   DesMessage = "success",
+  DesMessageColor = "white",
+  editCrossIconHeight = 1.5,
+  editCrossIconWidth = 1.5,
+  iconDisplay = "block",
+  CrossIconColor = "black",
+  editCrossIconColor = {},
   delay = 5000,
 }) {
   const [valueState, setValueState] = useState(false);
@@ -2393,15 +2400,21 @@ export function Notification({
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setValueState(true);
-    }, delay);
-  });
+    if (delay !== Infinity) {
+      const timer = setTimeout(() => {
+        setValueState(true);
+      }, delay);
+
+      // Clean up the timer on unmount
+      return () => clearTimeout(timer);
+    }
+  }, [delay]);
+
 
   return (
     <>
       <style>{`
-        .card {
+                .${RoseName} {
           width: 20.625rem;
           height: 5rem; 
           border-radius: 0.5rem; 
@@ -2433,6 +2446,7 @@ export function Notification({
           background-color: #04e40048;
           border-radius: 50%;
           margin-left: 0.5rem; /* 8px / 16 */
+          display:${iconDisplay};
         }
         .icon {
           width: 1.0625rem; /* 17px / 16 */
@@ -2452,19 +2466,20 @@ export function Notification({
           cursor: default;
         }
         .message-text {
-          color: #269b24;
+          color: ${MessageColor};
           font-size: 1.0625rem; /* 17px / 16 */
           font-weight: 700;
         }
         .sub-text {
           font-size: 0.875rem; /* 14px / 16 */
-          color: #555;
+          color: ${DesMessageColor};
         }
         .cross-icon {
-          width: 1.125rem; /* 18px / 16 */
-          height: 1.125rem; /* 18px / 16 */
-          color: #555;
+          width: ${editCrossIconHeight}rem;
+          height: ${editCrossIconWidth}rem;
+          color: ${CrossIconColor};
           cursor: pointer;
+
         }
       `}</style>
       <div
