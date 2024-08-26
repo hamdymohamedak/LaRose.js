@@ -60,11 +60,10 @@ function Default() {
         </SideText>
       </div>
       <div className="titleParent">
-        <div className="title">
-          <WaveText delay={0.6}>LaRose</WaveText>
-        </div>
+        <SplitText RoseName={"title"} delay={0.5} direction="left" >LaRose</SplitText>
         <AnimatedText edit={{
-          width: "38rem",
+          margin: "1rem",
+          width: "width: 92%",
           textAlign: "center",
         }} animationType="zoomIn">
           At LaRose, you'll find everything you need to speed up your development process. Our React library offers a comprehensive collection of hooks and components designed to make your development easier and more efficient.        </AnimatedText>
