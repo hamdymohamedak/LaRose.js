@@ -2,7 +2,7 @@
   <a href="https://larose.vercel.app">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="https://ibb.co/K67cf5m">
-[url=https://ibb.co/K67cf5m][img]https://i.ibb.co/K67cf5m/a-simple-logo-for-a-tech-tool-named-larose-js-it-f-ow-O1-Z9-Dg-R96-R5j5-ZSZOpmw-Qjb-At-TRo-Ti-CXL9fy.jpg[/img][/url]
+      <img src="https://i.ibb.co/rkMKzQv/a-simple-logo-for-a-tech-tool-named-larose-js-it-f-ow-O1-Z9-Dg-R96-R5j5-ZSZOpmw-Qjb-At-TRo-Ti-CXL9fy.jpg">
     </picture>
     <h1 align="center">LaRose.js</h1>
   </a>
