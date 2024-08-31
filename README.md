@@ -22,16 +22,16 @@ Visit [https://larosejs.vercel.app/](https://larosejs.vercel.app/) to view the f
 
 To get started with LaRose.js, follow these steps:
 
-1. Clone the repository:
+1. Clone the Repository:
    ```bash
    git clone https://github.com/hamdymohamedak/LaRose.js.git
    ```
    
-2. go to Project:
+2. Go to Project:
   ```bash
    cd LaRose.js
   ```
-3. install node_modules
+3. Install node_modules
   ```bash
     npm install
   ```
@@ -39,12 +39,12 @@ To get started with LaRose.js, follow these steps:
   ```bash
    npm i
   ```
-4. start development for (React)
+4. Start Development for (React)
   ```bash
   npm start 
   
   ```
-  start development for (Vite)
+  Start Development for (Vite)
   ```bash  
   npm run dev
   ```
