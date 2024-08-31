@@ -34,11 +34,17 @@ To get started with LaRose.js, follow these steps:
 3. install node_modules
   ```bash
     npm install
-    OR
-    npm i
   ```
-4. start development
+  OR
   ```bash
-  npm start (React)
+   npm i
+  ```
+4. start development for (React)
+  ```bash
+  npm start 
+  
+  ```
+  start development for (Vite)
+  ```bash  
   npm run dev (Vite)
   ```
