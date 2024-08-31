@@ -2788,7 +2788,6 @@ export function Variants({
     </>
   );
 }
-
 export function RandomAnimate({
   children,
   RoseID,
@@ -2833,151 +2832,149 @@ export function RandomAnimate({
   return (
     <>
       <style>{`
-              .random-animate {
-                  display: inline-block;
-              }
+        .random-animate {
+          display: inline-block;
+        }
 
-              /* Add your keyframe animations here */
-              /* Fade In Animation */
-              @keyframes fadeIn {
-                  from { opacity: 0; }
-                  to { opacity: 1; }
-              }
+        /* Add your keyframe animations here */
+        /* Fade In Animation */
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
 
-              .fadeIn {
-                  animation: fadeIn 1s ease-in-out;
-              }
+        .fadeIn {
+          animation: fadeIn 1s ease-in-out;
+        }
 
-              /* Slide In Left Animation */
-              @keyframes slideInLeft {
-                  from { transform: translateX(-100%); opacity: 0; }
-                  to { transform: translateX(0); opacity: 1; }
-              }
+        /* Slide In Left Animation */
+        @keyframes slideInLeft {
+          from { transform: translateX(-100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
 
-              .slideInLeft {
-                  animation: slideInLeft 1s ease-in-out;
-              }
+        .slideInLeft {
+          animation: slideInLeft 1s ease-in-out;
+        }
 
-              /* Zoom In Animation */
-              @keyframes zoomIn {
-                  from { transform: scale(0.5); opacity: 0; }
-                  to { transform: scale(1); opacity: 1; }
-              }
+        /* Zoom In Animation */
+        @keyframes zoomIn {
+          from { transform: scale(0.5); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
 
-              .zoomIn {
-                  animation: zoomIn 1s ease-in-out;
-              }
+        .zoomIn {
+          animation: zoomIn 1s ease-in-out;
+        }
 
-              /* Rotate In Animation */
-              @keyframes rotateIn {
-                  from { transform: rotate(-200deg); opacity: 0; }
-                  to { transform: rotate(0); opacity: 1; }
-              }
+        /* Rotate In Animation */
+        @keyframes rotateIn {
+          from { transform: rotate(-200deg); opacity: 0; }
+          to { transform: rotate(0); opacity: 1; }
+        }
 
-              .rotateIn {
-                  animation: rotateIn 1s ease-in-out;
-              }
+        .rotateIn {
+          animation: rotateIn 1s ease-in-out;
+        }
 
-              /* Bounce In Animation */
-              @keyframes bounceIn {
-                  0%, 20%, 40%, 60%, 80%, 100% {
-                      transform: translateY(0);
-                  }
-                  50% {
-                      transform: translateY(-20px);
-                  }
-              }
+        /* Bounce In Animation */
+        @keyframes bounceIn {
+          0%, 20%, 40%, 60%, 80%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+        }
 
-              .bounceIn {
-                  animation: bounceIn 1s ease-in-out;
-              }
+        .bounceIn {
+          animation: bounceIn 1s ease-in-out;
+        }
 
-              /* Flip In X Animation */
-              @keyframes flipInX {
-                  from {
-                      transform: perspective(400px) rotateX(90deg);
-                      opacity: 0;
-                  }
-                  to {
-                      transform: perspective(400px) rotateX(0deg);
-                      opacity: 1;
-                  }
-              }
+        /* Flip In X Animation */
+        @keyframes flipInX {
+          from {
+            transform: perspective(400px) rotateX(90deg);
+            opacity: 0;
+          }
+          to {
+            transform: perspective(400px) rotateX(0deg);
+            opacity: 1;
+          }
+        }
 
-              .flipInX {
-                  animation: flipInX 1s ease-in-out;
-              }
+        .flipInX {
+          animation: flipInX 1s ease-in-out;
+        }
 
-              /* Flip In Y Animation */
-              @keyframes flipInY {
-                  from {
-                      transform: perspective(400px) rotateY(90deg);
-                      opacity: 0;
-                  }
-                  to {
-                      transform: perspective(400px) rotateY(0deg);
-                      opacity: 1;
-                  }
-              }
+        /* Flip In Y Animation */
+        @keyframes flipInY {
+          from {
+            transform: perspective(400px) rotateY(90deg);
+            opacity: 0;
+          }
+          to {
+            transform: perspective(400px) rotateY(0deg);
+            opacity: 1;
+          }
+        }
 
-              .flipInY {
-                  animation: flipInY 1s ease-in-out;
-              }
+        .flipInY {
+          animation: flipInY 1s ease-in-out;
+        }
 
-              /* Light Speed In Animation */
-              @keyframes lightSpeedIn {
-                  from { transform: translateX(100%) skewX(-30deg); opacity: 0; }
-                  to { transform: translateX(0) skewX(0deg); opacity: 1; }
-              }
+        /* Light Speed In Animation */
+        @keyframes lightSpeedIn {
+          from { transform: translateX(100%) skewX(-30deg); opacity: 0; }
+          to { transform: translateX(0) skewX(0deg); opacity: 1; }
+        }
 
-              .lightSpeedIn {
-                  animation: lightSpeedIn 1s ease-out;
-              }
+        .lightSpeedIn {
+          animation: lightSpeedIn 1s ease-out;
+        }
 
-              /* Roll In Animation */
-              @keyframes rollIn {
-                  from { transform: translateX(-100%) rotate(-120deg); opacity: 0; }
-                  to { transform: translateX(0) rotate(0deg); opacity: 1; }
-              }
+        /* Roll In Animation */
+        @keyframes rollIn {
+          from { transform: translateX(-100%) rotate(-120deg); opacity: 0; }
+          to { transform: translateX(0) rotate(0deg); opacity: 1; }
+        }
 
-              .rollIn {
-                  animation: rollIn 1s ease-in-out;
-              }
+        .rollIn {
+          animation: rollIn 1s ease-in-out;
+        }
 
-              /* Jack In The Box Animation */
-              @keyframes jackInTheBox {
-                  from {
-                      opacity: 0;
-                      transform: scale(0.1) rotate(30deg);
-                  }
-                  50% {
-                      transform: rotate(-10deg);
-                  }
-                  70% {
-                      transform: rotate(3deg);
-                  }
-                  to {
-                      opacity: 1;
-                      transform: scale(1);
-                  }
-              }
+        /* Jack In The Box Animation */
+        @keyframes jackInTheBox {
+          from {
+            opacity: 0;
+            transform: scale(0.1) rotate(30deg);
+          }
+          50% {
+            transform: rotate(-10deg);
+          }
+          70% {
+            transform: rotate(3deg);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
 
-              .jackInTheBox {
-                  animation: jackInTheBox 1s ease-in-out;
-              }
-          `}</style>
+        .jackInTheBox {
+          animation: jackInTheBox 1s ease-in-out;
+        }
+      `}</style>
       <div
         id={RoseID}
         style={edit}
-        className={`${RoseName} ${children ? "" : animationClass}`}
+        className={`${RoseName} ${animationClass}`}
       >
         {children}
-        {!children && animationClass}
       </div>
     </>
   );
 }
-
 export function SideText({
   children,
   RoseID,
