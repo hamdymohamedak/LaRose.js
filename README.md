@@ -16,4 +16,12 @@ At LaRose, you'll find everything you need to speed up your development process.
 
 ## Documentation
 
-Visit [https://larose.vercel.app/](https://larosejs.vercel.app/) to view the full documentation.
+Visit [https://larosejs.vercel.app/](https://larosejs.vercel.app/) to view the full documentation.
+
+## Installation
+
+To get started with LaRose.js, follow these steps:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/hamdymohamedak/LaRose.js.git
