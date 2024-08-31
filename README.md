@@ -46,5 +46,5 @@ To get started with LaRose.js, follow these steps:
   ```
   start development for (Vite)
   ```bash  
-  npm run dev (Vite)
+  npm run dev
   ```
