@@ -25,3 +25,20 @@ To get started with LaRose.js, follow these steps:
 1. Clone the repository:
    ```bash
    git clone https://github.com/hamdymohamedak/LaRose.js.git
+   ```
+   
+2. go to Project:
+  ```bash
+   cd LaRose.js
+  ```
+3. install node_modules
+  ```bash
+    npm install
+    OR
+    npm i
+  ```
+4. start development
+  ```bash
+  npm start (React)
+  npm run dev (Vite)
+  ```
