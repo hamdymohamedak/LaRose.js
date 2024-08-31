@@ -24,7 +24,8 @@ To get started with LaRose.js, follow these steps:
 
 1. Clone the Repository:
    ```bash
-    git clone https://github.com/hamdymohamedak/LaRose.js.git ```
+    git clone https://github.com/hamdymohamedak/LaRose.js.git
+   ```
    
 3. Go to Project:
   ```bash
