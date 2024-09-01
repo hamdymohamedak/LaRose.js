@@ -3257,6 +3257,49 @@ export function SideBox({ children, direction = 'left', edit = {}, RoseID, RoseN
 }
 
 
+export const useBatteryStatus = () => {
+  const [batteryInfo, setBatteryInfo] = useState({
+    level: null,
+    charging: null,
+  });
+
+  useEffect(() => {
+    // Check if the browser supports the Battery Status API
+    if ('getBattery' in navigator) {
+      navigator.getBattery().then((battery) => {
+        // Set the initial battery status
+        setBatteryInfo({
+          level: battery.level,
+          charging: battery.charging,
+        });
+
+        // Update the battery status when it changes
+        const updateBatteryInfo = () => {
+          setBatteryInfo({
+            level: battery.level,
+            charging: battery.charging,
+          });
+        };
+
+        battery.addEventListener('levelchange', updateBatteryInfo);
+        battery.addEventListener('chargingchange', updateBatteryInfo);
+
+        // Cleanup the event listeners on unmount
+        return () => {
+          battery.removeEventListener('levelchange', updateBatteryInfo);
+          battery.removeEventListener('chargingchange', updateBatteryInfo);
+        };
+      });
+    } else {
+      console.log('Battery Status API is not supported in this browser.');
+    }
+  }, []);
+
+  return batteryInfo;
+};
+
+export default useBatteryStatus;
+
 
 let CSS_PROPRTY_ROOT = () => {
   return (
