@@ -1,5 +1,4 @@
 import "./Default.css";
-import { useRouter } from "../components/RoseRouter/RoseRouter";
 import {
   Ak_Alert,
   CounterUp,
@@ -12,6 +11,7 @@ import {
   SplitText,
   Spring,
   Variants,
+  useRouter
 } from "../LaRose";
 import { useEffect, useState } from "react";
 
