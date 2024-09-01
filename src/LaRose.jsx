@@ -3154,6 +3154,8 @@ export function SeeMore({
     </div>
   );
 }
+
+
 export function SideBox({ children, direction = 'left', edit = {}, RoseID, RoseName }) {
   const [isVisible, setIsVisible] = useState(false);
   const boxRef = useRef(null);
@@ -3184,41 +3186,68 @@ export function SideBox({ children, direction = 'left', edit = {}, RoseID, RoseN
   return (
     <>
       <style>{`
-              .sideboxComponent {
-                  transition: transform 0.5s ease, opacity 0.5s ease;
-                  opacity: 0;
-                  z-index: 1000;
-              }
-              .sideboxComponent.visible {
-                  opacity: 1;
-              }
-              .sideboxComponent.left {
-                  left: 0;
-                  transform: translateX(-100%) translateY(-50%);
-              }
-              .sideboxComponent.right {
-                  right: 0;
-                  transform: translateX(100%) translateY(-50%);
-              }
-              .sideboxComponent.left.visible {
-                  transform: translateX(0) translateY(-50%);
-              }
-              .sideboxComponent.right.visible {
-                  transform: translateX(0) translateY(-50%);
-              }
-              .sideboxComponent.hidden {
-                  opacity: 0;
-                  transform: translateY(-50%) translateX(-100%);
-              }
-              .sideboxComponent.hidden.right {
-                  transform: translateY(-50%) translateX(100%);
-              }
-          `}</style>
+        .sideboxComponent {
+          transition: transform 0.5s ease, opacity 0.5s ease;
+          opacity: 0;
+          z-index: 1000;
+          position: fixed;
+        }
+        .sideboxComponent.visible {
+          opacity: 1;
+        }
+        .sideboxComponent.left {
+          left: 0;
+          top: 50%;
+          transform: translateX(-100%) translateY(-50%);
+        }
+        .sideboxComponent.right {
+          right: 0;
+          top: 50%;
+          transform: translateX(100%) translateY(-50%);
+        }
+        .sideboxComponent.top {
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%) translateY(-100%);
+        }
+        .sideboxComponent.bottom {
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%) translateY(100%);
+        }
+        .sideboxComponent.left.visible {
+          transform: translateX(0) translateY(-50%);
+        }
+        .sideboxComponent.right.visible {
+          transform: translateX(0) translateY(-50%);
+        }
+        .sideboxComponent.top.visible {
+          transform: translateX(-50%) translateY(0);
+        }
+        .sideboxComponent.bottom.visible {
+          transform: translateX(-50%) translateY(0);
+        }
+        .sideboxComponent.hidden {
+          opacity: 0;
+        }
+        .sideboxComponent.hidden.left {
+          transform: translateX(-100%) translateY(-50%);
+        }
+        .sideboxComponent.hidden.right {
+          transform: translateX(100%) translateY(-50%);
+        }
+        .sideboxComponent.hidden.top {
+          transform: translateX(-50%) translateY(-100%);
+        }
+        .sideboxComponent.hidden.bottom {
+          transform: translateX(-50%) translateY(100%);
+        }
+      `}</style>
       <div
         ref={boxRef}
         style={edit}
         id={RoseID}
-        className={`sideboxComponent ${direction} ${isVisible ? 'visible' : 'hidden'} ${direction} ${!isVisible && direction === 'left' ? 'hidden' : ''} ${!isVisible && direction === 'right' ? 'hidden' : ''}`}
+        className={`sideboxComponent ${direction} ${isVisible ? 'visible' : 'hidden'}`}
       >
         {RoseName && <h2>{RoseName}</h2>}
         {children}
@@ -3226,6 +3255,7 @@ export function SideBox({ children, direction = 'left', edit = {}, RoseID, RoseN
     </>
   );
 }
+
 
 
 let CSS_PROPRTY_ROOT = () => {
