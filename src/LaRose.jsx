@@ -3298,8 +3298,6 @@ export const useBatteryStatus = () => {
   return batteryInfo;
 };
 
-export default useBatteryStatus;
-
 
 let CSS_PROPRTY_ROOT = () => {
   return (
