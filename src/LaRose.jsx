@@ -3154,6 +3154,79 @@ export function SeeMore({
     </div>
   );
 }
+export function SideBox({ children, direction = 'left', edit = {}, RoseID, RoseName }) {
+  const [isVisible, setIsVisible] = useState(false);
+  const boxRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (boxRef.current) {
+        const boxRect = boxRef.current.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+
+        // Check if the element is within the viewport
+        if (boxRect.top <= viewportHeight && boxRect.bottom >= 0) {
+          setIsVisible(true); // Element is visible
+        } else {
+          setIsVisible(false); // Element is not visible
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  return (
+    <>
+      <style>{`
+              .sideboxComponent {
+                  transition: transform 0.5s ease, opacity 0.5s ease;
+                  opacity: 0;
+                  z-index: 1000;
+              }
+              .sideboxComponent.visible {
+                  opacity: 1;
+              }
+              .sideboxComponent.left {
+                  left: 0;
+                  transform: translateX(-100%) translateY(-50%);
+              }
+              .sideboxComponent.right {
+                  right: 0;
+                  transform: translateX(100%) translateY(-50%);
+              }
+              .sideboxComponent.left.visible {
+                  transform: translateX(0) translateY(-50%);
+              }
+              .sideboxComponent.right.visible {
+                  transform: translateX(0) translateY(-50%);
+              }
+              .sideboxComponent.hidden {
+                  opacity: 0;
+                  transform: translateY(-50%) translateX(-100%);
+              }
+              .sideboxComponent.hidden.right {
+                  transform: translateY(-50%) translateX(100%);
+              }
+          `}</style>
+      <div
+        ref={boxRef}
+        style={edit}
+        id={RoseID}
+        className={`sideboxComponent ${direction} ${isVisible ? 'visible' : 'hidden'} ${direction} ${!isVisible && direction === 'left' ? 'hidden' : ''} ${!isVisible && direction === 'right' ? 'hidden' : ''}`}
+      >
+        {RoseName && <h2>{RoseName}</h2>}
+        {children}
+      </div>
+    </>
+  );
+}
+
 
 let CSS_PROPRTY_ROOT = () => {
   return (
