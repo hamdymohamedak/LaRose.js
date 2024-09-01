@@ -1,5 +1,5 @@
 import React from "react";
-import { RoseRouter, Route } from "./components/RoseRouter/RoseRouter";
+import { RoseRouter, Route } from "./LaRose";
 import Default from "./Tabs/Default";
 import Home from "./Tabs/Home";
 
