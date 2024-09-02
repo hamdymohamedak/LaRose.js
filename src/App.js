@@ -1,28 +1,28 @@
-import React from "react";
-import { RoseRouter, Route } from "./LaRose";
-import Default from "./Tabs/Default";
-import Home from "./Tabs/Home";
+import React, { useEffect, useState } from "react";
+import { RoseRouter, Route } from "./components/LaRose";
+import NavBar from "./components/NavBar/NavBar";
+import DocsPage from "./components/Docs/Docs";
+import HomePage from "./components/Home/Home";
+function App() {
+  let customStyle = `.route {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    background:black;
+  }
+  .route-active {
+    opacity: 1;
+    transform: translateY(0);
+    background:black;
+  }`;
 
-export default function App() {
-  const customAnimation = `
-    .route {
-        opacity: 0;
-        transform: scale(0.90);
-        transition: opacity 0.4s ease,  transform 0.4s ease;
-        transform:translateX(100%);
-    }
-
-    .route-active {
-        opacity: 1;
-        transform: scale(1);
-        transform:translateX(0);
-        
-    }
-`;
   return (
-    <RoseRouter>
-      <Route path="/" element={<Default />} />
-      <Route path="/Home" element={<Home />} />
+    <RoseRouter customStyles={customStyle}>
+      <NavBar />
+      <Route path="/" element={<HomePage />} />
+      <Route path="/Docs" element={<DocsPage />} />
     </RoseRouter>
   );
 }
+
+export default App;
