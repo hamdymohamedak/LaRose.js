@@ -3297,8 +3297,52 @@ export const useBatteryStatus = () => {
 
   return batteryInfo;
 };
+export function usePreferredLanguage() {
+  const [preferredLanguage, setPreferredLanguage] = useState('en');
+
+  useEffect(() => {
+    const language = navigator.language || navigator.userLanguage;
+    setPreferredLanguage(language);
+  }, []);
+
+  return preferredLanguage;
+}
 
 
+export function useColorScheme() {
+  const [colorScheme, setColorScheme] = useState('light');
+
+  useEffect(() => {
+    const matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
+
+    const handleChange = (e) => {
+      setColorScheme(e.matches ? 'dark' : 'light');
+    };
+
+    handleChange(matchMedia); // Set the initial value
+    matchMedia.addEventListener('change', handleChange);
+
+    return () => {
+      matchMedia.removeEventListener('change', handleChange);
+    };
+  }, []);
+
+  return colorScheme;
+}
+
+
+
+export function useHardwareConcurrency() {
+  const [coreCount, setCoreCount] = useState(1);
+
+  useEffect(() => {
+    if (navigator.hardwareConcurrency) {
+      setCoreCount(navigator.hardwareConcurrency);
+    }
+  }, []);
+
+  return coreCount;
+}
 let CSS_PROPRTY_ROOT = () => {
   return (
     <>
