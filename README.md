@@ -42,7 +42,6 @@ npm i
 4. Start Development for: (React)
 ```sh
 npm start 
-  
 ```
   Start Development for: (Vite)
 ```sh  
