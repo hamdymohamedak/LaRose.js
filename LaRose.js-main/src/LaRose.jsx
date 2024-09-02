@@ -3303,7 +3303,6 @@ export const useBatteryStatus = () => {
   return batteryInfo;
 };
 
-export default useBatteryStatus;
 
 export function usePreferredLanguage() {
   const [preferredLanguage, setPreferredLanguage] = useState("en");
