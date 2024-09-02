@@ -11,17 +11,15 @@ import {
   SplitText,
   Spring,
   Variants,
-  SideBox
 } from "../LaRose";
 import { useEffect, useState } from "react";
-
+import useDeviceOS from "../Hooks/useDeviceOS";
 function Default() {
   const { navigate } = useRouter();
   const [randomNumber, setRandomNumber] = useRand(1000, 10000);
   const [title, setTitle] = useState("LaRose.js");
   const [springBgColor, setSpringBgColor] = useState("white");
-
-
+  const thisOS = useDeviceOS()
   useDocumentTitle(title);
 
   useEffect(() => {

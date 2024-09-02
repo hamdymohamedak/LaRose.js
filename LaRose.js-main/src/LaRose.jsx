@@ -1036,8 +1036,9 @@ export function Slider({
           {React.Children.map(children, (_, index) => (
             <span
               key={index}
-              className={`pagination-dot ${index === currentIndex ? "active" : ""
-                }`}
+              className={`pagination-dot ${
+                index === currentIndex ? "active" : ""
+              }`}
               onClick={() => setCurrentIndex(index)}
             />
           ))}
@@ -1657,32 +1658,32 @@ export function RoseBox({
   const aspectStyle = aspectRatio ? { aspectRatio } : {};
   const displayLayoutStyle = grid
     ? {
-      display: "grid",
-      gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
-    }
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
+      }
     : flex
-      ? { display: "flex", justifyContent: "space-between", alignItems: "center" }
-      : {};
+    ? { display: "flex", justifyContent: "space-between", alignItems: "center" }
+    : {};
   const backgroundStyle = background ? { background } : {};
   const autoHandleStyle = AutoHandling
     ? {
-      background: "#1b85db",
-      height: "3rem",
-      minWidth: "11rem",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      border: "1px solid #1b85db",
-      borderRadius: "7px",
-      fontWeight: "bold",
-      boxShadow:
-        "#1b85db 0px 50px 100px -20px, #1b85db 0px 30px 60px -30px, #1b85db 0px -2px 6px 0px inset",
-      outlineOffset: `${outlineOffset}`,
-      outlineStyle: "solid",
-      outlineColor: "#1b85db",
-      outlineWidth: "2px",
-      cursor: "pointer",
-    }
+        background: "#1b85db",
+        height: "3rem",
+        minWidth: "11rem",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        border: "1px solid #1b85db",
+        borderRadius: "7px",
+        fontWeight: "bold",
+        boxShadow:
+          "#1b85db 0px 50px 100px -20px, #1b85db 0px 30px 60px -30px, #1b85db 0px -2px 6px 0px inset",
+        outlineOffset: `${outlineOffset}`,
+        outlineStyle: "solid",
+        outlineColor: "#1b85db",
+        outlineWidth: "2px",
+        cursor: "pointer",
+      }
     : {};
   // Apply the hover class conditionally
   const hoverClass = atHover ? "rosebox-hover" : "";
@@ -1720,8 +1721,9 @@ export function RoseBox({
           role={role}
           onClick={handleClick}
           id={RoseID}
-          className={`${RoseName} ${hoverClass} ${scaleAnimate ? "rosebox-scale-animate" : ""
-            }`}
+          className={`${RoseName} ${hoverClass} ${
+            scaleAnimate ? "rosebox-scale-animate" : ""
+          }`}
           style={{
             ...edit,
             ...layoutStyle,
@@ -1856,10 +1858,10 @@ export const RoseMouse = ({
 
   const mouseShadowStyle = mouseShadow
     ? {
-      boxShadow: `2px 2px 15px 12px ${mouseShadowColor}`,
-      width: "0.01rem",
-      height: "0.01rem",
-    }
+        boxShadow: `2px 2px 15px 12px ${mouseShadowColor}`,
+        width: "0.01rem",
+        height: "0.01rem",
+      }
     : {};
 
   return (
@@ -2292,8 +2294,9 @@ export const RoseParent = ({
       <style>{`
                 .rose-parent {
                     display: ${display};
-                    ${isGrid
-          ? `
+                    ${
+                      isGrid
+                        ? `
                         grid-template-columns: ${gridTemplateColumns};
                         grid-template-rows: ${gridTemplateRows};
                         grid-column-gap: ${gridColumnGap};
@@ -2306,7 +2309,7 @@ export const RoseParent = ({
                         grid-auto-rows: ${gridAutoRows};
                         grid-template-areas: ${gridTemplateAreas};
                     `
-          : `
+                        : `
                         flex-direction: ${flexDirection};
                         justify-content: ${justifyContent};
                         align-items: ${alignItems};
@@ -2314,7 +2317,7 @@ export const RoseParent = ({
                         flex-wrap: ${flexWrap};
                         gap: ${gap};
                     `
-        }
+                    }
                     padding: ${padding};
                     box-sizing: border-box;
                     width: ${width};
@@ -2965,11 +2968,7 @@ export function RandomAnimate({
           animation: jackInTheBox 1s ease-in-out;
         }
       `}</style>
-      <div
-        id={RoseID}
-        style={edit}
-        className={`${RoseName} ${animationClass}`}
-      >
+      <div id={RoseID} style={edit} className={`${RoseName} ${animationClass}`}>
         {children}
       </div>
     </>
@@ -3155,8 +3154,13 @@ export function SeeMore({
   );
 }
 
-
-export function SideBox({ children, direction = 'left', edit = {}, RoseID, RoseName }) {
+export function SideBox({
+  children,
+  direction = "left",
+  edit = {},
+  RoseID,
+  RoseName,
+}) {
   const [isVisible, setIsVisible] = useState(false);
   const boxRef = useRef(null);
 
@@ -3175,11 +3179,11 @@ export function SideBox({ children, direction = 'left', edit = {}, RoseID, RoseN
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     handleScroll(); // Initial check
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -3247,7 +3251,9 @@ export function SideBox({ children, direction = 'left', edit = {}, RoseID, RoseN
         ref={boxRef}
         style={edit}
         id={RoseID}
-        className={`sideboxComponent ${direction} ${isVisible ? 'visible' : 'hidden'}`}
+        className={`sideboxComponent ${direction} ${
+          isVisible ? "visible" : "hidden"
+        }`}
       >
         {RoseName && <h2>{RoseName}</h2>}
         {children}
@@ -3256,7 +3262,92 @@ export function SideBox({ children, direction = 'left', edit = {}, RoseID, RoseN
   );
 }
 
+export const useBatteryStatus = () => {
+  const [batteryInfo, setBatteryInfo] = useState({
+    level: null,
+    charging: null,
+  });
 
+  useEffect(() => {
+    // Check if the browser supports the Battery Status API
+    if ("getBattery" in navigator) {
+      navigator.getBattery().then((battery) => {
+        // Set the initial battery status
+        setBatteryInfo({
+          level: battery.level,
+          charging: battery.charging,
+        });
+
+        // Update the battery status when it changes
+        const updateBatteryInfo = () => {
+          setBatteryInfo({
+            level: battery.level,
+            charging: battery.charging,
+          });
+        };
+
+        battery.addEventListener("levelchange", updateBatteryInfo);
+        battery.addEventListener("chargingchange", updateBatteryInfo);
+
+        // Cleanup the event listeners on unmount
+        return () => {
+          battery.removeEventListener("levelchange", updateBatteryInfo);
+          battery.removeEventListener("chargingchange", updateBatteryInfo);
+        };
+      });
+    } else {
+      console.log("Battery Status API is not supported in this browser.");
+    }
+  }, []);
+
+  return batteryInfo;
+};
+
+export default useBatteryStatus;
+
+export function usePreferredLanguage() {
+  const [preferredLanguage, setPreferredLanguage] = useState("en");
+
+  useEffect(() => {
+    const language = navigator.language || navigator.userLanguage;
+    setPreferredLanguage(language);
+  }, []);
+
+  return preferredLanguage;
+}
+
+export function useHardwareConcurrency() {
+  const [coreCount, setCoreCount] = useState(1);
+
+  useEffect(() => {
+    if (navigator.hardwareConcurrency) {
+      setCoreCount(navigator.hardwareConcurrency);
+    }
+  }, []);
+
+  return coreCount;
+}
+
+export function useColorScheme() {
+  const [colorScheme, setColorScheme] = useState("light");
+
+  useEffect(() => {
+    const matchMedia = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const handleChange = (e) => {
+      setColorScheme(e.matches ? "dark" : "light");
+    };
+
+    handleChange(matchMedia); // Set the initial value
+    matchMedia.addEventListener("change", handleChange);
+
+    return () => {
+      matchMedia.removeEventListener("change", handleChange);
+    };
+  }, []);
+
+  return colorScheme;
+}
 
 let CSS_PROPRTY_ROOT = () => {
   return (
