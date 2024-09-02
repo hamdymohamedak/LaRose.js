@@ -1,8 +1,7 @@
 import React from "react";
-import { RoseRouter, Route } from "./components/RoseRouter/RoseRouter";
+import { RoseRouter, Route } from "./LaRose";
 import Default from "./Tabs/Default";
 import Home from "./Tabs/Home";
-import BgSvg from "./components/bg_svg";
 
 export default function App() {
   const customAnimation = `
@@ -22,7 +21,6 @@ export default function App() {
 `;
   return (
     <RoseRouter>
-      <BgSvg />
       <Route path="/" element={<Default />} />
       <Route path="/Home" element={<Home />} />
     </RoseRouter>

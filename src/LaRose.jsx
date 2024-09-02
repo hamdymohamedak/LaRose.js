@@ -1,7 +1,13 @@
-// LaRose is a Library was built with "Hamdy Mohamed Askander" 
+// LaRose is a Library was built with "Hamdy Mohamed Askander"
 // for More Visit => https://askander.vercel.app
 // Happy Hacking (˶ˆᗜˆ˵)
-import React, { useEffect, useState, createContext, useContext, useRef } from 'react';
+import React, {
+  useEffect,
+  useState,
+  createContext,
+  useContext,
+  useRef,
+} from "react";
 export function Ak_Alert({ title, time, edit = {}, children }) {
   const [display, setDisplay] = useState("flex");
   useEffect(() => {
@@ -29,13 +35,13 @@ export function Ak_Alert({ title, time, edit = {}, children }) {
       boxShadow: "0px 0px 5px -3px #111",
       position: "relative",
       zIndex: "999",
-      ...edit
+      ...edit,
     },
     infoIcon: {
       width: "20px",
       height: "20px",
       transform: "translateY(-2px)",
-      marginRight: "8px"
+      marginRight: "8px",
     },
     infoTitle: {
       fontWeight: 500,
@@ -50,8 +56,8 @@ export function Ak_Alert({ title, time, edit = {}, children }) {
       position: "absolute", // Position close button to the right of the alert
       right: "0.9rem",
       top: "50%",
-      transform: "translateY(-50%)"
-    }
+      transform: "translateY(-50%)",
+    },
   };
   const handleClose = () => {
     setDisplay("none");
@@ -112,7 +118,7 @@ export function Button({ h, w, event }) {
     cursor: "pointer",
     justifyContent: "center",
     alignItems: "center",
-    border: "none"
+    border: "none",
   };
   const hoverStyle = {
     backgroundPosition: "right center",
@@ -143,7 +149,7 @@ export function CounterUp({ start, end, time, size, weight }) {
   useEffect(() => {
     if (number < end) {
       const timer = setTimeout(() => {
-        setNumber(prevNumber => prevNumber + 1);
+        setNumber((prevNumber) => prevNumber + 1);
       }, time);
       return () => clearTimeout(timer);
     }
@@ -152,7 +158,9 @@ export function CounterUp({ start, end, time, size, weight }) {
     setNumber(start);
   }, [start]);
   return (
-    <div style={{ fontSize: `${size}rem`, fontWeight: `${weight}` }}>{number}</div>
+    <div style={{ fontSize: `${size}rem`, fontWeight: `${weight}` }}>
+      {number}
+    </div>
   );
 }
 export function CounterDown({ start, end, time, size }) {
@@ -160,7 +168,7 @@ export function CounterDown({ start, end, time, size }) {
   useEffect(() => {
     if (number > end) {
       const timer = setTimeout(() => {
-        setNumber(prevNumber => prevNumber - 1);
+        setNumber((prevNumber) => prevNumber - 1);
       }, time * 1000); // time is in seconds, so convert to milliseconds
       return () => clearTimeout(timer);
     }
@@ -168,16 +176,23 @@ export function CounterDown({ start, end, time, size }) {
   useEffect(() => {
     setNumber(start);
   }, [start]);
-  return (
-    <div style={{ fontSize: `${size}rem` }}>{number}</div>
-  );
+  return <div style={{ fontSize: `${size}rem` }}>{number}</div>;
 }
-export function ModernBtn({ title, allColor, fontSize, color, hoverColor, clickEvent, h = "4", w = "11" }) {
+export function ModernBtn({
+  title,
+  allColor,
+  fontSize,
+  color,
+  hoverColor,
+  clickEvent,
+  h = "4",
+  w = "11",
+}) {
   let handleClick = () => {
     if (typeof clickEvent === "function") {
       clickEvent();
     }
-  }
+  };
   return (
     <>
       <style>{`
@@ -263,12 +278,20 @@ export function ModernBtn({ title, allColor, fontSize, color, hoverColor, clickE
                 }
             `}</style>
       <button onClick={handleClick} className="animated-button">
-        <svg viewBox="0 0 24 24" className="arr-2" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          viewBox="0 0 24 24"
+          className="arr-2"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
         </svg>
         <span className="text">{title}</span>
         <span className="circle" />
-        <svg viewBox="0 0 24 24" className="arr-1" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          viewBox="0 0 24 24"
+          className="arr-1"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
         </svg>
       </button>
@@ -362,7 +385,12 @@ export function SwitchCase({ w, h }) {
     }
             `}</style>
       <div className="toggler">
-        <input id="toggler-1" name="toggler-1" type="checkbox" defaultValue={1} />
+        <input
+          id="toggler-1"
+          name="toggler-1"
+          type="checkbox"
+          defaultValue={1}
+        />
         <label htmlFor="toggler-1">
           <svg
             className="toggler-on"
@@ -381,20 +409,32 @@ export function SwitchCase({ w, h }) {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 130.2 130.2"
           >
-            <line className="path line" x1="34.4" y1="34.4" x2="95.8" y2="95.8" />
-            <line className="path line" x1="95.8" y1="34.4" x2="34.4" y2="95.8" />
+            <line
+              className="path line"
+              x1="34.4"
+              y1="34.4"
+              x2="95.8"
+              y2="95.8"
+            />
+            <line
+              className="path line"
+              x1="95.8"
+              y1="34.4"
+              x2="34.4"
+              y2="95.8"
+            />
           </svg>
         </label>
       </div>
     </>
-  )
+  );
 }
 export function CheckOut({ title, clickEvent }) {
   let handleEvent = () => {
     if (typeof clickEvent === "function") {
       clickEvent();
     }
-  }
+  };
   return (
     <>
       <style>{`
@@ -632,7 +672,7 @@ export function CheckOut({ title, clickEvent }) {
         </div>
       </div>
     </>
-  )
+  );
 }
 export function Loader() {
   return (
@@ -872,9 +912,13 @@ export function Loader() {
         </div>
       </div>
     </>
-  )
+  );
 }
-export function Slider({ children, autoplay = false, autoplayInterval = 3000 }) {
+export function Slider({
+  children,
+  autoplay = false,
+  autoplayInterval = 3000,
+}) {
   const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
     if (autoplay) {
@@ -970,10 +1014,17 @@ export function Slider({ children, autoplay = false, autoplayInterval = 3000 }) 
       }
       `}</style>
       <div className="slider-container">
-        <button className="slider-button prev" onClick={handlePrev}><i className="fa-solid fa-angles-left"></i></button>
-        <button className="slider-button next" onClick={handleNext}><i className="fa-solid fa-angles-right"></i></button>
+        <button className="slider-button prev" onClick={handlePrev}>
+          <i className="fa-solid fa-angles-left"></i>
+        </button>
+        <button className="slider-button next" onClick={handleNext}>
+          <i className="fa-solid fa-angles-right"></i>
+        </button>
         <div className="slider-wrapper">
-          <div className="slider-content" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+          <div
+            className="slider-content"
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          >
             {React.Children.map(children, (child, index) => (
               <div className="slider-slide" key={index}>
                 {child}
@@ -985,7 +1036,8 @@ export function Slider({ children, autoplay = false, autoplayInterval = 3000 }) 
           {React.Children.map(children, (_, index) => (
             <span
               key={index}
-              className={`pagination-dot ${index === currentIndex ? 'active' : ''}`}
+              className={`pagination-dot ${index === currentIndex ? "active" : ""
+                }`}
               onClick={() => setCurrentIndex(index)}
             />
           ))}
@@ -994,85 +1046,105 @@ export function Slider({ children, autoplay = false, autoplayInterval = 3000 }) 
     </>
   );
 }
-export function MiniNav({ w = 20, h = 3.5, homeEvent = () => { window.open("https://askander.vercel.app") }, homeSVG = <svg
-  className="icon"
-  stroke="currentColor"
-  fill="currentColor"
-  strokeWidth={0}
-  viewBox="0 0 1024 1024"
-  height="1em"
-  width="1em"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <path d="M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 0 0-44.4 0L77.5 505a63.9 63.9 0 0 0-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0 0 18.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204zm217.9-325.7V868H632V640c0-22.1-17.9-40-40-40H432c-22.1 0-40 17.9-40 40v228H238.1V542.3h-96l370-369.7 23.1 23.1L882 542.3h-96.1z" />
-</svg>,
-  presonEvent = () => { window.open("https://askander.vercel.app") },
-  personSVG = <svg
-    className="icon"
-    stroke="currentColor"
-    fill="currentColor"
-    strokeWidth={0}
-    viewBox="0 0 24 24"
-    height="1em"
-    width="1em"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z" />
-  </svg>,
-  searchEvent = () => { window.open("https://askander.vercel.app") },
-  searchSVG = <svg
-    className="icon"
-    stroke="currentColor"
-    fill="none"
-    strokeWidth={2}
-    viewBox="0 0 24 24"
-    aria-hidden="true"
-    height="1em"
-    width="1em"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
+export function MiniNav({
+  w = 20,
+  h = 3.5,
+  homeEvent = () => {
+    window.open("https://askander.vercel.app");
+  },
+  homeSVG = (
+    <svg
+      className="icon"
+      stroke="currentColor"
+      fill="currentColor"
+      strokeWidth={0}
+      viewBox="0 0 1024 1024"
+      height="1em"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 0 0-44.4 0L77.5 505a63.9 63.9 0 0 0-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0 0 18.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204zm217.9-325.7V868H632V640c0-22.1-17.9-40-40-40H432c-22.1 0-40 17.9-40 40v228H238.1V542.3h-96l370-369.7 23.1 23.1L882 542.3h-96.1z" />
+    </svg>
+  ),
+  presonEvent = () => {
+    window.open("https://askander.vercel.app");
+  },
+  personSVG = (
+    <svg
+      className="icon"
+      stroke="currentColor"
+      fill="currentColor"
+      strokeWidth={0}
+      viewBox="0 0 24 24"
+      height="1em"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z" />
+    </svg>
+  ),
+  searchEvent = () => {
+    window.open("https://askander.vercel.app");
+  },
+  searchSVG = (
+    <svg
+      className="icon"
+      stroke="currentColor"
+      fill="none"
+      strokeWidth={2}
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      height="1em"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+      />
+    </svg>
+  ),
+  shopEvent = () => {
+    window.open("https://askander.vercel.app");
+  },
+  shopSVG = (
+    <svg
+      className="icon"
+      stroke="currentColor"
+      fill="none"
+      strokeWidth={2}
+      viewBox="0 0 24 24"
       strokeLinecap="round"
       strokeLinejoin="round"
-      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-    />
-  </svg>,
-  shopEvent = () => { window.open("https://askander.vercel.app") },
-  shopSVG = <svg
-    className="icon"
-    stroke="currentColor"
-    fill="none"
-    strokeWidth={2}
-    viewBox="0 0 24 24"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    height="1em"
-    width="1em"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <circle cx={9} cy={21} r={1} />
-    <circle cx={20} cy={21} r={1} />
-    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-  </svg>
+      height="1em"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle cx={9} cy={21} r={1} />
+      <circle cx={20} cy={21} r={1} />
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+    </svg>
+  ),
 }) {
   let handlHomeSVGClick = () => {
     if (typeof homeEvent === "function") {
-      homeEvent()
+      homeEvent();
     }
-  }
+  };
   let handlePersonSVGClick = () => {
     if (typeof presonEvent === "function") {
-      presonEvent()
+      presonEvent();
     }
-  }
+  };
   let handleSearchSVGClick = () => {
     if (typeof searchEvent === "function") {
-      searchEvent()
+      searchEvent();
     }
-  }
+  };
   let handleShopSVGClick = () => {
-    shopEvent()
-  }
+    shopEvent();
+  };
   return (
     <>
       <style>{`
@@ -1109,21 +1181,37 @@ export function MiniNav({ w = 20, h = 3.5, homeEvent = () => { window.open("http
 }
         `}</style>
       <div className="button-container">
-        <button aria-label="navbar-button" onClick={handlHomeSVGClick} className="button">
+        <button
+          aria-label="navbar-button"
+          onClick={handlHomeSVGClick}
+          className="button"
+        >
           {homeSVG}
         </button>
-        <button aria-label="navbar-button" onClick={handlePersonSVGClick} className="button">
+        <button
+          aria-label="navbar-button"
+          onClick={handlePersonSVGClick}
+          className="button"
+        >
           {searchSVG}
         </button>
-        <button aria-label="navbar-button" onClick={handleSearchSVGClick} className="button">
+        <button
+          aria-label="navbar-button"
+          onClick={handleSearchSVGClick}
+          className="button"
+        >
           {personSVG}
         </button>
-        <button aria-label="navbar-button" onClick={handleShopSVGClick} className="button">
+        <button
+          aria-label="navbar-button"
+          onClick={handleShopSVGClick}
+          className="button"
+        >
           {shopSVG}
         </button>
       </div>
     </>
-  )
+  );
 }
 export function Register({ Name, Pass }) {
   return (
@@ -1276,12 +1364,24 @@ font-size: 0.5625rem; /* 9px */
           <span className="forgot-password">
             <a href="#">Forgot Password ?</a>
           </span>
-          <input onClick={() => { window.open("https://github.com/hamdymohamedak") }} className="login-button" type="submit" defaultValue="Sign In" />
+          <input
+            onClick={() => {
+              window.open("https://github.com/hamdymohamedak");
+            }}
+            className="login-button"
+            type="submit"
+            defaultValue="Sign In"
+          />
         </form>
         <div className="social-account-container">
           <span className="title">Or Sign in with</span>
           <div className="social-accounts">
-            <button onClick={() => { window.open("https://mohameddhamdy407@gmail.com") }} className="social-button google">
+            <button
+              onClick={() => {
+                window.open("https://mohameddhamdy407@gmail.com");
+              }}
+              className="social-button google"
+            >
               <svg
                 className="svg"
                 xmlns="http://www.w3.org/2000/svg"
@@ -1291,7 +1391,12 @@ font-size: 0.5625rem; /* 9px */
                 <path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
               </svg>
             </button>
-            <button onClick={() => { window.open("https://x.com/HamdyMohamedd1") }} className="social-button twitter">
+            <button
+              onClick={() => {
+                window.open("https://x.com/HamdyMohamedd1");
+              }}
+              className="social-button twitter"
+            >
               <svg
                 className="svg"
                 xmlns="http://www.w3.org/2000/svg"
@@ -1308,34 +1413,54 @@ font-size: 0.5625rem; /* 9px */
         </span>
       </div>
     </>
-  )
+  );
 }
-export function IconsGroup({ firstSVG = <svg version="1.1" viewBox="0 0 100 100">
-  <path
-    d="M50,4C24.7,4,4,24.7,4,50s20.6,46,46,46s46-20.6,46-46S75.4,4,50,4z M71.6,71.5c0,0,0,0.1-0.1,0.1c-0.8,1.2-2,1.8-3.2,1.8  c-0.7,0-1.4-0.2-2-0.6c-10.2-6.3-23.3-7.7-38.8-4.1c-2.1,0.6-4-0.9-4.5-2.7c-0.6-2.3,0.9-4.1,2.7-4.6c17.7-4,32.6-2.3,44.4,5  c0.9,0.4,1.5,1,1.8,1.9C72.2,69.3,72.1,70.5,71.6,71.5z M76.9,59.3L76.9,59.3c-0.8,1.1-1.9,1.9-3.2,2.1c-0.2,0-0.5,0.1-0.7,0.1  c-0.8,0-1.6-0.3-2.3-0.7c-12-7.3-30.1-9.4-43.9-5c-2.5,0.6-5-0.7-5.6-3c-0.6-2.5,0.7-4.9,3-5.5c16.5-5,37.2-2.5,51.4,6.2  c0.8,0.4,1.5,1.3,1.8,2.5C77.9,57,77.6,58.3,76.9,59.3z M83.2,45.6c-1,1.4-2.7,2.1-4.4,2.1c-0.9,0-1.9-0.2-2.7-0.7c0,0,0,0,0,0  c-13.9-8.3-37.8-9.3-51.4-5.1c-2.7,0.8-5.5-0.7-6.4-3.3c-0.8-2.7,0.7-5.6,3.3-6.4c16.2-4.8,43-3.8,59.8,6.2  C83.8,39.6,84.7,42.9,83.2,45.6C83.3,45.5,83.3,45.5,83.2,45.6z"
-    fill="currentColor"
-  />
-</svg>, firstTitle = "spotify", firstIconLink = "#", firstColor = "green",
-  secoundSVG = <svg version="1.1" viewBox="0 0 100 100" xmlSpace="preserve">
-    <path
-      d="M83,17.8C74.5,8.9,63.4,4.3,50,4.1C37.7,4.2,26.8,8.6,17.9,17.3C8.9,26,4.3,37,4.1,50c0,0,0,0,0,0c0,9.1,2.5,17.4,7.4,24.9  c4.9,7.4,11.6,13.2,20.1,17.1c0.3,0.1,0.7,0.1,1-0.1c0.3-0.2,0.5-0.5,0.5-0.8l0-4.9c0.1-2.1,0.7-5.3,1.7-9.5c1-4,1.7-6.7,1.9-7.6  c0.7-3,1.7-7.2,3-12.6c0.1-0.2,0-0.5-0.1-0.7c-0.4-0.8-1-2.6-1.5-6.6c0.1-2.7,0.8-5.2,2.1-7.3c1.2-2,3.1-3.1,5.7-3.5  c2,0.1,4.7,0.8,5.1,5.9c-0.1,1.8-0.8,4.5-1.9,8.1c-1.2,3.8-1.9,6.3-2.1,7.6c-0.7,2.5-0.2,4.8,1.5,6.8c1.6,1.9,3.8,2.9,6.5,3.1  c4.3-0.1,8.1-2.6,11.2-7.5c1.7-3,2.9-6.3,3.5-9.7c0.7-3.4,0.7-7.1,0-10.8c-0.7-3.8-2.2-7.1-4.5-9.8c0,0-0.1-0.1-0.1-0.1  c-4.3-3.7-9.5-5.3-15.6-5c-6,0.4-11.3,2.6-15.9,6.6c-2.9,3.2-4.8,7.1-5.7,11.6c-0.9,4.6,0,9.1,2.6,13.3c0.3,0.5,0.5,0.8,0.6,1  c0,0.3,0,1-0.5,2.8c-0.5,1.8-0.9,2.2-0.9,2.2c0,0-0.1,0-0.1,0.1c0,0-0.2,0-0.4-0.1c-2.2-1-3.9-2.4-5.2-4.2c-1.3-1.9-2.1-4-2.5-6.3  c-0.3-2.5-0.4-5-0.3-7.5c0.2-2.5,0.7-5.1,1.4-7.7c3-6.9,8.5-11.9,16.3-14.8c7.8-2.9,16-3.2,24.3-0.8c6.5,2.8,11,7.4,13.6,13.7  c2.5,6.4,2.8,13.4,0.8,20.8c-2.2,7.1-6.4,12.4-12.1,15.7c-5.6,2.8-10.8,3-15.7,0.7c-1.8-1.1-3.1-2.3-3.9-3.5c-0.2-0.3-0.6-0.5-1-0.5  c-0.4,0.1-0.7,0.3-0.8,0.7c-0.7,2.7-1.3,4.7-1.6,6.2c-1.4,5.4-2.6,9.2-3.4,11c-0.8,1.6-1.6,3.1-2.4,4.3c-0.2,0.3-0.2,0.6-0.1,0.9  s0.3,0.5,0.6,0.6c4.3,1.3,8.7,2,13,2c12.4-0.1,23.2-4.6,32.1-13.4C91.1,73.9,95.8,62.9,96,50C95.9,37.5,91.5,26.7,83,17.8z"
-      fill="currentColor"
-    />
-  </svg>, secoundTitle = "pentrest", secoundIconLink = "#", SecoundColor = "#bd081c",
-  thirdSVG = <svg version="1.1" viewBox="0 0 100 100">
-    <path
-      d="M83.5,18.5C74.9,9.3,62.8,4,50.2,4c-6.1,0-12,1.1-17.6,3.4C15.2,14.5,4,31.3,4,50c0,13.9,6.2,26.9,17,35.7  C29.2,92.3,39.4,96,50,96c6.6,0,13.2-1.5,19.2-4.2c12.5-5.7,21.7-16.6,25.2-29.8C95.5,57.9,96,53.8,96,50  C96,38.3,91.6,27.1,83.5,18.5z M75,22.3c-0.7,0.9-1.4,1.8-2.1,2.6c-1.4,1.6-2.8,3-4.4,4.3c-0.3,0.3-0.6,0.6-1,0.8  c-1,0.9-2.1,1.7-3.2,2.5l-0.3,0.2c-1.1,0.7-2.2,1.5-3.5,2.2c-0.4,0.3-0.9,0.5-1.4,0.8c-0.8,0.5-1.7,0.9-2.7,1.4  c-0.6,0.3-1.2,0.5-1.8,0.8L54.3,38c-0.1,0-0.2,0.1-0.3,0.1c0,0,0,0,0,0c-1.3-2.6-2.4-4.9-3.5-7l-0.3-0.5c-1.1-2-2.2-4-3.3-6  l-0.7-1.3c-1.1-1.9-2.2-3.7-3.2-5.4l-0.7-1.1c-0.7-1.2-1.4-2.3-2.2-3.5c3.2-0.8,6.5-1.3,9.8-1.3c9.4,0,18.4,3.5,25.4,9.8  C75.3,21.9,75.2,22.1,75,22.3z M46.4,40.6c-1.4,0.4-2.9,0.8-4.4,1.1c-0.3,0-0.7,0.1-0.9,0.2c-6,1-12.5,1.4-19.4,1.1  c-0.3,0-0.6,0-0.9,0c-0.3,0-0.5,0-0.7,0c-2.5-0.2-4.9-0.4-7.2-0.7c2.3-11.2,9.6-20.9,19.8-26.1c2.1,3.3,4.2,6.7,6.3,10.3l0.4,0.7  c0.9,1.6,1.9,3.4,3.2,5.8l0.6,1.2C44.4,36.6,45.4,38.6,46.4,40.6z M24.4,51.1c2.2,0.1,4.2,0,6.2-0.1l0.7,0c0.4,0,0.9,0,1.3,0  c2.8-0.2,5.5-0.5,8.5-1c0.5-0.1,1-0.2,1.6-0.3l0.5-0.1c2.2-0.4,4.2-0.9,6.1-1.4c0.1,0,0.3-0.1,0.4-0.1l0.5,1.1  c1.2,2.8,2.3,5.5,3.3,8.1c0,0,0,0,0,0c-0.2,0.1-0.5,0.2-0.7,0.2c-2,0.6-4,1.4-5.9,2.2c-0.6,0.3-1.3,0.5-1.9,0.8  c-1.4,0.6-2.7,1.3-4.1,2.1l-0.3,0.2c-0.2,0.1-0.5,0.2-0.6,0.4c-1.5,0.9-3.1,1.9-4.7,3c-0.2,0.1-0.4,0.3-0.6,0.4  c-0.2,0.1-0.4,0.3-0.6,0.5c-1,0.7-2,1.5-3,2.3c-0.4,0.3-0.7,0.6-1.1,0.9l-0.3,0.3c-0.7,0.6-1.5,1.3-2.2,1.9l-0.2,0.2  c-0.4,0.4-0.7,0.7-1.1,1.1l-0.2,0.2c-0.6,0.6-1.3,1.3-2,2l-0.4,0.4c-0.2,0.2-0.4,0.4-0.5,0.6C16.1,69.9,12,60.2,12,50.3  c0,0,0.1,0,0.1,0c0.4,0,0.7,0,1.1,0.1c3.5,0.4,6.9,0.6,10.3,0.7C23.8,51,24.1,51.1,24.4,51.1z M29.5,81.9c0.2-0.2,0.3-0.4,0.5-0.5  c1-1.1,2-2.1,3-3c1.9-1.8,3.8-3.3,5.7-4.8c0.2-0.1,0.4-0.3,0.6-0.4c0.2-0.2,0.5-0.4,0.8-0.6c1.1-0.8,2.2-1.5,3.4-2.2  c0.1-0.1,0.2-0.1,0.3-0.2c0.1-0.1,0.2-0.1,0.3-0.2c1.4-0.8,2.9-1.6,4.5-2.3c0.3-0.1,0.6-0.2,0.8-0.4l0.6-0.3  c1.1-0.5,2.2-0.9,3.5-1.4c0.5-0.2,1.1-0.4,1.7-0.6l0.2-0.1c0.4-0.1,0.7-0.2,1.1-0.3c0,0,0,0,0,0c1.1,3.2,2.3,6.4,3.3,9.8l0.1,0.4  c1.1,3.6,2,7.3,2.9,10.8C51.7,89.8,39.3,88.3,29.5,81.9C29.4,81.9,29.4,81.9,29.5,81.9z M65.6,62.9c0.7-0.1,1.3-0.2,2-0.2  c2-0.2,4-0.2,5.9-0.2c0.2,0,0.4,0,0.6,0l0.2,0c2.2,0.1,4.6,0.3,6.9,0.6c0.4,0.1,0.9,0.1,1.3,0.2l0.6,0.1c0.7,0.1,1.5,0.3,2.2,0.4  c-3,7.6-8.3,14-15.2,18.3c-0.8-3.1-1.7-6.2-2.6-9.2l-0.1-0.4c-0.9-3-1.9-6.1-3.1-9.5C64.8,63.1,65.2,63,65.6,62.9z M81.6,55.2  C80,55,78.4,54.9,77,54.8l-0.9-0.1c-0.9-0.1-1.9-0.1-2.8-0.2c-0.2,0-0.3,0-0.5,0c-0.2,0-0.4,0-0.6,0c-2,0-3.9,0.1-5.9,0.3  c-0.2,0-0.3,0-0.5,0.1c-0.1,0-0.2,0-0.3,0c-1.3,0.1-2.6,0.3-3.9,0.5c-0.1-0.1-0.1-0.3-0.2-0.4c-0.1-0.2-0.2-0.5-0.3-0.7  c-1.1-2.9-2.3-5.7-3.2-7.8l-0.3-0.6c-0.1-0.1-0.1-0.3-0.2-0.4c0,0,0,0,0.1,0c0.2-0.1,0.5-0.2,0.7-0.3c0.6-0.2,1.2-0.5,1.8-0.8  c1.2-0.5,2.4-1.2,3.6-1.8c0.1-0.1,0.3-0.2,0.5-0.2c0.2-0.1,0.5-0.2,0.7-0.4c1.5-0.9,2.9-1.8,4.2-2.7l0.3-0.2  c0.2-0.1,0.4-0.3,0.6-0.4c0.9-0.6,1.9-1.4,2.8-2.2c1.5-1.2,2.9-2.5,4.3-4c0.8-0.8,1.5-1.6,2.2-2.4l0.4-0.5c0.5-0.5,0.9-1.1,1.3-1.6  C85.5,34.3,88,42.1,88,50c0,2-0.2,4.1-0.5,6.1c-0.3,0-0.6-0.1-0.8-0.1c-0.4-0.1-0.7-0.1-1.1-0.2l-1.1-0.2  C83.5,55.5,82.5,55.3,81.6,55.2z"
-      fill="currentColor"
-    />
-  </svg>, thirdTitle = "dribble", thirdIconLink = "#", thirdColor = "#bd081c",
-  fourthSVG = <svg version="1.1" viewBox="0 0 100 100">
-    <path
-      d="M95,9.9c-1.3-1.1-3.4-1.2-7-0.1c0,0,0,0,0,0c-2.5,0.8-24.7,9.2-44.3,17.3c-17.6,7.3-31.9,13.7-33.6,14.5  c-1.9,0.6-6,2.4-6.2,5.2c-0.1,1.8,1.4,3.4,4.3,4.7c3.1,1.6,16.8,6.2,19.7,7.1c1,3.4,6.9,23.3,7.2,24.5c0.4,1.8,1.6,2.8,2.2,3.2  c0.1,0.1,0.3,0.3,0.5,0.4c0.3,0.2,0.7,0.3,1.2,0.3c0.7,0,1.5-0.3,2.2-0.8c3.7-3,10.1-9.7,11.9-11.6c7.9,6.2,16.5,13.1,17.3,13.9  c0,0,0.1,0.1,0.1,0.1c1.9,1.6,3.9,2.5,5.7,2.5c0.6,0,1.2-0.1,1.8-0.3c2.1-0.7,3.6-2.7,4.1-5.4c0-0.1,0.1-0.5,0.3-1.2  c3.4-14.8,6.1-27.8,8.3-38.7c2.1-10.7,3.8-21.2,4.8-26.8c0.2-1.4,0.4-2.5,0.5-3.2C96.3,13.5,96.5,11.2,95,9.9z M30,58.3l47.7-31.6  c0.1-0.1,0.3-0.2,0.4-0.3c0,0,0,0,0,0c0.1,0,0.1-0.1,0.2-0.1c0.1,0,0.1,0,0.2-0.1c-0.1,0.1-0.2,0.4-0.4,0.6L66,38.1  c-8.4,7.7-19.4,17.8-26.7,24.4c0,0,0,0,0,0.1c0,0-0.1,0.1-0.1,0.1c0,0,0,0.1-0.1,0.1c0,0.1,0,0.1-0.1,0.2c0,0,0,0.1,0,0.1  c0,0,0,0,0,0.1c-0.5,5.6-1.4,15.2-1.8,19.5c0,0,0,0,0-0.1C36.8,81.4,31.2,62.3,30,58.3z"
-      fill="currentColor"
-    />
-  </svg>, fourthTitle = "telegram", fourthIconLink = "#", fourthColor = "#0088cc"
-}
-) {
+export function IconsGroup({
+  firstSVG = (
+    <svg version="1.1" viewBox="0 0 100 100">
+      <path
+        d="M50,4C24.7,4,4,24.7,4,50s20.6,46,46,46s46-20.6,46-46S75.4,4,50,4z M71.6,71.5c0,0,0,0.1-0.1,0.1c-0.8,1.2-2,1.8-3.2,1.8  c-0.7,0-1.4-0.2-2-0.6c-10.2-6.3-23.3-7.7-38.8-4.1c-2.1,0.6-4-0.9-4.5-2.7c-0.6-2.3,0.9-4.1,2.7-4.6c17.7-4,32.6-2.3,44.4,5  c0.9,0.4,1.5,1,1.8,1.9C72.2,69.3,72.1,70.5,71.6,71.5z M76.9,59.3L76.9,59.3c-0.8,1.1-1.9,1.9-3.2,2.1c-0.2,0-0.5,0.1-0.7,0.1  c-0.8,0-1.6-0.3-2.3-0.7c-12-7.3-30.1-9.4-43.9-5c-2.5,0.6-5-0.7-5.6-3c-0.6-2.5,0.7-4.9,3-5.5c16.5-5,37.2-2.5,51.4,6.2  c0.8,0.4,1.5,1.3,1.8,2.5C77.9,57,77.6,58.3,76.9,59.3z M83.2,45.6c-1,1.4-2.7,2.1-4.4,2.1c-0.9,0-1.9-0.2-2.7-0.7c0,0,0,0,0,0  c-13.9-8.3-37.8-9.3-51.4-5.1c-2.7,0.8-5.5-0.7-6.4-3.3c-0.8-2.7,0.7-5.6,3.3-6.4c16.2-4.8,43-3.8,59.8,6.2  C83.8,39.6,84.7,42.9,83.2,45.6C83.3,45.5,83.3,45.5,83.2,45.6z"
+        fill="currentColor"
+      />
+    </svg>
+  ),
+  firstTitle = "spotify",
+  firstIconLink = "#",
+  firstColor = "green",
+  secoundSVG = (
+    <svg version="1.1" viewBox="0 0 100 100" xmlSpace="preserve">
+      <path
+        d="M83,17.8C74.5,8.9,63.4,4.3,50,4.1C37.7,4.2,26.8,8.6,17.9,17.3C8.9,26,4.3,37,4.1,50c0,0,0,0,0,0c0,9.1,2.5,17.4,7.4,24.9  c4.9,7.4,11.6,13.2,20.1,17.1c0.3,0.1,0.7,0.1,1-0.1c0.3-0.2,0.5-0.5,0.5-0.8l0-4.9c0.1-2.1,0.7-5.3,1.7-9.5c1-4,1.7-6.7,1.9-7.6  c0.7-3,1.7-7.2,3-12.6c0.1-0.2,0-0.5-0.1-0.7c-0.4-0.8-1-2.6-1.5-6.6c0.1-2.7,0.8-5.2,2.1-7.3c1.2-2,3.1-3.1,5.7-3.5  c2,0.1,4.7,0.8,5.1,5.9c-0.1,1.8-0.8,4.5-1.9,8.1c-1.2,3.8-1.9,6.3-2.1,7.6c-0.7,2.5-0.2,4.8,1.5,6.8c1.6,1.9,3.8,2.9,6.5,3.1  c4.3-0.1,8.1-2.6,11.2-7.5c1.7-3,2.9-6.3,3.5-9.7c0.7-3.4,0.7-7.1,0-10.8c-0.7-3.8-2.2-7.1-4.5-9.8c0,0-0.1-0.1-0.1-0.1  c-4.3-3.7-9.5-5.3-15.6-5c-6,0.4-11.3,2.6-15.9,6.6c-2.9,3.2-4.8,7.1-5.7,11.6c-0.9,4.6,0,9.1,2.6,13.3c0.3,0.5,0.5,0.8,0.6,1  c0,0.3,0,1-0.5,2.8c-0.5,1.8-0.9,2.2-0.9,2.2c0,0-0.1,0-0.1,0.1c0,0-0.2,0-0.4-0.1c-2.2-1-3.9-2.4-5.2-4.2c-1.3-1.9-2.1-4-2.5-6.3  c-0.3-2.5-0.4-5-0.3-7.5c0.2-2.5,0.7-5.1,1.4-7.7c3-6.9,8.5-11.9,16.3-14.8c7.8-2.9,16-3.2,24.3-0.8c6.5,2.8,11,7.4,13.6,13.7  c2.5,6.4,2.8,13.4,0.8,20.8c-2.2,7.1-6.4,12.4-12.1,15.7c-5.6,2.8-10.8,3-15.7,0.7c-1.8-1.1-3.1-2.3-3.9-3.5c-0.2-0.3-0.6-0.5-1-0.5  c-0.4,0.1-0.7,0.3-0.8,0.7c-0.7,2.7-1.3,4.7-1.6,6.2c-1.4,5.4-2.6,9.2-3.4,11c-0.8,1.6-1.6,3.1-2.4,4.3c-0.2,0.3-0.2,0.6-0.1,0.9  s0.3,0.5,0.6,0.6c4.3,1.3,8.7,2,13,2c12.4-0.1,23.2-4.6,32.1-13.4C91.1,73.9,95.8,62.9,96,50C95.9,37.5,91.5,26.7,83,17.8z"
+        fill="currentColor"
+      />
+    </svg>
+  ),
+  secoundTitle = "pentrest",
+  secoundIconLink = "#",
+  SecoundColor = "#bd081c",
+  thirdSVG = (
+    <svg version="1.1" viewBox="0 0 100 100">
+      <path
+        d="M83.5,18.5C74.9,9.3,62.8,4,50.2,4c-6.1,0-12,1.1-17.6,3.4C15.2,14.5,4,31.3,4,50c0,13.9,6.2,26.9,17,35.7  C29.2,92.3,39.4,96,50,96c6.6,0,13.2-1.5,19.2-4.2c12.5-5.7,21.7-16.6,25.2-29.8C95.5,57.9,96,53.8,96,50  C96,38.3,91.6,27.1,83.5,18.5z M75,22.3c-0.7,0.9-1.4,1.8-2.1,2.6c-1.4,1.6-2.8,3-4.4,4.3c-0.3,0.3-0.6,0.6-1,0.8  c-1,0.9-2.1,1.7-3.2,2.5l-0.3,0.2c-1.1,0.7-2.2,1.5-3.5,2.2c-0.4,0.3-0.9,0.5-1.4,0.8c-0.8,0.5-1.7,0.9-2.7,1.4  c-0.6,0.3-1.2,0.5-1.8,0.8L54.3,38c-0.1,0-0.2,0.1-0.3,0.1c0,0,0,0,0,0c-1.3-2.6-2.4-4.9-3.5-7l-0.3-0.5c-1.1-2-2.2-4-3.3-6  l-0.7-1.3c-1.1-1.9-2.2-3.7-3.2-5.4l-0.7-1.1c-0.7-1.2-1.4-2.3-2.2-3.5c3.2-0.8,6.5-1.3,9.8-1.3c9.4,0,18.4,3.5,25.4,9.8  C75.3,21.9,75.2,22.1,75,22.3z M46.4,40.6c-1.4,0.4-2.9,0.8-4.4,1.1c-0.3,0-0.7,0.1-0.9,0.2c-6,1-12.5,1.4-19.4,1.1  c-0.3,0-0.6,0-0.9,0c-0.3,0-0.5,0-0.7,0c-2.5-0.2-4.9-0.4-7.2-0.7c2.3-11.2,9.6-20.9,19.8-26.1c2.1,3.3,4.2,6.7,6.3,10.3l0.4,0.7  c0.9,1.6,1.9,3.4,3.2,5.8l0.6,1.2C44.4,36.6,45.4,38.6,46.4,40.6z M24.4,51.1c2.2,0.1,4.2,0,6.2-0.1l0.7,0c0.4,0,0.9,0,1.3,0  c2.8-0.2,5.5-0.5,8.5-1c0.5-0.1,1-0.2,1.6-0.3l0.5-0.1c2.2-0.4,4.2-0.9,6.1-1.4c0.1,0,0.3-0.1,0.4-0.1l0.5,1.1  c1.2,2.8,2.3,5.5,3.3,8.1c0,0,0,0,0,0c-0.2,0.1-0.5,0.2-0.7,0.2c-2,0.6-4,1.4-5.9,2.2c-0.6,0.3-1.3,0.5-1.9,0.8  c-1.4,0.6-2.7,1.3-4.1,2.1l-0.3,0.2c-0.2,0.1-0.5,0.2-0.6,0.4c-1.5,0.9-3.1,1.9-4.7,3c-0.2,0.1-0.4,0.3-0.6,0.4  c-0.2,0.1-0.4,0.3-0.6,0.5c-1,0.7-2,1.5-3,2.3c-0.4,0.3-0.7,0.6-1.1,0.9l-0.3,0.3c-0.7,0.6-1.5,1.3-2.2,1.9l-0.2,0.2  c-0.4,0.4-0.7,0.7-1.1,1.1l-0.2,0.2c-0.6,0.6-1.3,1.3-2,2l-0.4,0.4c-0.2,0.2-0.4,0.4-0.5,0.6C16.1,69.9,12,60.2,12,50.3  c0,0,0.1,0,0.1,0c0.4,0,0.7,0,1.1,0.1c3.5,0.4,6.9,0.6,10.3,0.7C23.8,51,24.1,51.1,24.4,51.1z M29.5,81.9c0.2-0.2,0.3-0.4,0.5-0.5  c1-1.1,2-2.1,3-3c1.9-1.8,3.8-3.3,5.7-4.8c0.2-0.1,0.4-0.3,0.6-0.4c0.2-0.2,0.5-0.4,0.8-0.6c1.1-0.8,2.2-1.5,3.4-2.2  c0.1-0.1,0.2-0.1,0.3-0.2c0.1-0.1,0.2-0.1,0.3-0.2c1.4-0.8,2.9-1.6,4.5-2.3c0.3-0.1,0.6-0.2,0.8-0.4l0.6-0.3  c1.1-0.5,2.2-0.9,3.5-1.4c0.5-0.2,1.1-0.4,1.7-0.6l0.2-0.1c0.4-0.1,0.7-0.2,1.1-0.3c0,0,0,0,0,0c1.1,3.2,2.3,6.4,3.3,9.8l0.1,0.4  c1.1,3.6,2,7.3,2.9,10.8C51.7,89.8,39.3,88.3,29.5,81.9C29.4,81.9,29.4,81.9,29.5,81.9z M65.6,62.9c0.7-0.1,1.3-0.2,2-0.2  c2-0.2,4-0.2,5.9-0.2c0.2,0,0.4,0,0.6,0l0.2,0c2.2,0.1,4.6,0.3,6.9,0.6c0.4,0.1,0.9,0.1,1.3,0.2l0.6,0.1c0.7,0.1,1.5,0.3,2.2,0.4  c-3,7.6-8.3,14-15.2,18.3c-0.8-3.1-1.7-6.2-2.6-9.2l-0.1-0.4c-0.9-3-1.9-6.1-3.1-9.5C64.8,63.1,65.2,63,65.6,62.9z M81.6,55.2  C80,55,78.4,54.9,77,54.8l-0.9-0.1c-0.9-0.1-1.9-0.1-2.8-0.2c-0.2,0-0.3,0-0.5,0c-0.2,0-0.4,0-0.6,0c-2,0-3.9,0.1-5.9,0.3  c-0.2,0-0.3,0-0.5,0.1c-0.1,0-0.2,0-0.3,0c-1.3,0.1-2.6,0.3-3.9,0.5c-0.1-0.1-0.1-0.3-0.2-0.4c-0.1-0.2-0.2-0.5-0.3-0.7  c-1.1-2.9-2.3-5.7-3.2-7.8l-0.3-0.6c-0.1-0.1-0.1-0.3-0.2-0.4c0,0,0,0,0.1,0c0.2-0.1,0.5-0.2,0.7-0.3c0.6-0.2,1.2-0.5,1.8-0.8  c1.2-0.5,2.4-1.2,3.6-1.8c0.1-0.1,0.3-0.2,0.5-0.2c0.2-0.1,0.5-0.2,0.7-0.4c1.5-0.9,2.9-1.8,4.2-2.7l0.3-0.2  c0.2-0.1,0.4-0.3,0.6-0.4c0.9-0.6,1.9-1.4,2.8-2.2c1.5-1.2,2.9-2.5,4.3-4c0.8-0.8,1.5-1.6,2.2-2.4l0.4-0.5c0.5-0.5,0.9-1.1,1.3-1.6  C85.5,34.3,88,42.1,88,50c0,2-0.2,4.1-0.5,6.1c-0.3,0-0.6-0.1-0.8-0.1c-0.4-0.1-0.7-0.1-1.1-0.2l-1.1-0.2  C83.5,55.5,82.5,55.3,81.6,55.2z"
+        fill="currentColor"
+      />
+    </svg>
+  ),
+  thirdTitle = "dribble",
+  thirdIconLink = "#",
+  thirdColor = "#bd081c",
+  fourthSVG = (
+    <svg version="1.1" viewBox="0 0 100 100">
+      <path
+        d="M95,9.9c-1.3-1.1-3.4-1.2-7-0.1c0,0,0,0,0,0c-2.5,0.8-24.7,9.2-44.3,17.3c-17.6,7.3-31.9,13.7-33.6,14.5  c-1.9,0.6-6,2.4-6.2,5.2c-0.1,1.8,1.4,3.4,4.3,4.7c3.1,1.6,16.8,6.2,19.7,7.1c1,3.4,6.9,23.3,7.2,24.5c0.4,1.8,1.6,2.8,2.2,3.2  c0.1,0.1,0.3,0.3,0.5,0.4c0.3,0.2,0.7,0.3,1.2,0.3c0.7,0,1.5-0.3,2.2-0.8c3.7-3,10.1-9.7,11.9-11.6c7.9,6.2,16.5,13.1,17.3,13.9  c0,0,0.1,0.1,0.1,0.1c1.9,1.6,3.9,2.5,5.7,2.5c0.6,0,1.2-0.1,1.8-0.3c2.1-0.7,3.6-2.7,4.1-5.4c0-0.1,0.1-0.5,0.3-1.2  c3.4-14.8,6.1-27.8,8.3-38.7c2.1-10.7,3.8-21.2,4.8-26.8c0.2-1.4,0.4-2.5,0.5-3.2C96.3,13.5,96.5,11.2,95,9.9z M30,58.3l47.7-31.6  c0.1-0.1,0.3-0.2,0.4-0.3c0,0,0,0,0,0c0.1,0,0.1-0.1,0.2-0.1c0.1,0,0.1,0,0.2-0.1c-0.1,0.1-0.2,0.4-0.4,0.6L66,38.1  c-8.4,7.7-19.4,17.8-26.7,24.4c0,0,0,0,0,0.1c0,0-0.1,0.1-0.1,0.1c0,0,0,0.1-0.1,0.1c0,0.1,0,0.1-0.1,0.2c0,0,0,0.1,0,0.1  c0,0,0,0,0,0.1c-0.5,5.6-1.4,15.2-1.8,19.5c0,0,0,0,0-0.1C36.8,81.4,31.2,62.3,30,58.3z"
+        fill="currentColor"
+      />
+    </svg>
+  ),
+  fourthTitle = "telegram",
+  fourthIconLink = "#",
+  fourthColor = "#0088cc",
+}) {
   return (
     <>
       <style>{`
@@ -1428,11 +1553,7 @@ export function IconsGroup({ firstSVG = <svg version="1.1" viewBox="0 0 100 100"
         `}</style>
       <ul className="example-2">
         <li className="icon-content">
-          <a
-            href={firstIconLink}
-            aria-label="spotify"
-            data-social="spotify"
-          >
+          <a href={firstIconLink} aria-label="spotify" data-social="spotify">
             <div className="filled" />
             {firstSVG}
           </a>
@@ -1450,22 +1571,14 @@ export function IconsGroup({ firstSVG = <svg version="1.1" viewBox="0 0 100 100"
           <div className="tooltip">{secoundTitle}</div>
         </li>
         <li className="icon-content">
-          <a
-            href={thirdIconLink}
-            aria-label="Dribbble"
-            data-social="dribbble"
-          >
+          <a href={thirdIconLink} aria-label="Dribbble" data-social="dribbble">
             <div className="filled" />
             {thirdSVG}
           </a>
           <div className="tooltip">{thirdTitle}</div>
         </li>
         <li className="icon-content">
-          <a
-            href={fourthIconLink}
-            aria-label="Telegram"
-            data-social="telegram"
-          >
+          <a href={fourthIconLink} aria-label="Telegram" data-social="telegram">
             <div className="filled" />
             {fourthSVG}
           </a>
@@ -1475,10 +1588,16 @@ export function IconsGroup({ firstSVG = <svg version="1.1" viewBox="0 0 100 100"
     </>
   );
 }
-export function LaRoseText({ edit = {}, children, fontSize = 2, fontWeight = 600, gradientText = 'linear-gradient(45deg, #ff007f, #ff00ff, #ff1493, #ff69b4, #ff69b4, #ff1493, #ff00ff, #ff007f)' }) {
+export function LaRoseText({
+  edit = {},
+  children,
+  fontSize = 2,
+  fontWeight = 600,
+  gradientText = "linear-gradient(45deg, #ff007f, #ff00ff, #ff1493, #ff69b4, #ff69b4, #ff1493, #ff00ff, #ff007f)",
+}) {
   let LaRoseText = {
-    ...edit
-  }
+    ...edit,
+  };
   return (
     <>
       <style>{`
@@ -1492,7 +1611,9 @@ export function LaRoseText({ edit = {}, children, fontSize = 2, fontWeight = 600
           text-fill-color: transparent;
         }
       `}</style>
-      <div style={LaRoseText} className="title">{children}</div>
+      <div style={LaRoseText} className="title">
+        {children}
+      </div>
     </>
   );
 }
@@ -1516,7 +1637,7 @@ export function RoseBox({
   role,
   lazy = false,
   AutoHandling = false,
-  outlineOffset = 0
+  outlineOffset = 0,
 }) {
   const [isLoaded, setIsLoaded] = useState(!lazy);
   useEffect(() => {
@@ -1528,46 +1649,48 @@ export function RoseBox({
     }
   }, [lazy]);
   const layoutStyle = autoLayout
-    ? { padding: '0.8rem', margin: '0 auto', overflow: 'hidden' }
+    ? { padding: "0.8rem", margin: "0 auto", overflow: "hidden" }
     : {};
   const shadowStyle = shadow
     ? { boxShadow: `0px 0px 9px 1px ${shadowColor}` }
     : {};
-  const aspectStyle = aspectRatio
-    ? { aspectRatio }
-    : {};
+  const aspectStyle = aspectRatio ? { aspectRatio } : {};
   const displayLayoutStyle = grid
-    ? { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))' }
+    ? {
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
+    }
     : flex
-      ? { display: 'flex', justifyContent: 'space-between', alignItems: 'center' }
+      ? { display: "flex", justifyContent: "space-between", alignItems: "center" }
       : {};
-  const backgroundStyle = background
-    ? { background }
+  const backgroundStyle = background ? { background } : {};
+  const autoHandleStyle = AutoHandling
+    ? {
+      background: "#1b85db",
+      height: "3rem",
+      minWidth: "11rem",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      border: "1px solid #1b85db",
+      borderRadius: "7px",
+      fontWeight: "bold",
+      boxShadow:
+        "#1b85db 0px 50px 100px -20px, #1b85db 0px 30px 60px -30px, #1b85db 0px -2px 6px 0px inset",
+      outlineOffset: `${outlineOffset}`,
+      outlineStyle: "solid",
+      outlineColor: "#1b85db",
+      outlineWidth: "2px",
+      cursor: "pointer",
+    }
     : {};
-  const autoHandleStyle = AutoHandling ? {
-    background: "#1b85db",
-    height: "3rem",
-    minWidth: "11rem",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    border: "1px solid #1b85db",
-    borderRadius: "7px",
-    fontWeight: "bold",
-    boxShadow: "#1b85db 0px 50px 100px -20px, #1b85db 0px 30px 60px -30px, #1b85db 0px -2px 6px 0px inset",
-    outlineOffset: `${outlineOffset}`,
-    outlineStyle: "solid",
-    outlineColor: "#1b85db",
-    outlineWidth: "2px",
-    cursor: "pointer"
-  } : {};
   // Apply the hover class conditionally
-  const hoverClass = atHover ? 'rosebox-hover' : '';
+  const hoverClass = atHover ? "rosebox-hover" : "";
   const handleClick = () => {
     if (typeof onClick === "function") {
       onClick();
     }
-  }
+  };
   return (
     <>
       <style>{`
@@ -1597,8 +1720,17 @@ export function RoseBox({
           role={role}
           onClick={handleClick}
           id={RoseID}
-          className={`${RoseName} ${hoverClass} ${scaleAnimate ? 'rosebox-scale-animate' : ''}`}
-          style={{ ...edit, ...layoutStyle, ...shadowStyle, ...aspectStyle, ...displayLayoutStyle, ...backgroundStyle, ...autoHandleStyle }}
+          className={`${RoseName} ${hoverClass} ${scaleAnimate ? "rosebox-scale-animate" : ""
+            }`}
+          style={{
+            ...edit,
+            ...layoutStyle,
+            ...shadowStyle,
+            ...aspectStyle,
+            ...displayLayoutStyle,
+            ...backgroundStyle,
+            ...autoHandleStyle,
+          }}
         >
           {isLoaded ? children : <div>Loading...</div>}
         </div>
@@ -1606,27 +1738,55 @@ export function RoseBox({
     </>
   );
 }
-export function SplitText({ children, RoseName, RoseId, edit = {}, speed = 0.5, delay = 0.05 }) {
-  // Split the text into individual characters
-  const splitText = children.split('').map((char, index) => (
+export function SplitText({
+  children,
+  RoseName,
+  RoseId,
+  initialAnimateTypeStyle = "character",
+  edit = {},
+  speed = 0.5,
+  delay = 0.05,
+}) {
+  const [animateTypeStyle, setAnimateTypeStyle] = useState(
+    initialAnimateTypeStyle
+  );
+
+  useEffect(() => {
+    const fullAnimationDuration =
+      speed + delay * (children.split("").length || 1);
+    const timer = setTimeout(() => {
+      setAnimateTypeStyle("word"); // Change to 'word' after full animation duration
+    }, fullAnimationDuration * 1000); // Convert duration to milliseconds
+
+    return () => clearTimeout(timer); // Cleanup timer on component unmount
+  }, [speed, delay, children]);
+
+  // Split the text based on animateTypeStyle (word or character)
+  const splitText =
+    animateTypeStyle === "word" ? children.split(/(\s+)/) : children.split("");
+
+  // Map through the split text to create the animation effect
+  const animatedText = splitText.map((item, index) => (
     <span
       key={index}
-      className="char"
-      style={{ '--char-index': index }}
+      className="SplitTextItem"
+      style={{ "--SplitTextItem-index": index }}
     >
-      {char === ' ' ? '\u00A0' : char} {/* Replace spaces with non-breaking spaces */}
+      {item === " " ? "\u00A0" : item} {/* Handle spaces */}
     </span>
   ));
+
   return (
     <>
       <style>{`
-              .char {
+              .SplitTextItem {
                   display: inline-block;
                   opacity: 0;
                   transform: translateY(20px);
                   animation: splitAnimation ${speed}s forwards;
-                  animation-delay: calc(var(--char-index) * ${delay}s);
+                  animation-delay: calc(var(--SplitTextItem-index) * ${delay}s);
               }
+
               @keyframes splitAnimation {
                   to {
                       opacity: 1;
@@ -1634,10 +1794,8 @@ export function SplitText({ children, RoseName, RoseId, edit = {}, speed = 0.5, 
                   }
               }
           `}</style>
-      <div style={{
-        ...edit
-      }} id={RoseId} className={RoseName}>
-        {splitText}
+      <div style={{ ...edit }} id={RoseId} className={RoseName}>
+        {animatedText}
       </div>
     </>
   );
@@ -1667,7 +1825,10 @@ export const RoseMouse = ({
       const { clientX: x, clientY: y } = event;
       const now = Date.now();
 
-      if (x !== mousePositionRef.current.x || y !== mousePositionRef.current.y) {
+      if (
+        x !== mousePositionRef.current.x ||
+        y !== mousePositionRef.current.y
+      ) {
         const timeElapsed = now - lastMoveTimeRef.current;
 
         if (timeElapsed >= delay) {
@@ -1733,17 +1894,14 @@ export const RoseMouse = ({
     </div>
   );
 };
-
-
-
 export function ShinyText({
   children,
   RoseName,
   RoseId,
   edit = {},
   speed = 2, // duration of the shine effect
-  color = '#fff', // color of the shiny effect
-  backgroundColor = '#000' // background color to contrast with the shine
+  color = "#fff", // color of the shiny effect
+  backgroundColor = "#000", // background color to contrast with the shine
 }) {
   return (
     <>
@@ -1794,17 +1952,17 @@ export function ShinyButton({
   RoseId,
   edit = {},
   speed = 2, // duration of the shine effect
-  color = '#fff', // text color
-  backgroundColor = '#111', // button background color
-  padding = '10px 20px', // button padding
-  borderRadius = '5px', // button border radius
-  ShinyButtonEvent }) {
-
+  color = "#fff", // text color
+  backgroundColor = "#111", // button background color
+  padding = "10px 20px", // button padding
+  borderRadius = "5px", // button border radius
+  ShinyButtonEvent,
+}) {
   let ShinyButtonEventClick = () => {
     if (typeof ShinyButtonEvent === "function") {
       ShinyButtonEvent();
     }
-  }
+  };
   return (
     <>
       <style>{`
@@ -1854,42 +2012,67 @@ export function ShinyButton({
                   }
               }
           `}</style>
-      <button onClick={ShinyButtonEventClick} style={{ ...edit }} id={RoseId} className={`shiny-button ${RoseName}`}>
+      <button
+        onClick={ShinyButtonEventClick}
+        style={{ ...edit }}
+        id={RoseId}
+        className={`shiny-button ${RoseName}`}
+      >
         {children}
       </button>
     </>
   );
 }
+
 export function WaveText({
   children,
   RoseName,
   RoseId,
+  initialWaveType = "character", // Initial waveType, defaults to 'character'
   edit = {},
   speed = 0.5,
   delay = 0.05,
   amplitude = 10,
-  frequency = 0.5
+  frequency = 0.5,
 }) {
-  // Split the text into individual characters
-  const waveText = children.split('').map((WaveTextChar, index) => (
+  const [waveType, setWaveType] = useState(initialWaveType);
+
+  useEffect(() => {
+    const totalAnimationDuration =
+      speed + delay * (children.split("").length || 1);
+    const timer = setTimeout(() => {
+      setWaveType("word"); // Change to 'word' after the full animation duration
+    }, totalAnimationDuration * 1000 + 200); // Adjust timing to ensure it starts after animation
+
+    return () => clearTimeout(timer); // Cleanup timer on component unmount
+  }, [speed, delay, children]);
+
+  // Split the text based on waveType (word or character)
+  const splitText =
+    waveType === "word" ? children.split(/(\s+)/) : children.split("");
+
+  // Map through the split text to create the wave effect
+  const waveText = splitText.map((item, index) => (
     <span
       key={index}
-      className="WaveTextChar"
-      style={{ '--WaveTextChar-index': index }}
+      className="WaveTextItem"
+      style={{ "--WaveTextItem-index": index }}
     >
-      {WaveTextChar === ' ' ? '\u00A0' : WaveTextChar} {/* Replace spaces with non-breaking spaces */}
+      {item === " " ? "\u00A0" : item} {/* Handle spaces */}
     </span>
   ));
+
   return (
     <>
       <style>{`
-              .WaveTextChar {
+              .WaveTextItem {
                   display: inline-block;
                   opacity: 0;
                   transform: translateY(${amplitude}px);
                   animation: waveAnimation ${speed}s forwards;
-                  animation-delay: calc(var(--WaveTextChar-index) * ${delay}s);
+                  animation-delay: calc(var(--WaveTextItem-index) * ${delay}s);
               }
+
               @keyframes waveAnimation {
                   0% {
                       opacity: 0;
@@ -1911,6 +2094,7 @@ export function WaveText({
     </>
   );
 }
+
 export function AnimatedText({
   children,
   RoseName,
@@ -1918,18 +2102,43 @@ export function AnimatedText({
   edit = {},
   speed = 0.5,
   delay = 0.05,
-  animationType = 'blur'
+  animationType = "blur", // Type of animation: 'blur', 'fadeIn', 'slideIn', 'zoomIn'
+  initialAnimateTypeStyle = "character", // Initial prop for animating by 'word' or 'character'
 }) {
-  // Split the text into individual characters
-  const animatedText = children.split('').map((char, index) => (
+  const [animateTypeStyle, setAnimateTypeStyle] = useState(
+    initialAnimateTypeStyle
+  );
+
+  useEffect(() => {
+    // Calculate total duration of animation including delay
+    const totalAnimationDuration =
+      speed + delay * (children.split("").length || 1);
+    const timer = setTimeout(() => {
+      setAnimateTypeStyle("word"); // Change to 'word' after the animation ends
+    }, totalAnimationDuration * 1000 + 600); // Adjust timing as needed
+
+    return () => clearTimeout(timer); // Cleanup timer on component unmount
+  }, [speed, delay, children]);
+
+  // Split the text based on animateTypeStyle (word or character)
+  const splitText =
+    animateTypeStyle === "word"
+      ? children.split(/(\s+)/) // Split by spaces and preserve them
+      : children.split("");
+
+  // Map through the split text to create the animation effect
+  const animatedText = splitText.map((item, index) => (
     <span
       key={index}
-      className="BlurTextChar"
-      style={{ '--BlurTextChar-index': index }}
+      className="AnimatedTextItem"
+      style={{ "--AnimatedTextItem-index": index }}
     >
-      {char === ' ' ? '\u00A0' : char} {/* Replace spaces with non-breaking spaces */}
+      {item === " " ? "\u00A0" : item} {/* Handle spaces */}
+      {animateTypeStyle === "word" && item === " " && " "}{" "}
+      {/* Ensure space rendering if animating words */}
     </span>
   ));
+
   const animations = {
     blur: `
           filter: blur(15px);
@@ -1950,15 +2159,18 @@ export function AnimatedText({
           animation: zoomInAnimation ${speed}s forwards;
       `,
   };
+
   const selectedAnimation = animations[animationType] || animations.blur;
+
   return (
     <>
       <style>{`
-              .BlurTextChar {
+              .AnimatedTextItem {
                   display: inline-block;
                   ${selectedAnimation}
-                  animation-delay: calc(var(--BlurTextChar-index) * ${delay}s);
+                  animation-delay: calc(var(--AnimatedTextItem-index) * ${delay}s);
               }
+
               @keyframes blurAnimation {
                   to {
                       opacity: 1;
@@ -1966,17 +2178,20 @@ export function AnimatedText({
                       filter: blur(0);
                   }
               }
+
               @keyframes fadeInAnimation {
                   to {
                       opacity: 1;
                   }
               }
+
               @keyframes slideInAnimation {
                   to {
                       opacity: 1;
                       transform: translateX(0);
                   }
               }
+
               @keyframes zoomInAnimation {
                   to {
                       opacity: 1;
@@ -1990,6 +2205,7 @@ export function AnimatedText({
     </>
   );
 }
+
 // RoseRouter
 const RouterContext = createContext();
 export const useRouter = () => useContext(RouterContext);
@@ -1998,13 +2214,13 @@ export const RoseRouter = ({ children, customStyles = "" }) => {
   const navigate = (path) => {
     if (path !== route) {
       setRoute(path);
-      window.history.pushState({}, '', path);
+      window.history.pushState({}, "", path);
     }
   };
   useEffect(() => {
     const handlePopState = () => setRoute(window.location.pathname);
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
   }, []);
   return (
     <>
@@ -2029,26 +2245,89 @@ export const RoseRouter = ({ children, customStyles = "" }) => {
 export const Route = ({ path, element }) => {
   const { route } = useRouter();
   return (
-    <div className={`route ${route === path ? 'route-active' : ''}`}>
+    <div className={`route ${route === path ? "route-active" : ""}`}>
       {route === path ? element : null}
     </div>
   );
 };
 
-export const RoseParent = ({ children, edit, RoseID, RoseName }) => {
+export const RoseParent = ({
+  children,
+  edit,
+  RoseID,
+  RoseName,
+  display = "flex",
+  flexDirection = "row",
+  flexDirectionMobile = "column",
+  justifyContent = "space-around",
+  alignItems = "center",
+  alignContent = "center",
+  flexWrap = "wrap",
+  gap = "1rem",
+  padding = "1rem",
+  minHeight = "100vh",
+  width = "100%",
+  flexBasis = "auto",
+  flexGrow = "1",
+  flexShrink = "1",
+  gridTemplateColumns = "",
+  gridTemplateRows = "",
+  gridColumnGap = "",
+  gridRowGap = "",
+  placeItems = "center",
+  alignContentGrid = "",
+  justifyItems = "",
+  gridAutoFlow = "",
+  gridAutoColumns = "",
+  gridAutoRows = "",
+  gridTemplateAreas = "",
+  alignSelf = "",
+  justifySelf = "",
+  gridArea = "",
+}) => {
+  const isGrid = display === "grid";
+
   return (
     <>
       <style>{`
                 .rose-parent {
-                    display: flex;
-                    justify-content: space-around;
-                    align-items: center;
-                    flex-wrap: wrap;
-                    gap: 1rem;
-                    padding: 1rem;
+                    display: ${display};
+                    ${isGrid
+          ? `
+                        grid-template-columns: ${gridTemplateColumns};
+                        grid-template-rows: ${gridTemplateRows};
+                        grid-column-gap: ${gridColumnGap};
+                        grid-row-gap: ${gridRowGap};
+                        place-items: ${placeItems};
+                        align-content: ${alignContentGrid};
+                        justify-items: ${justifyItems};
+                        grid-auto-flow: ${gridAutoFlow};
+                        grid-auto-columns: ${gridAutoColumns};
+                        grid-auto-rows: ${gridAutoRows};
+                        grid-template-areas: ${gridTemplateAreas};
+                    `
+          : `
+                        flex-direction: ${flexDirection};
+                        justify-content: ${justifyContent};
+                        align-items: ${alignItems};
+                        align-content: ${alignContent};
+                        flex-wrap: ${flexWrap};
+                        gap: ${gap};
+                    `
+        }
+                    padding: ${padding};
                     box-sizing: border-box;
-                    width: 100%;
-                    min-height: 100vh;
+                    width: ${width};
+                    min-height: ${minHeight};
+                }
+
+                .rose-parent > * {
+                    flex-basis: ${flexBasis};
+                    flex-grow: ${flexGrow};
+                    flex-shrink: ${flexShrink};
+                    align-self: ${alignSelf};
+                    justify-self: ${justifySelf};
+                    grid-area: ${gridArea};
                 }
 
                 @media (min-width: 768px) {
@@ -2060,7 +2339,7 @@ export const RoseParent = ({ children, edit, RoseID, RoseName }) => {
 
                 @media (max-width: 767px) {
                     .rose-parent {
-                        flex-direction: column;
+                        flex-direction: ${flexDirectionMobile};
                         align-items: center;
                     }
                 }
@@ -2095,20 +2374,29 @@ export function Notification({
   children,
   edit = {},
   RoseID,
-  icon = <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 512 512"
-    strokeWidth={0}
-    fill="currentColor"
-    stroke="currentColor"
-    className="icon"
-  >
-    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
-  </svg>,
+  icon = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+      strokeWidth={0}
+      fill="currentColor"
+      stroke="currentColor"
+      className="icon"
+    >
+      <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z" />
+    </svg>
+  ),
   RoseName = "card",
   Message = "Hello LaRose Devs",
+  MessageColor = "white",
   DesMessage = "success",
-  delay = 5000
+  DesMessageColor = "white",
+  editCrossIconHeight = 1.5,
+  editCrossIconWidth = 1.5,
+  iconDisplay = "block",
+  CrossIconColor = "black",
+  editCrossIconColor = {},
+  delay = 5000,
 }) {
   const [valueState, setValueState] = useState(false);
 
@@ -2117,15 +2405,20 @@ export function Notification({
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setValueState(true)
-    }, delay);
-  })
+    if (delay !== Infinity) {
+      const timer = setTimeout(() => {
+        setValueState(true);
+      }, delay);
+
+      // Clean up the timer on unmount
+      return () => clearTimeout(timer);
+    }
+  }, [delay]);
 
   return (
     <>
       <style>{`
-        .card {
+                .${RoseName} {
           width: 20.625rem;
           height: 5rem; 
           border-radius: 0.5rem; 
@@ -2157,6 +2450,7 @@ export function Notification({
           background-color: #04e40048;
           border-radius: 50%;
           margin-left: 0.5rem; /* 8px / 16 */
+          display:${iconDisplay};
         }
         .icon {
           width: 1.0625rem; /* 17px / 16 */
@@ -2176,25 +2470,26 @@ export function Notification({
           cursor: default;
         }
         .message-text {
-          color: #269b24;
+          color: ${MessageColor};
           font-size: 1.0625rem; /* 17px / 16 */
           font-weight: 700;
         }
         .sub-text {
           font-size: 0.875rem; /* 14px / 16 */
-          color: #555;
+          color: ${DesMessageColor};
         }
         .cross-icon {
-          width: 1.125rem; /* 18px / 16 */
-          height: 1.125rem; /* 18px / 16 */
-          color: #555;
+          width: ${editCrossIconHeight}rem;
+          height: ${editCrossIconWidth}rem;
+          color: ${CrossIconColor};
           cursor: pointer;
+
         }
       `}</style>
       <div
         style={{
-          display: valueState ? 'none' : 'flex',
-          ...edit
+          display: valueState ? "none" : "flex",
+          ...edit,
         }}
         id={RoseID}
         className={RoseName}
@@ -2209,9 +2504,7 @@ export function Notification({
             fillOpacity={1}
           />
         </svg>
-        <div className="icon-container">
-          {icon}
-        </div>
+        <div className="icon-container">{icon}</div>
         <div className="message-text-container">
           <p className="message-text">{Message}</p>
           <p className="sub-text">{DesMessage}</p>
@@ -2237,6 +2530,774 @@ export function Notification({
     </>
   );
 }
+export function Spring({
+  rotate = 360, // Default rotation to 360 degrees
+  scale = 1, // Default scale to 1 (normal size)
+  speed = 0.8, // Default speed to 0.8 seconds
+  x = "0", // Default x translation
+  y = "0", // Default y translation
+  z = "0",
+  children,
+  RoseID,
+  RoseName = "RotatingSpringComponentStyle",
+  edit,
+  drag = false, // Default to allow dragging
+}) {
+  const elementRef = useRef(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [isDragged, setIsDragged] = useState(false);
+  const [startOffset, setStartOffset] = useState({ x: 0, y: 0 });
+
+  // UseEffect to set initial position based on the element's location
+  useEffect(() => {
+    if (elementRef.current) {
+      const rect = elementRef.current.getBoundingClientRect();
+      setPosition({ x: rect.left, y: rect.top });
+    }
+  }, []);
+
+  const handleMouseDown = (e) => {
+    if (drag) {
+      const rect = e.target.getBoundingClientRect();
+      setStartOffset({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      });
+      setIsDragging(true);
+      setIsDragged(true);
+    }
+  };
+
+  const handleMouseMove = (e) => {
+    if (isDragging && drag) {
+      setPosition({
+        x: e.clientX - startOffset.x,
+        y: e.clientY - startOffset.y,
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    if (drag) {
+      setIsDragging(false);
+    }
+  };
+
+  return (
+    <>
+      <style>{`
+              .${RoseName} {
+                  min-height: 7rem;
+                  width: 7rem;
+                  background: #ffffff;
+                  border-radius: 26px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  animation: LaRoseRotatingAnimated ${speed}s ease-in-out forwards;
+                  transform: rotate(0deg) scale(0);
+                  opacity: 0;
+                  overflow: hidden;
+                  translate: ${x} ${y} ${z};
+                  position: relative; /* Default position */
+                  cursor: ${drag ? "grab" : "default"};
+              }
+              
+              .${RoseName}:active {
+                  cursor: ${drag ? "grabbing" : "default"};
+              }
+
+              @keyframes LaRoseRotatingAnimated {
+                  to {
+                                    translate: ${x} ${y} ${z};
+                      transform: rotate(${rotate}deg) scale(${scale});
+                      opacity: 1;
+                  }
+              }
+          `}</style>
+      <div
+        ref={elementRef}
+        style={{
+          ...edit,
+          left: isDragged ? `${position.x}px` : "auto",
+          top: isDragged ? `${position.y}px` : "auto",
+          position: isDragged ? "absolute" : "relative",
+        }}
+        className={RoseName}
+        id={RoseID}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+      >
+        {children}
+      </div>
+    </>
+  );
+}
+export function Variants({
+  rotate = 0, // Default rotation to 0 degrees
+  scale = 1, // Default scale to 1 (normal size)
+  speed = 0.8, // Default speed to 0.8 seconds
+  x = "0", // Default x translation
+  y = "0", // Default y translation
+  z = "0",
+  children,
+  RoseID,
+  RoseName = "RotatingVariantsComponentStyle",
+  edit,
+  childDisplay = "grid", // Default child display
+  drag = false, // Default to allow dragging
+}) {
+  const elementRef = useRef(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [isDragged, setIsDragged] = useState(false);
+  const [startOffset, setStartOffset] = useState({ x: 0, y: 0 });
+
+  // Set initial position based on the element's location
+  useEffect(() => {
+    if (elementRef.current) {
+      const rect = elementRef.current.getBoundingClientRect();
+      setPosition({ x: rect.left, y: rect.top });
+    }
+  }, []);
+
+  const handleMouseDown = (e) => {
+    if (drag) {
+      const rect = e.target.getBoundingClientRect();
+      setStartOffset({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      });
+      setIsDragging(true);
+      setIsDragged(true);
+    }
+  };
+
+  const handleMouseMove = (e) => {
+    if (isDragging && drag) {
+      setPosition({
+        x: e.clientX - startOffset.x,
+        y: e.clientY - startOffset.y,
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    if (drag) {
+      setIsDragging(false);
+    }
+  };
+
+  return (
+    <>
+      <style>{`
+              .${RoseName} {
+                  min-height: 7rem;
+                  width: 7rem;
+                  background: #380eff;
+                  border-radius: 26px;
+                  display:grid;
+                  grid-template-columns: auto auto;
+                  grid-gap: 1rem;
+                  justify-content: center;
+                  align-items: center;
+                  animation: ${RoseName}Animated ${speed}s ease-in-out forwards;
+                  transform: rotate(${rotate}deg) scale(${scale});
+                  translate: ${x} ${y} ${z};
+                  opacity: 0;
+                  overflow: hidden;
+                  position: relative; /* Default position */
+                  cursor: ${drag ? "grab" : "default"};
+              }
+              
+              .${RoseName}:active {
+                  cursor: ${drag ? "grabbing" : "default"};
+              }
+
+              @keyframes ${RoseName}Animated {
+                  to {
+                      translate: ${x} ${y} ${z};
+                      transform: rotate(${rotate}deg) scale(${scale});
+                      opacity: 1;
+                  }
+              }
+          `}</style>
+      <div
+        ref={elementRef}
+        style={{
+          ...edit,
+          left: isDragged ? `${position.x}px` : "auto",
+          top: isDragged ? `${position.y}px` : "auto",
+          position: isDragged ? "absolute" : "relative",
+        }}
+        className={RoseName}
+        id={RoseID}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+      >
+        {children}
+        <SideText direction="left">
+          {" "}
+          <div
+            style={{
+              height: "2rem",
+              width: "2rem",
+              background: "#EEE",
+              borderRadius: "50%",
+              display: childDisplay,
+            }}
+          ></div>
+        </SideText>
+        <SideText direction="right">
+          <div
+            style={{
+              height: "2rem",
+              width: "2rem",
+              background: "#EEE",
+              borderRadius: "50%",
+              display: childDisplay,
+            }}
+          ></div>
+        </SideText>
+        <SideText direction="left">
+          <div
+            style={{
+              height: "2rem",
+              width: "2rem",
+              background: "#EEE",
+              borderRadius: "50%",
+              display: childDisplay,
+            }}
+          ></div>
+        </SideText>
+        <SideText direction="right">
+          <div
+            style={{
+              height: "2rem",
+              width: "2rem",
+              background: "#EEE",
+              borderRadius: "50%",
+              display: childDisplay,
+            }}
+          ></div>
+        </SideText>
+      </div>
+    </>
+  );
+}
+export function RandomAnimate({
+  children,
+  RoseID,
+  RoseName = "random-animate",
+  edit = {
+    backgroundColor: "#EEE",
+    height: "12rem",
+    width: "12rem",
+    borderRadius: "20px",
+    padding: "1rem",
+  },
+  AnimatedType,
+}) {
+  const [animationClass, setAnimationClass] = useState("");
+
+  useEffect(() => {
+    // List of possible animations
+    const animations = [
+      "fadeIn",
+      "slideInLeft",
+      "zoomIn",
+      "rotateIn",
+      "bounceIn",
+      "flipInX",
+      "flipInY",
+      "lightSpeedIn",
+      "rollIn",
+      "jackInTheBox",
+    ];
+
+    if (AnimatedType) {
+      // If AnimatedType is provided, use it as the animation class
+      setAnimationClass(AnimatedType);
+    } else {
+      // Randomly pick an animation if AnimatedType is not provided
+      const randomAnimation =
+        animations[Math.floor(Math.random() * animations.length)];
+      setAnimationClass(randomAnimation);
+    }
+  }, [AnimatedType]);
+
+  return (
+    <>
+      <style>{`
+        .random-animate {
+          display: inline-block;
+        }
+
+        /* Add your keyframe animations here */
+        /* Fade In Animation */
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        .fadeIn {
+          animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Slide In Left Animation */
+        @keyframes slideInLeft {
+          from { transform: translateX(-100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+
+        .slideInLeft {
+          animation: slideInLeft 1s ease-in-out;
+        }
+
+        /* Zoom In Animation */
+        @keyframes zoomIn {
+          from { transform: scale(0.5); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+
+        .zoomIn {
+          animation: zoomIn 1s ease-in-out;
+        }
+
+        /* Rotate In Animation */
+        @keyframes rotateIn {
+          from { transform: rotate(-200deg); opacity: 0; }
+          to { transform: rotate(0); opacity: 1; }
+        }
+
+        .rotateIn {
+          animation: rotateIn 1s ease-in-out;
+        }
+
+        /* Bounce In Animation */
+        @keyframes bounceIn {
+          0%, 20%, 40%, 60%, 80%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+        }
+
+        .bounceIn {
+          animation: bounceIn 1s ease-in-out;
+        }
+
+        /* Flip In X Animation */
+        @keyframes flipInX {
+          from {
+            transform: perspective(400px) rotateX(90deg);
+            opacity: 0;
+          }
+          to {
+            transform: perspective(400px) rotateX(0deg);
+            opacity: 1;
+          }
+        }
+
+        .flipInX {
+          animation: flipInX 1s ease-in-out;
+        }
+
+        /* Flip In Y Animation */
+        @keyframes flipInY {
+          from {
+            transform: perspective(400px) rotateY(90deg);
+            opacity: 0;
+          }
+          to {
+            transform: perspective(400px) rotateY(0deg);
+            opacity: 1;
+          }
+        }
+
+        .flipInY {
+          animation: flipInY 1s ease-in-out;
+        }
+
+        /* Light Speed In Animation */
+        @keyframes lightSpeedIn {
+          from { transform: translateX(100%) skewX(-30deg); opacity: 0; }
+          to { transform: translateX(0) skewX(0deg); opacity: 1; }
+        }
+
+        .lightSpeedIn {
+          animation: lightSpeedIn 1s ease-out;
+        }
+
+        /* Roll In Animation */
+        @keyframes rollIn {
+          from { transform: translateX(-100%) rotate(-120deg); opacity: 0; }
+          to { transform: translateX(0) rotate(0deg); opacity: 1; }
+        }
+
+        .rollIn {
+          animation: rollIn 1s ease-in-out;
+        }
+
+        /* Jack In The Box Animation */
+        @keyframes jackInTheBox {
+          from {
+            opacity: 0;
+            transform: scale(0.1) rotate(30deg);
+          }
+          50% {
+            transform: rotate(-10deg);
+          }
+          70% {
+            transform: rotate(3deg);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        .jackInTheBox {
+          animation: jackInTheBox 1s ease-in-out;
+        }
+      `}</style>
+      <div
+        id={RoseID}
+        style={edit}
+        className={`${RoseName} ${animationClass}`}
+      >
+        {children}
+      </div>
+    </>
+  );
+}
+export function SideText({
+  children,
+  RoseID,
+  RoseName = "side-textAnimatedLarose",
+  edit = {},
+  direction = "left", // Default direction is 'left'
+}) {
+  const animationDirection =
+    direction === "right" ? "sideTextRight" : "sideTextLeft";
+
+  return (
+    <>
+      <style>{`
+              .side-text {
+                  display: inline-block;
+              }
+
+              /* SideTextLeft Animation */
+              @keyframes sideTextLeft {
+                  from {
+                      transform: translateX(-100%);
+                      opacity: 0;
+                  }
+                  to {
+                      transform: translateX(0);
+                      opacity: 1;
+                  }
+              }
+
+              /* SideTextRight Animation */
+              @keyframes sideTextRight {
+                  from {
+                      transform: translateX(100%);
+                      opacity: 0;
+                  }
+                  to {
+                      transform: translateX(0);
+                      opacity: 1;
+                  }
+              }
+
+              .sideTextLeft {
+                  animation: sideTextLeft 1s ease-in-out;
+              }
+
+              .sideTextRight {
+                  animation: sideTextRight 1s ease-in-out;
+              }
+          `}</style>
+      <div
+        id={RoseID}
+        style={edit}
+        className={`${RoseName} ${animationDirection}`}
+      >
+        {children}
+      </div>
+    </>
+  );
+}
+
+export function useClipboard() {
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
+  return [copied, copyToClipboard];
+}
+
+export function useDocumentTitle(title) {
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+}
+
+export function useLocalStorage(key, initialValue) {
+  const [storedValue, setStoredValue] = useState(() => {
+    try {
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      console.error(error);
+      return initialValue;
+    }
+  });
+
+  const setValue = (value) => {
+    try {
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value;
+      setStoredValue(valueToStore);
+      window.localStorage.setItem(key, JSON.stringify(valueToStore));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return [storedValue, setValue];
+}
+
+export function useOnlineStatus() {
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
+  }, []);
+
+  return isOnline;
+}
+
+export function useRand(from, to) {
+  const getRandomValue = () =>
+    Math.floor(Math.random() * (to - from + 1)) + from;
+
+  const [RandValue, setRandValue] = useState(getRandomValue());
+
+  const refreshRandValue = () => {
+    setRandValue(getRandomValue());
+  };
+
+  return [RandValue, refreshRandValue];
+}
+
+export function SeeMore({
+  children,
+  maxCharacters = 100,
+  edit,
+  RoseName,
+  RoseId,
+  editButton = {},
+}) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  // Convert children to string
+  const text =
+    typeof children === "string" ? children : children?.props?.children;
+
+  // Determine if the text needs to be truncated
+  const isTruncated = text?.length > maxCharacters;
+
+  // Handle the toggling of the text visibility
+  const toggleExpand = () => setIsExpanded(!isExpanded);
+
+  return (
+    <div style={edit} className={RoseName} id={RoseId}>
+      {/* Render truncated or full text based on state */}
+      {isTruncated && !isExpanded ? `${text.slice(0, maxCharacters)}...` : text}
+
+      {/* Show "Show More" button if the text is truncated */}
+      {isTruncated && (
+        <button
+          style={{
+            background: "none",
+            border: "none",
+            fontWeight: "bold",
+            color: "blue",
+            ...editButton,
+          }}
+          onClick={toggleExpand}
+        >
+          {isExpanded ? "Show Less" : "Show More"}
+        </button>
+      )}
+    </div>
+  );
+}
+
+
+export function SideBox({ children, direction = 'left', edit = {}, RoseID, RoseName }) {
+  const [isVisible, setIsVisible] = useState(false);
+  const boxRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (boxRef.current) {
+        const boxRect = boxRef.current.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+
+        // Check if the element is within the viewport
+        if (boxRect.top <= viewportHeight && boxRect.bottom >= 0) {
+          setIsVisible(true); // Element is visible
+        } else {
+          setIsVisible(false); // Element is not visible
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  return (
+    <>
+      <style>{`
+        .sideboxComponent {
+          transition: transform 0.5s ease, opacity 0.5s ease;
+          opacity: 0;
+          z-index: 1000;
+          position: fixed;
+        }
+        .sideboxComponent.visible {
+          opacity: 1;
+        }
+        .sideboxComponent.left {
+          left: 0;
+          top: 50%;
+          transform: translateX(-100%) translateY(-50%);
+        }
+        .sideboxComponent.right {
+          right: 0;
+          top: 50%;
+          transform: translateX(100%) translateY(-50%);
+        }
+        .sideboxComponent.top {
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%) translateY(-100%);
+        }
+        .sideboxComponent.bottom {
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%) translateY(100%);
+        }
+        .sideboxComponent.left.visible {
+          transform: translateX(0) translateY(-50%);
+        }
+        .sideboxComponent.right.visible {
+          transform: translateX(0) translateY(-50%);
+        }
+        .sideboxComponent.top.visible {
+          transform: translateX(-50%) translateY(0);
+        }
+        .sideboxComponent.bottom.visible {
+          transform: translateX(-50%) translateY(0);
+        }
+        .sideboxComponent.hidden {
+          opacity: 0;
+        }
+        .sideboxComponent.hidden.left {
+          transform: translateX(-100%) translateY(-50%);
+        }
+        .sideboxComponent.hidden.right {
+          transform: translateX(100%) translateY(-50%);
+        }
+        .sideboxComponent.hidden.top {
+          transform: translateX(-50%) translateY(-100%);
+        }
+        .sideboxComponent.hidden.bottom {
+          transform: translateX(-50%) translateY(100%);
+        }
+      `}</style>
+      <div
+        ref={boxRef}
+        style={edit}
+        id={RoseID}
+        className={`sideboxComponent ${direction} ${isVisible ? 'visible' : 'hidden'}`}
+      >
+        {RoseName && <h2>{RoseName}</h2>}
+        {children}
+      </div>
+    </>
+  );
+}
+
+
+export const useBatteryStatus = () => {
+  const [batteryInfo, setBatteryInfo] = useState({
+    level: null,
+    charging: null,
+  });
+
+  useEffect(() => {
+    // Check if the browser supports the Battery Status API
+    if ('getBattery' in navigator) {
+      navigator.getBattery().then((battery) => {
+        // Set the initial battery status
+        setBatteryInfo({
+          level: battery.level,
+          charging: battery.charging,
+        });
+
+        // Update the battery status when it changes
+        const updateBatteryInfo = () => {
+          setBatteryInfo({
+            level: battery.level,
+            charging: battery.charging,
+          });
+        };
+
+        battery.addEventListener('levelchange', updateBatteryInfo);
+        battery.addEventListener('chargingchange', updateBatteryInfo);
+
+        // Cleanup the event listeners on unmount
+        return () => {
+          battery.removeEventListener('levelchange', updateBatteryInfo);
+          battery.removeEventListener('chargingchange', updateBatteryInfo);
+        };
+      });
+    } else {
+      console.log('Battery Status API is not supported in this browser.');
+    }
+  }, []);
+
+  return batteryInfo;
+};
+
 
 let CSS_PROPRTY_ROOT = () => {
   return (
@@ -2256,5 +3317,5 @@ let CSS_PROPRTY_ROOT = () => {
 
   `}</style>
     </>
-  )
-}
+  );
+};
