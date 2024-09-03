@@ -12,8 +12,6 @@
 
 At LaRose, you'll find everything you need to speed up your development process. Our React library offers a comprehensive collection of hooks and components designed to make your development easier and more efficient.
 
-- Visit our [Learn LaRose.js](https://github.com/hamdy-mohamedak/LaRose.js) Repository to get started with LaRose.js
-
 ## Documentation
 
 Visit [https://larosejs.vercel.app/](https://larosejs.vercel.app/) to view the full documentation.
