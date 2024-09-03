@@ -36,9 +36,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "babel-minify-webpack-plugin": "^0.3.1",
-    "webpack-cli": "^5.1.4"
   }
 }
