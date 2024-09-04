@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.1931b55b.css",
+    "main.js": "/static/js/main.aa861703.js",
+    "static/js/511.0b275bf5.chunk.js": "/static/js/511.0b275bf5.chunk.js",
+    "static/media/LaRose.webp": "/static/media/LaRose.926b0296efbef00a5cfe.webp",
+    "static/media/bg.avif": "/static/media/bg.375852f1f2bcbeeddc00.avif",
+    "index.html": "/index.html",
+    "main.1931b55b.css.map": "/static/css/main.1931b55b.css.map",
+    "main.aa861703.js.map": "/static/js/main.aa861703.js.map",
+    "511.0b275bf5.chunk.js.map": "/static/js/511.0b275bf5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1931b55b.css",
+    "static/js/main.aa861703.js"
+  ]
+}
