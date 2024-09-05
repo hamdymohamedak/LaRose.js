@@ -3034,7 +3034,6 @@ export function SideText({
     </>
   );
 }
-
 export function useClipboard() {
   const [copied, setCopied] = useState(false);
 
@@ -3047,13 +3046,11 @@ export function useClipboard() {
 
   return [copied, copyToClipboard];
 }
-
 export function useDocumentTitle(title) {
   useEffect(() => {
     document.title = title;
   }, [title]);
 }
-
 export function useLocalStorage(key, initialValue) {
   const [storedValue, setStoredValue] = useState(() => {
     try {
@@ -3078,7 +3075,6 @@ export function useLocalStorage(key, initialValue) {
 
   return [storedValue, setValue];
 }
-
 export function useOnlineStatus() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
 
@@ -3097,7 +3093,6 @@ export function useOnlineStatus() {
 
   return isOnline;
 }
-
 export function useRand(from, to) {
   const getRandomValue = () =>
     Math.floor(Math.random() * (to - from + 1)) + from;
@@ -3110,51 +3105,72 @@ export function useRand(from, to) {
 
   return [RandValue, refreshRandValue];
 }
-
 export function SeeMore({
   children,
   maxCharacters = 100,
+  maxElements = 3, // Default to 3 elements
   edit,
   RoseName,
   RoseId,
   editButton = {},
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const textRef = useRef(null);
 
-  // Convert children to string
+  // Convert children to string if it's plain text
   const text =
-    typeof children === "string" ? children : children?.props?.children;
+    typeof children === 'string' ? children : children?.props?.children;
 
-  // Determine if the text needs to be truncated
-  const isTruncated = text?.length > maxCharacters;
-
-  // Handle the toggling of the text visibility
+  // Handle the toggling of the content visibility
   const toggleExpand = () => setIsExpanded(!isExpanded);
 
-  return (
-    <div style={edit} className={RoseName} id={RoseId}>
-      {/* Render truncated or full text based on state */}
-      {isTruncated && !isExpanded ? `${text.slice(0, maxCharacters)}...` : text}
+  // Split children into an array if they are not already
+  const childrenArray = React.Children.toArray(children);
 
-      {/* Show "Show More" button if the text is truncated */}
-      {isTruncated && (
+  // Handle truncation for text
+  let truncatedText = text;
+  if (text && text.length > maxCharacters && !isExpanded) {
+    truncatedText = text.slice(0, maxCharacters) + '...';
+  }
+
+  // Handle element visibility
+  const visibleChildren = isExpanded ? childrenArray : childrenArray.slice(0, maxElements);
+
+  // Determine if there's more content to show
+  const hasMoreContent = text?.length > maxCharacters || childrenArray.length > maxElements;
+
+  return (
+    <div
+      style={{ ...edit, overflow: 'hidden', transition: 'height 0.5s ease' }}
+      className={RoseName}
+      id={RoseId}
+    >
+      <div
+        ref={textRef}
+        className="content"
+      >
+        {/* Render either text or elements based on the content type */}
+        {typeof children === 'string' ? truncatedText : visibleChildren}
+      </div>
+
+      {/* Show "Show More" button if there's more content */}
+      {hasMoreContent && (
         <button
           style={{
-            background: "none",
-            border: "none",
-            fontWeight: "bold",
-            color: "blue",
+            background: 'none',
+            border: 'none',
+            fontWeight: 'bold',
+            color: 'blue',
             ...editButton,
           }}
           onClick={toggleExpand}
         >
-          {isExpanded ? "Show Less" : "Show More"}
+          {isExpanded ? 'Show Less' : 'Show More'}
         </button>
       )}
     </div>
   );
 }
-
 
 export function SideBox({ children, direction = 'left', edit = {}, RoseID, RoseName }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -3255,8 +3271,6 @@ export function SideBox({ children, direction = 'left', edit = {}, RoseID, RoseN
     </>
   );
 }
-
-
 export const useBatteryStatus = () => {
   const [batteryInfo, setBatteryInfo] = useState({
     level: null,
@@ -3307,8 +3321,6 @@ export function usePreferredLanguage() {
 
   return preferredLanguage;
 }
-
-
 export function useColorScheme() {
   const [colorScheme, setColorScheme] = useState('light');
 
@@ -3329,9 +3341,6 @@ export function useColorScheme() {
 
   return colorScheme;
 }
-
-
-
 export function useHardwareConcurrency() {
   const [coreCount, setCoreCount] = useState(1);
 
@@ -3343,6 +3352,165 @@ export function useHardwareConcurrency() {
 
   return coreCount;
 }
+
+export const getContinent = (latitude, longitude) => {
+  if (latitude && longitude) {
+    if (latitude >= -34 && latitude <= 37 && longitude >= -17 && longitude <= 51) {
+      return 'Africa';
+    } else if (latitude >= 10 && latitude <= 82 && longitude >= 25 && longitude <= 180) {
+      return 'Asia';
+    } else if (latitude >= 10 && latitude <= 83 && longitude >= -168 && longitude <= -52) {
+      return 'North America';
+    } else if (latitude >= -56 && latitude <= 13 && longitude >= -93 && longitude <= -32) {
+      return 'South America';
+    } else if (latitude >= -48 && latitude <= -12 && longitude >= 110 && longitude <= 180) {
+      return 'Australia';
+    } else if (latitude >= 35 && latitude <= 72 && longitude >= -25 && longitude <= 45) {
+      return 'Europe';
+    } else if (latitude >= -90 && latitude <= -60) {
+      return 'Antarctica';
+    }
+  }
+  return 'Unknown';
+};
+export const useContinentContent = () => {
+  const [continent, setContinent] = useState(null);
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          const userContinent = getContinent(latitude, longitude);
+          setContinent(userContinent);
+        },
+        (error) => {
+          console.error("Error getting location:", error);
+          setContinent('Unknown');
+        }
+      );
+    } else {
+      setContinent('Unknown');
+    }
+  }, []);
+
+  return { continent };
+};
+
+
+export const useUserCountry = () => {
+  const [country, setCountry] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchCountry = async () => {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        if (!response.ok) {
+          throw new Error('Failed to fetch country data');
+        }
+        const data = await response.json();
+        setCountry(data.country_name);
+      } catch (err) {
+        console.error("Error fetching the user's country:", err);
+        setError('Could not determine your country.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCountry();
+  }, []);
+
+  return { country, loading, error };
+};
+
+
+export const usePhotoCapture = () => {
+  const [photo, setPhoto] = useState(null);
+  const [cameraError, setCameraError] = useState(null);
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
+
+  // Start the camera when the hook is used
+  useEffect(() => {
+    const startCamera = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+
+          // Play video after the stream metadata is loaded
+          videoRef.current.onloadedmetadata = () => {
+            videoRef.current.play().catch(err => {
+              console.error('Error playing video:', err);
+            });
+          };
+        }
+      } catch (err) {
+        console.error('Error accessing the camera: ', err);
+        setCameraError('Unable to access the camera. Please check your device settings.');
+      }
+    };
+
+    startCamera();
+
+    // Cleanup function to stop the camera when the component unmounts
+    return () => {
+      if (videoRef.current && videoRef.current.srcObject) {
+        const stream = videoRef.current.srcObject;
+        const tracks = stream.getTracks();
+        tracks.forEach(track => track.stop());
+      }
+    };
+  }, []);
+
+  // Capture a photo by drawing the video frame onto a canvas
+  const takePhoto = () => {
+    const canvas = canvasRef.current;
+    const video = videoRef.current;
+    if (canvas && video) {
+      const context = canvas.getContext('2d');
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      setPhoto(canvas.toDataURL('image/png'));
+    }
+  };
+
+  return { takePhoto, photo, videoRef, canvasRef, cameraError };
+};
+
+export const useGetContacts = () => {
+  const [contacts, setContacts] = useState([]);
+  const [error, setError] = useState(null);
+  const [isFetching, setIsFetching] = useState(false);
+
+  // Function to get contacts
+  const getContacts = async () => {
+    try {
+      if (!('contacts' in navigator && 'ContactsManager' in window)) {
+        throw new Error("Contacts API not supported on this device.");
+      }
+
+      // Define the properties and options for contact retrieval
+      const props = ['name', 'email', 'tel'];
+      const opts = { multiple: true }; // Fetch multiple contacts
+
+      setIsFetching(true);
+      const contactList = await navigator.contacts.select(props, opts);
+      setContacts(contactList);
+      setIsFetching(false);
+    } catch (err) {
+      setError(err.message);
+      setIsFetching(false);
+    }
+  };
+
+  return { contacts, error, isFetching, getContacts };
+};
+
+
+
 let CSS_PROPRTY_ROOT = () => {
   return (
     <>
