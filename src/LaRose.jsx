@@ -98,7 +98,7 @@ export function Ak_Alert({ title, time, edit = {}, children }) {
     </>
   );
 }
-export function Button({ h, w, event }) {
+export function Button({ h, w, event, children, edit = {} }) {
   const [hover, setHover] = useState(false);
   const baseStyle = {
     height: `${h}rem`,
@@ -119,6 +119,7 @@ export function Button({ h, w, event }) {
     justifyContent: "center",
     alignItems: "center",
     border: "none",
+    ...edit
   };
   const hoverStyle = {
     backgroundPosition: "right center",
@@ -139,7 +140,7 @@ export function Button({ h, w, event }) {
         onMouseLeave={() => setHover(false)}
         onClick={handleEvent}
       >
-        button
+        {children}
       </button>
     </>
   );
@@ -195,7 +196,7 @@ export function ModernBtn({
   };
   return (
     <>
-      <style>{`
+      <style jsx>{`
                 .animated-button {
                     position: relative;
                     display: flex;
@@ -301,7 +302,7 @@ export function ModernBtn({
 export function SwitchCase({ w, h }) {
   return (
     <>
-      <style>{` 
+      <style jsx>{` 
     .toggler {
       width: 3rem;
       margin: 40px auto;
@@ -429,255 +430,10 @@ export function SwitchCase({ w, h }) {
     </>
   );
 }
-export function CheckOut({ title, clickEvent }) {
-  let handleEvent = () => {
-    if (typeof clickEvent === "function") {
-      clickEvent();
-    }
-  };
-  return (
-    <>
-      <style>{`
-                .container {
-  background-color: #ffffff;
-  display: flex;
-  width: 270px;
-  height: 120px;
-  position: relative;
-  border-radius: 6px;
-  transition: 0.3s ease-in-out;
-}
-.container:hover {
-  transform: scale(1.03);
-}
-.container:hover .left-side {
-  width: 100%;
-}
-.left-side {
-  background-color: #5de2a3;
-  width: 130px;
-  height: 120px;
-  border-radius: 4px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: 0.3s;
-  flex-shrink: 0;
-  overflow: hidden;
-}
-.right-side {
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  cursor: pointer;
-  justify-content: space-between;
-  white-space: nowrap;
-  transition: 0.3s;
-}
-.right-side:hover {
-  background-color: #f9f7f9;
-}
-.arrow {
-  width: 20px;
-  height: 20px;
-  margin-right: 20px;
-}
-.new {
-  font-size: 23px;
-  font-family: "Lexend Deca", sans-serif;
-  margin-left: 20px;
-}
-.card {
-  width: 70px;
-  height: 46px;
-  background-color: #c7ffbc;
-  border-radius: 6px;
-  position: absolute;
-  display: flex;
-  z-index: 10;
-  flex-direction: column;
-  align-items: center;
-  -webkit-box-shadow: 9px 9px 9px -2px rgba(77, 200, 143, 0.72);
-  -moz-box-shadow: 9px 9px 9px -2px rgba(77, 200, 143, 0.72);
-  -webkit-box-shadow: 9px 9px 9px -2px rgba(77, 200, 143, 0.72);
-}
-.card-line {
-  width: 65px;
-  height: 13px;
-  background-color: #80ea69;
-  border-radius: 2px;
-  margin-top: 7px;
-}
-.buttons {
-  width: 8px;
-  height: 8px;
-  background-color: #379e1f;
-  box-shadow: 0 -10px 0 0 #26850e, 0 10px 0 0 #56be3e;
-  border-radius: 50%;
-  margin-top: 5px;
-  transform: rotate(90deg);
-  margin: 10px 0 0 -30px;
-}
-.container:hover .card {
-  animation: slide-top 1.2s cubic-bezier(0.645, 0.045, 0.355, 1) both;
-}
-.container:hover .post {
-  animation: slide-post 1s cubic-bezier(0.165, 0.84, 0.44, 1) both;
-}
-@keyframes slide-top {
-  0% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-  }
-  50% {
-    -webkit-transform: translateY(-70px) rotate(90deg);
-    transform: translateY(-70px) rotate(90deg);
-  }
-  60% {
-    -webkit-transform: translateY(-70px) rotate(90deg);
-    transform: translateY(-70px) rotate(90deg);
-  }
-  100% {
-    -webkit-transform: translateY(-8px) rotate(90deg);
-    transform: translateY(-8px) rotate(90deg);
-  }
-}
-.post {
-  width: 63px;
-  height: 75px;
-  background-color: #dddde0;
-  position: absolute;
-  z-index: 11;
-  bottom: 10px;
-  top: 120px;
-  border-radius: 6px;
-  overflow: hidden;
-}
-.post-line {
-  width: 47px;
-  height: 9px;
-  background-color: #545354;
-  position: absolute;
-  border-radius: 0px 0px 3px 3px;
-  right: 8px;
-  top: 8px;
-}
-.post-line:before {
-  content: "";
-  position: absolute;
-  width: 47px;
-  height: 9px;
-  background-color: #757375;
-  top: -8px;
-}
-.screen {
-  width: 47px;
-  height: 23px;
-  background-color: #ffffff;
-  position: absolute;
-  top: 22px;
-  right: 8px;
-  border-radius: 3px;
-}
-.numbers {
-  width: 12px;
-  height: 12px;
-  background-color: #838183;
-  box-shadow: 0 -18px 0 0 #838183, 0 18px 0 0 #838183;
-  border-radius: 2px;
-  position: absolute;
-  transform: rotate(90deg);
-  left: 25px;
-  top: 52px;
-}
-.numbers-line2 {
-  width: 12px;
-  height: 12px;
-  background-color: #aaa9ab;
-  box-shadow: 0 -18px 0 0 #aaa9ab, 0 18px 0 0 #aaa9ab;
-  border-radius: 2px;
-  position: absolute;
-  transform: rotate(90deg);
-  left: 25px;
-  top: 68px;
-}
-@keyframes slide-post {
-  50% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-  }
-  100% {
-    -webkit-transform: translateY(-70px);
-    transform: translateY(-70px);
-  }
-}
-.dollar {
-  position: absolute;
-  font-size: 16px;
-  font-family: "Lexend Deca", sans-serif;
-  width: 100%;
-  left: 0;
-  top: 0;
-  color: #4b953b;
-  text-align: center;
-}
-.container:hover .dollar {
-  animation: fade-in-fwd 0.3s 1s backwards;
-}
-@keyframes fade-in-fwd {
-  0% {
-    opacity: 0;
-    transform: translateY(-5px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-            `}</style>
-      <div onClick={handleEvent} className="container">
-        <div className="left-side">
-          <div className="card">
-            <div className="card-line" />
-            <div className="buttons" />
-          </div>
-          <div className="post">
-            <div className="post-line" />
-            <div className="screen">
-              <div className="dollar">$</div>
-            </div>
-            <div className="numbers" />
-            <div className="numbers-line2" />
-          </div>
-        </div>
-        <div className="right-side">
-          <div className="new">{title}</div>
-          <svg
-            viewBox="0 0 451.846 451.847"
-            height={512}
-            width={512}
-            xmlns="http://www.w3.org/2000/svg"
-            className="arrow"
-          >
-            <path
-              fill="#cfcfcf"
-              data-old_color="#000000"
-              className="active-path"
-              data-original="#000000"
-              d="M345.441 248.292L151.154 442.573c-12.359 12.365-32.397 12.365-44.75 0-12.354-12.354-12.354-32.391 0-44.744L278.318 225.92 106.409 54.017c-12.354-12.359-12.354-32.394 0-44.748 12.354-12.359 32.391-12.359 44.75 0l194.287 194.284c6.177 6.18 9.262 14.271 9.262 22.366 0 8.099-3.091 16.196-9.267 22.373z"
-            />
-          </svg>
-        </div>
-      </div>
-    </>
-  );
-}
 export function Loader() {
   return (
     <>
-      <style>{`
+      <style jsx>{`
         /* Assuming base font size of 16px, so 1rem = 16px */
 .loading {
   display: flex;
@@ -942,7 +698,7 @@ export function Slider({
   };
   return (
     <>
-      <style>{`
+      <style jsx>{`
       .slider-container {
         position: relative;
         overflow: hidden;
@@ -1046,548 +802,7 @@ export function Slider({
     </>
   );
 }
-export function MiniNav({
-  w = 20,
-  h = 3.5,
-  homeEvent = () => {
-    window.open("https://askander.vercel.app");
-  },
-  homeSVG = (
-    <svg
-      className="icon"
-      stroke="currentColor"
-      fill="currentColor"
-      strokeWidth={0}
-      viewBox="0 0 1024 1024"
-      height="1em"
-      width="1em"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d="M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 0 0-44.4 0L77.5 505a63.9 63.9 0 0 0-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0 0 18.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204zm217.9-325.7V868H632V640c0-22.1-17.9-40-40-40H432c-22.1 0-40 17.9-40 40v228H238.1V542.3h-96l370-369.7 23.1 23.1L882 542.3h-96.1z" />
-    </svg>
-  ),
-  presonEvent = () => {
-    window.open("https://askander.vercel.app");
-  },
-  personSVG = (
-    <svg
-      className="icon"
-      stroke="currentColor"
-      fill="currentColor"
-      strokeWidth={0}
-      viewBox="0 0 24 24"
-      height="1em"
-      width="1em"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z" />
-    </svg>
-  ),
-  searchEvent = () => {
-    window.open("https://askander.vercel.app");
-  },
-  searchSVG = (
-    <svg
-      className="icon"
-      stroke="currentColor"
-      fill="none"
-      strokeWidth={2}
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      height="1em"
-      width="1em"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-      />
-    </svg>
-  ),
-  shopEvent = () => {
-    window.open("https://askander.vercel.app");
-  },
-  shopSVG = (
-    <svg
-      className="icon"
-      stroke="currentColor"
-      fill="none"
-      strokeWidth={2}
-      viewBox="0 0 24 24"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      height="1em"
-      width="1em"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <circle cx={9} cy={21} r={1} />
-      <circle cx={20} cy={21} r={1} />
-      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-    </svg>
-  ),
-}) {
-  let handlHomeSVGClick = () => {
-    if (typeof homeEvent === "function") {
-      homeEvent();
-    }
-  };
-  let handlePersonSVGClick = () => {
-    if (typeof presonEvent === "function") {
-      presonEvent();
-    }
-  };
-  let handleSearchSVGClick = () => {
-    if (typeof searchEvent === "function") {
-      searchEvent();
-    }
-  };
-  let handleShopSVGClick = () => {
-    shopEvent();
-  };
-  return (
-    <>
-      <style>{`
-        .button-container {
-    display: flex;
-    background-color: rgb(27, 133, 219);
-    width: ${w}rem;
-    height: ${h}rem;
-    align-items: center;
-    justify-content: space-around;
-    border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px,
-      rgba(27, 133, 219, 0.5) 5px 10px 15px;
-}
-.button {
-  outline: 0 !important;
-  border: 0 !important;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  transition: all ease-in-out 0.3s;
-  cursor: pointer;
-}
-.button:hover {
-  transform: translateY(-3px);
-}
-.icon {
-  font-size: 20px;
-}
-        `}</style>
-      <div className="button-container">
-        <button
-          aria-label="navbar-button"
-          onClick={handlHomeSVGClick}
-          className="button"
-        >
-          {homeSVG}
-        </button>
-        <button
-          aria-label="navbar-button"
-          onClick={handlePersonSVGClick}
-          className="button"
-        >
-          {searchSVG}
-        </button>
-        <button
-          aria-label="navbar-button"
-          onClick={handleSearchSVGClick}
-          className="button"
-        >
-          {personSVG}
-        </button>
-        <button
-          aria-label="navbar-button"
-          onClick={handleShopSVGClick}
-          className="button"
-        >
-          {shopSVG}
-        </button>
-      </div>
-    </>
-  );
-}
-export function Register({ Name, Pass }) {
-  return (
-    <>
-      <style>{`.container {
-max-width: 21.875rem; /* 350px */
-background: #F8F9FD;
-background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
-border-radius: 2.5rem; /* 40px */
-padding: 1.5625rem 2.1875rem; /* 25px 35px */
-border: 0.3125rem solid rgb(255, 255, 255); /* 5px */
-box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 1.875rem 1.875rem -1.25rem; /* 0px 30px 30px -20px */
-margin: 1.25rem; /* 20px */
-}
-.heading {
-text-align: center;
-font-weight: 900;
-font-size: 1.875rem; /* 30px */
-color: rgb(16, 137, 211);
-}
-.form {
-margin-top: 1.25rem;
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
-width: 18.8rem;
-}
-.form .input {
-width: 100%;
-background: white;
-border: none;
-padding: 0.9375rem 1.25rem; /* 15px 20px */
-border-radius: 1.25rem; /* 20px */
-margin-top: 0.9375rem; /* 15px */
-box-shadow: #cff0ff 0px 0.625rem 0.625rem -0.3125rem; /* 10px 10px -5px */
-border-inline: 0.125rem solid transparent; /* 2px */
-}
-.form .input::-moz-placeholder {
-color: rgb(170, 170, 170);
-}
-.form .input::placeholder {
-color: rgb(170, 170, 170);
-}
-.form .input:focus {
-outline: none;
-border-inline: 0.125rem solid #12B1D1; /* 2px */
-}
-.form .forgot-password {
-display: block;
-margin-top: 0.625rem; /* 10px */
-margin-left: 0.625rem; /* 10px */
-}
-.form .forgot-password a {
-font-size: 0.6875rem; /* 11px */
-color: #0099ff;
-text-decoration: none;
-}
-.form .login-button {
-display: block;
-width: 100%;
-font-weight: bold;
-background: linear-gradient(45deg, rgb(16, 137, 211) 0%, rgb(18, 177, 209) 100%);
-color: white;
-padding-block: 0.9375rem; /* 15px */
-margin: 1.25rem auto; /* 20px auto */
-border-radius: 1.25rem; /* 20px */
-box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 1.25rem 0.625rem -0.9375rem; /* 20px 10px -15px */
-border: none;
-transition: all 0.2s ease-in-out;
-}
-.form .login-button:hover {
-transform: scale(1.03);
-box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 1.4375rem 0.625rem -1.25rem; /* 23px 10px -20px */
-}
-.form .login-button:active {
-transform: scale(0.95);
-box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 0.9375rem 0.625rem -0.625rem; /* 15px 10px -10px */
-}
-.social-account-container {
-margin-top: 1.5625rem; /* 25px */
-}
-.social-account-container .title {
-display: block;
-text-align: center;
-font-size: 0.625rem; /* 10px */
-color: rgb(170, 170, 170);
-}
-.social-account-container .social-accounts {
-width: 100%;
-display: flex;
-justify-content: center;
-gap: 0.9375rem; /* 15px */
-margin-top: 0.3125rem; /* 5px */
-}
-.social-account-container .social-accounts .social-button {
-background: linear-gradient(45deg, rgb(0, 0, 0) 0%, rgb(112, 112, 112) 100%);
-border: 0.3125rem solid white; /* 5px */
-padding: 0.3125rem; /* 5px */
-border-radius: 50%;
-width: 2.5rem; /* 40px */
-aspect-ratio: 1;
-display: grid;
-place-content: center;
-box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 0.75rem 0.625rem -0.5rem; /* 12px 10px -8px */
-transition: all 0.2s ease-in-out;
-}
-.social-account-container .social-accounts .social-button .svg {
-fill: white;
-margin: auto;
-}
-.social-account-container .social-accounts .social-button:hover {
-transform: scale(1.2);
-}
-.social-account-container .social-accounts .social-button:active {
-transform: scale(0.9);
-}
-.agreement {
-display: block;
-text-align: center;
-margin-top: 0.9375rem; /* 15px */
-}
-.agreement a {
-text-decoration: none;
-color: #0099ff;
-font-size: 0.5625rem; /* 9px */
-}
-      `}</style>
-      <div className="container">
-        <div className="heading">Register</div>
-        <form action="" className="form">
-          <input
-            required=""
-            className="input"
-            type="email"
-            name="email"
-            id="email"
-            placeholder="E-mail"
-            value={Name}
-          />
-          <input
-            required=""
-            className="input"
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Password"
-            value={Pass}
-          />
-          <span className="forgot-password">
-            <a href="#">Forgot Password ?</a>
-          </span>
-          <input
-            onClick={() => {
-              window.open("https://github.com/hamdymohamedak");
-            }}
-            className="login-button"
-            type="submit"
-            defaultValue="Sign In"
-          />
-        </form>
-        <div className="social-account-container">
-          <span className="title">Or Sign in with</span>
-          <div className="social-accounts">
-            <button
-              onClick={() => {
-                window.open("https://mohameddhamdy407@gmail.com");
-              }}
-              className="social-button google"
-            >
-              <svg
-                className="svg"
-                xmlns="http://www.w3.org/2000/svg"
-                height="1em"
-                viewBox="0 0 488 512"
-              >
-                <path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
-              </svg>
-            </button>
-            <button
-              onClick={() => {
-                window.open("https://x.com/HamdyMohamedd1");
-              }}
-              className="social-button twitter"
-            >
-              <svg
-                className="svg"
-                xmlns="http://www.w3.org/2000/svg"
-                height="1em"
-                viewBox="0 0 512 512"
-              >
-                <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
-              </svg>
-            </button>
-          </div>
-        </div>
-        <span className="agreement">
-          <a href="#">Learn user licence agreement</a>
-        </span>
-      </div>
-    </>
-  );
-}
-export function IconsGroup({
-  firstSVG = (
-    <svg version="1.1" viewBox="0 0 100 100">
-      <path
-        d="M50,4C24.7,4,4,24.7,4,50s20.6,46,46,46s46-20.6,46-46S75.4,4,50,4z M71.6,71.5c0,0,0,0.1-0.1,0.1c-0.8,1.2-2,1.8-3.2,1.8  c-0.7,0-1.4-0.2-2-0.6c-10.2-6.3-23.3-7.7-38.8-4.1c-2.1,0.6-4-0.9-4.5-2.7c-0.6-2.3,0.9-4.1,2.7-4.6c17.7-4,32.6-2.3,44.4,5  c0.9,0.4,1.5,1,1.8,1.9C72.2,69.3,72.1,70.5,71.6,71.5z M76.9,59.3L76.9,59.3c-0.8,1.1-1.9,1.9-3.2,2.1c-0.2,0-0.5,0.1-0.7,0.1  c-0.8,0-1.6-0.3-2.3-0.7c-12-7.3-30.1-9.4-43.9-5c-2.5,0.6-5-0.7-5.6-3c-0.6-2.5,0.7-4.9,3-5.5c16.5-5,37.2-2.5,51.4,6.2  c0.8,0.4,1.5,1.3,1.8,2.5C77.9,57,77.6,58.3,76.9,59.3z M83.2,45.6c-1,1.4-2.7,2.1-4.4,2.1c-0.9,0-1.9-0.2-2.7-0.7c0,0,0,0,0,0  c-13.9-8.3-37.8-9.3-51.4-5.1c-2.7,0.8-5.5-0.7-6.4-3.3c-0.8-2.7,0.7-5.6,3.3-6.4c16.2-4.8,43-3.8,59.8,6.2  C83.8,39.6,84.7,42.9,83.2,45.6C83.3,45.5,83.3,45.5,83.2,45.6z"
-        fill="currentColor"
-      />
-    </svg>
-  ),
-  firstTitle = "spotify",
-  firstIconLink = "#",
-  firstColor = "green",
-  secoundSVG = (
-    <svg version="1.1" viewBox="0 0 100 100" xmlSpace="preserve">
-      <path
-        d="M83,17.8C74.5,8.9,63.4,4.3,50,4.1C37.7,4.2,26.8,8.6,17.9,17.3C8.9,26,4.3,37,4.1,50c0,0,0,0,0,0c0,9.1,2.5,17.4,7.4,24.9  c4.9,7.4,11.6,13.2,20.1,17.1c0.3,0.1,0.7,0.1,1-0.1c0.3-0.2,0.5-0.5,0.5-0.8l0-4.9c0.1-2.1,0.7-5.3,1.7-9.5c1-4,1.7-6.7,1.9-7.6  c0.7-3,1.7-7.2,3-12.6c0.1-0.2,0-0.5-0.1-0.7c-0.4-0.8-1-2.6-1.5-6.6c0.1-2.7,0.8-5.2,2.1-7.3c1.2-2,3.1-3.1,5.7-3.5  c2,0.1,4.7,0.8,5.1,5.9c-0.1,1.8-0.8,4.5-1.9,8.1c-1.2,3.8-1.9,6.3-2.1,7.6c-0.7,2.5-0.2,4.8,1.5,6.8c1.6,1.9,3.8,2.9,6.5,3.1  c4.3-0.1,8.1-2.6,11.2-7.5c1.7-3,2.9-6.3,3.5-9.7c0.7-3.4,0.7-7.1,0-10.8c-0.7-3.8-2.2-7.1-4.5-9.8c0,0-0.1-0.1-0.1-0.1  c-4.3-3.7-9.5-5.3-15.6-5c-6,0.4-11.3,2.6-15.9,6.6c-2.9,3.2-4.8,7.1-5.7,11.6c-0.9,4.6,0,9.1,2.6,13.3c0.3,0.5,0.5,0.8,0.6,1  c0,0.3,0,1-0.5,2.8c-0.5,1.8-0.9,2.2-0.9,2.2c0,0-0.1,0-0.1,0.1c0,0-0.2,0-0.4-0.1c-2.2-1-3.9-2.4-5.2-4.2c-1.3-1.9-2.1-4-2.5-6.3  c-0.3-2.5-0.4-5-0.3-7.5c0.2-2.5,0.7-5.1,1.4-7.7c3-6.9,8.5-11.9,16.3-14.8c7.8-2.9,16-3.2,24.3-0.8c6.5,2.8,11,7.4,13.6,13.7  c2.5,6.4,2.8,13.4,0.8,20.8c-2.2,7.1-6.4,12.4-12.1,15.7c-5.6,2.8-10.8,3-15.7,0.7c-1.8-1.1-3.1-2.3-3.9-3.5c-0.2-0.3-0.6-0.5-1-0.5  c-0.4,0.1-0.7,0.3-0.8,0.7c-0.7,2.7-1.3,4.7-1.6,6.2c-1.4,5.4-2.6,9.2-3.4,11c-0.8,1.6-1.6,3.1-2.4,4.3c-0.2,0.3-0.2,0.6-0.1,0.9  s0.3,0.5,0.6,0.6c4.3,1.3,8.7,2,13,2c12.4-0.1,23.2-4.6,32.1-13.4C91.1,73.9,95.8,62.9,96,50C95.9,37.5,91.5,26.7,83,17.8z"
-        fill="currentColor"
-      />
-    </svg>
-  ),
-  secoundTitle = "pentrest",
-  secoundIconLink = "#",
-  SecoundColor = "#bd081c",
-  thirdSVG = (
-    <svg version="1.1" viewBox="0 0 100 100">
-      <path
-        d="M83.5,18.5C74.9,9.3,62.8,4,50.2,4c-6.1,0-12,1.1-17.6,3.4C15.2,14.5,4,31.3,4,50c0,13.9,6.2,26.9,17,35.7  C29.2,92.3,39.4,96,50,96c6.6,0,13.2-1.5,19.2-4.2c12.5-5.7,21.7-16.6,25.2-29.8C95.5,57.9,96,53.8,96,50  C96,38.3,91.6,27.1,83.5,18.5z M75,22.3c-0.7,0.9-1.4,1.8-2.1,2.6c-1.4,1.6-2.8,3-4.4,4.3c-0.3,0.3-0.6,0.6-1,0.8  c-1,0.9-2.1,1.7-3.2,2.5l-0.3,0.2c-1.1,0.7-2.2,1.5-3.5,2.2c-0.4,0.3-0.9,0.5-1.4,0.8c-0.8,0.5-1.7,0.9-2.7,1.4  c-0.6,0.3-1.2,0.5-1.8,0.8L54.3,38c-0.1,0-0.2,0.1-0.3,0.1c0,0,0,0,0,0c-1.3-2.6-2.4-4.9-3.5-7l-0.3-0.5c-1.1-2-2.2-4-3.3-6  l-0.7-1.3c-1.1-1.9-2.2-3.7-3.2-5.4l-0.7-1.1c-0.7-1.2-1.4-2.3-2.2-3.5c3.2-0.8,6.5-1.3,9.8-1.3c9.4,0,18.4,3.5,25.4,9.8  C75.3,21.9,75.2,22.1,75,22.3z M46.4,40.6c-1.4,0.4-2.9,0.8-4.4,1.1c-0.3,0-0.7,0.1-0.9,0.2c-6,1-12.5,1.4-19.4,1.1  c-0.3,0-0.6,0-0.9,0c-0.3,0-0.5,0-0.7,0c-2.5-0.2-4.9-0.4-7.2-0.7c2.3-11.2,9.6-20.9,19.8-26.1c2.1,3.3,4.2,6.7,6.3,10.3l0.4,0.7  c0.9,1.6,1.9,3.4,3.2,5.8l0.6,1.2C44.4,36.6,45.4,38.6,46.4,40.6z M24.4,51.1c2.2,0.1,4.2,0,6.2-0.1l0.7,0c0.4,0,0.9,0,1.3,0  c2.8-0.2,5.5-0.5,8.5-1c0.5-0.1,1-0.2,1.6-0.3l0.5-0.1c2.2-0.4,4.2-0.9,6.1-1.4c0.1,0,0.3-0.1,0.4-0.1l0.5,1.1  c1.2,2.8,2.3,5.5,3.3,8.1c0,0,0,0,0,0c-0.2,0.1-0.5,0.2-0.7,0.2c-2,0.6-4,1.4-5.9,2.2c-0.6,0.3-1.3,0.5-1.9,0.8  c-1.4,0.6-2.7,1.3-4.1,2.1l-0.3,0.2c-0.2,0.1-0.5,0.2-0.6,0.4c-1.5,0.9-3.1,1.9-4.7,3c-0.2,0.1-0.4,0.3-0.6,0.4  c-0.2,0.1-0.4,0.3-0.6,0.5c-1,0.7-2,1.5-3,2.3c-0.4,0.3-0.7,0.6-1.1,0.9l-0.3,0.3c-0.7,0.6-1.5,1.3-2.2,1.9l-0.2,0.2  c-0.4,0.4-0.7,0.7-1.1,1.1l-0.2,0.2c-0.6,0.6-1.3,1.3-2,2l-0.4,0.4c-0.2,0.2-0.4,0.4-0.5,0.6C16.1,69.9,12,60.2,12,50.3  c0,0,0.1,0,0.1,0c0.4,0,0.7,0,1.1,0.1c3.5,0.4,6.9,0.6,10.3,0.7C23.8,51,24.1,51.1,24.4,51.1z M29.5,81.9c0.2-0.2,0.3-0.4,0.5-0.5  c1-1.1,2-2.1,3-3c1.9-1.8,3.8-3.3,5.7-4.8c0.2-0.1,0.4-0.3,0.6-0.4c0.2-0.2,0.5-0.4,0.8-0.6c1.1-0.8,2.2-1.5,3.4-2.2  c0.1-0.1,0.2-0.1,0.3-0.2c0.1-0.1,0.2-0.1,0.3-0.2c1.4-0.8,2.9-1.6,4.5-2.3c0.3-0.1,0.6-0.2,0.8-0.4l0.6-0.3  c1.1-0.5,2.2-0.9,3.5-1.4c0.5-0.2,1.1-0.4,1.7-0.6l0.2-0.1c0.4-0.1,0.7-0.2,1.1-0.3c0,0,0,0,0,0c1.1,3.2,2.3,6.4,3.3,9.8l0.1,0.4  c1.1,3.6,2,7.3,2.9,10.8C51.7,89.8,39.3,88.3,29.5,81.9C29.4,81.9,29.4,81.9,29.5,81.9z M65.6,62.9c0.7-0.1,1.3-0.2,2-0.2  c2-0.2,4-0.2,5.9-0.2c0.2,0,0.4,0,0.6,0l0.2,0c2.2,0.1,4.6,0.3,6.9,0.6c0.4,0.1,0.9,0.1,1.3,0.2l0.6,0.1c0.7,0.1,1.5,0.3,2.2,0.4  c-3,7.6-8.3,14-15.2,18.3c-0.8-3.1-1.7-6.2-2.6-9.2l-0.1-0.4c-0.9-3-1.9-6.1-3.1-9.5C64.8,63.1,65.2,63,65.6,62.9z M81.6,55.2  C80,55,78.4,54.9,77,54.8l-0.9-0.1c-0.9-0.1-1.9-0.1-2.8-0.2c-0.2,0-0.3,0-0.5,0c-0.2,0-0.4,0-0.6,0c-2,0-3.9,0.1-5.9,0.3  c-0.2,0-0.3,0-0.5,0.1c-0.1,0-0.2,0-0.3,0c-1.3,0.1-2.6,0.3-3.9,0.5c-0.1-0.1-0.1-0.3-0.2-0.4c-0.1-0.2-0.2-0.5-0.3-0.7  c-1.1-2.9-2.3-5.7-3.2-7.8l-0.3-0.6c-0.1-0.1-0.1-0.3-0.2-0.4c0,0,0,0,0.1,0c0.2-0.1,0.5-0.2,0.7-0.3c0.6-0.2,1.2-0.5,1.8-0.8  c1.2-0.5,2.4-1.2,3.6-1.8c0.1-0.1,0.3-0.2,0.5-0.2c0.2-0.1,0.5-0.2,0.7-0.4c1.5-0.9,2.9-1.8,4.2-2.7l0.3-0.2  c0.2-0.1,0.4-0.3,0.6-0.4c0.9-0.6,1.9-1.4,2.8-2.2c1.5-1.2,2.9-2.5,4.3-4c0.8-0.8,1.5-1.6,2.2-2.4l0.4-0.5c0.5-0.5,0.9-1.1,1.3-1.6  C85.5,34.3,88,42.1,88,50c0,2-0.2,4.1-0.5,6.1c-0.3,0-0.6-0.1-0.8-0.1c-0.4-0.1-0.7-0.1-1.1-0.2l-1.1-0.2  C83.5,55.5,82.5,55.3,81.6,55.2z"
-        fill="currentColor"
-      />
-    </svg>
-  ),
-  thirdTitle = "dribble",
-  thirdIconLink = "#",
-  thirdColor = "#bd081c",
-  fourthSVG = (
-    <svg version="1.1" viewBox="0 0 100 100">
-      <path
-        d="M95,9.9c-1.3-1.1-3.4-1.2-7-0.1c0,0,0,0,0,0c-2.5,0.8-24.7,9.2-44.3,17.3c-17.6,7.3-31.9,13.7-33.6,14.5  c-1.9,0.6-6,2.4-6.2,5.2c-0.1,1.8,1.4,3.4,4.3,4.7c3.1,1.6,16.8,6.2,19.7,7.1c1,3.4,6.9,23.3,7.2,24.5c0.4,1.8,1.6,2.8,2.2,3.2  c0.1,0.1,0.3,0.3,0.5,0.4c0.3,0.2,0.7,0.3,1.2,0.3c0.7,0,1.5-0.3,2.2-0.8c3.7-3,10.1-9.7,11.9-11.6c7.9,6.2,16.5,13.1,17.3,13.9  c0,0,0.1,0.1,0.1,0.1c1.9,1.6,3.9,2.5,5.7,2.5c0.6,0,1.2-0.1,1.8-0.3c2.1-0.7,3.6-2.7,4.1-5.4c0-0.1,0.1-0.5,0.3-1.2  c3.4-14.8,6.1-27.8,8.3-38.7c2.1-10.7,3.8-21.2,4.8-26.8c0.2-1.4,0.4-2.5,0.5-3.2C96.3,13.5,96.5,11.2,95,9.9z M30,58.3l47.7-31.6  c0.1-0.1,0.3-0.2,0.4-0.3c0,0,0,0,0,0c0.1,0,0.1-0.1,0.2-0.1c0.1,0,0.1,0,0.2-0.1c-0.1,0.1-0.2,0.4-0.4,0.6L66,38.1  c-8.4,7.7-19.4,17.8-26.7,24.4c0,0,0,0,0,0.1c0,0-0.1,0.1-0.1,0.1c0,0,0,0.1-0.1,0.1c0,0.1,0,0.1-0.1,0.2c0,0,0,0.1,0,0.1  c0,0,0,0,0,0.1c-0.5,5.6-1.4,15.2-1.8,19.5c0,0,0,0,0-0.1C36.8,81.4,31.2,62.3,30,58.3z"
-        fill="currentColor"
-      />
-    </svg>
-  ),
-  fourthTitle = "telegram",
-  fourthIconLink = "#",
-  fourthColor = "#0088cc",
-}) {
-  return (
-    <>
-      <style>{`
-        ul {
-  list-style: none;
-}
-.example-2 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 16rem;
-  margin-right: 2rem;
-}
-.example-2 .icon-content {
-  margin: 0 0.625rem;
-  position: relative;
-}
-.example-2 .icon-content .tooltip {
-  position: absolute;
-  top: -1.875rem;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #fff;
-  padding: 0.375rem 0.625rem;
-  border-radius: 0.9375rem;
-  opacity: 0;
-  visibility: hidden;
-  font-size: 0.875rem;
-  transition: all 0.3s ease;
-}
-.example-2 .icon-content:hover .tooltip {
-  opacity: 1;
-  visibility: visible;
-  top: -3.125rem;
-}
-.example-2 .icon-content a {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 3.125rem;
-  height: 3.125rem;
-  border-radius: 20%;
-  color: #4d4d4d;
-  background-color: #ffff;
-  transition: all 0.3s ease-in-out;
-}
-.example-2 .icon-content a:hover {
-  box-shadow: 3px 2px 45px 0px rgb(0 0 0 / 50%);
-}
-.example-2 .icon-content a svg {
-  position: relative;
-  z-index: 1;
-  width: 1.875rem;
-  height: 1.875rem;
-}
-.example-2 .icon-content a:hover {
-  color: white;
-}
-.example-2 .icon-content a .filled {
-  position: absolute;
-  top: auto;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 0;
-  background-color: #000;
-  transition: all 0.3s ease-in-out;
-}
-.example-2 .icon-content a:hover .filled {
-  height: 100%;
-}
-.example-2 .icon-content a[data-social="spotify"] .filled,
-.example-2 .icon-content a[data-social="spotify"] ~ .tooltip {
-  background-color:${firstColor};
-}
-.example-2 .icon-content a[data-social="pinterest"] .filled,
-.example-2 .icon-content a[data-social="pinterest"] ~ .tooltip {
-  background-color: ${SecoundColor};
-}
-.example-2 .icon-content a[data-social="dribbble"] .filled,
-.example-2 .icon-content a[data-social="dribbble"] ~ .tooltip {
-  background-color: ${thirdColor};
-}
-.example-2 .icon-content a[data-social="telegram"] .filled,
-.example-2 .icon-content a[data-social="telegram"] ~ .tooltip {
-  background-color: ${fourthColor};
-}
-        `}</style>
-      <ul className="example-2">
-        <li className="icon-content">
-          <a href={firstIconLink} aria-label="spotify" data-social="spotify">
-            <div className="filled" />
-            {firstSVG}
-          </a>
-          <div className="tooltip">{firstTitle}</div>
-        </li>
-        <li className="icon-content">
-          <a
-            href={secoundIconLink}
-            aria-label="Pinterest"
-            data-social="pinterest"
-          >
-            <div className="filled" />
-            {secoundSVG}
-          </a>
-          <div className="tooltip">{secoundTitle}</div>
-        </li>
-        <li className="icon-content">
-          <a href={thirdIconLink} aria-label="Dribbble" data-social="dribbble">
-            <div className="filled" />
-            {thirdSVG}
-          </a>
-          <div className="tooltip">{thirdTitle}</div>
-        </li>
-        <li className="icon-content">
-          <a href={fourthIconLink} aria-label="Telegram" data-social="telegram">
-            <div className="filled" />
-            {fourthSVG}
-          </a>
-          <div className="tooltip">{fourthTitle}</div>
-        </li>
-      </ul>
-    </>
-  );
-}
+
 export function LaRoseText({
   edit = {},
   children,
@@ -1600,7 +815,7 @@ export function LaRoseText({
   };
   return (
     <>
-      <style>{`
+      <style jsx>{`
         .title {
           font-size: ${fontSize}rem;
           font-weight: ${fontWeight};
@@ -1693,7 +908,7 @@ export function RoseBox({
   };
   return (
     <>
-      <style>{`
+      <style jsx>{`
                 .rosebox-hover {
                     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
                 }
@@ -1750,21 +965,17 @@ export function SplitText({
   const [animateTypeStyle, setAnimateTypeStyle] = useState(
     initialAnimateTypeStyle
   );
-
   useEffect(() => {
     const fullAnimationDuration =
       speed + delay * (children.split("").length || 1);
     const timer = setTimeout(() => {
       setAnimateTypeStyle("word"); // Change to 'word' after full animation duration
     }, fullAnimationDuration * 1000); // Convert duration to milliseconds
-
     return () => clearTimeout(timer); // Cleanup timer on component unmount
   }, [speed, delay, children]);
-
   // Split the text based on animateTypeStyle (word or character)
   const splitText =
     animateTypeStyle === "word" ? children.split(/(\s+)/) : children.split("");
-
   // Map through the split text to create the animation effect
   const animatedText = splitText.map((item, index) => (
     <span
@@ -1775,10 +986,9 @@ export function SplitText({
       {item === " " ? "\u00A0" : item} {/* Handle spaces */}
     </span>
   ));
-
   return (
     <>
-      <style>{`
+      <style jsx>{`
               .SplitTextItem {
                   display: inline-block;
                   opacity: 0;
@@ -1786,7 +996,6 @@ export function SplitText({
                   animation: splitAnimation ${speed}s forwards;
                   animation-delay: calc(var(--SplitTextItem-index) * ${delay}s);
               }
-
               @keyframes splitAnimation {
                   to {
                       opacity: 1;
@@ -1800,100 +1009,6 @@ export function SplitText({
     </>
   );
 }
-export const RoseMouse = ({
-  children,
-  title = "",
-  h = 5,
-  w = 5,
-  borderRadiusValue = "50%",
-  bg = "black",
-  cursorView = false,
-  zIndexValue = "999",
-  edit = {},
-  RoseId = "",
-  RoseName = "",
-  mouseShadow = false,
-  mouseShadowColor = "black",
-  delay = 0, // Delay for mouse movement
-}) => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const mousePositionRef = useRef(mousePosition);
-  const lastMoveTimeRef = useRef(Date.now());
-
-  useEffect(() => {
-    const handleMouseMove = (event) => {
-      const { clientX: x, clientY: y } = event;
-      const now = Date.now();
-
-      if (
-        x !== mousePositionRef.current.x ||
-        y !== mousePositionRef.current.y
-      ) {
-        const timeElapsed = now - lastMoveTimeRef.current;
-
-        if (timeElapsed >= delay) {
-          mousePositionRef.current = { x, y };
-          requestAnimationFrame(() => {
-            setMousePosition(mousePositionRef.current);
-          });
-          lastMoveTimeRef.current = now;
-        }
-      }
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, [delay]);
-
-  useEffect(() => {
-    document.body.style.cursor = cursorView ? "none" : "default";
-    return () => {
-      document.body.style.cursor = "default"; // Reset cursor on unmount
-    };
-  }, [cursorView]);
-
-  const mouseShadowStyle = mouseShadow
-    ? {
-      boxShadow: `2px 2px 15px 12px ${mouseShadowColor}`,
-      width: "0.01rem",
-      height: "0.01rem",
-    }
-    : {};
-
-  return (
-    <div
-      className={RoseName}
-      id={RoseId}
-      style={{
-        position: "absolute",
-        left: `${mousePosition.x}px`,
-        top: `${mousePosition.y}px`,
-        pointerEvents: "none",
-        transform: "translate(-50%, -50%)",
-        height: `${h}rem`,
-        width: `${w}rem`,
-        borderRadius: borderRadiusValue,
-        background: bg,
-        zIndex: zIndexValue,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        opacity: 0.8,
-        color: "white",
-        fontSize: "0.75rem",
-        textAlign: "center",
-        transition: "transform 0.05s ease-out",
-        ...mouseShadowStyle,
-        ...edit,
-      }}
-    >
-      {children}
-      {title}
-    </div>
-  );
-};
 export function ShinyText({
   children,
   RoseName,
@@ -1905,7 +1020,7 @@ export function ShinyText({
 }) {
   return (
     <>
-      <style>{`
+      <style jsx>{`
               .shiny-text {
                   position: relative;
                   display: inline-block;
@@ -1945,7 +1060,6 @@ export function ShinyText({
     </>
   );
 }
-
 export function ShinyButton({
   children,
   RoseName,
@@ -1965,7 +1079,7 @@ export function ShinyButton({
   };
   return (
     <>
-      <style>{`
+      <style jsx>{`
               .shiny-button {
                   position: relative;
                   display: inline-block;
@@ -2023,7 +1137,6 @@ export function ShinyButton({
     </>
   );
 }
-
 export function WaveText({
   children,
   RoseName,
@@ -2036,21 +1149,17 @@ export function WaveText({
   frequency = 0.5,
 }) {
   const [waveType, setWaveType] = useState(initialWaveType);
-
   useEffect(() => {
     const totalAnimationDuration =
       speed + delay * (children.split("").length || 1);
     const timer = setTimeout(() => {
       setWaveType("word"); // Change to 'word' after the full animation duration
     }, totalAnimationDuration * 1000 + 200); // Adjust timing to ensure it starts after animation
-
     return () => clearTimeout(timer); // Cleanup timer on component unmount
   }, [speed, delay, children]);
-
   // Split the text based on waveType (word or character)
   const splitText =
     waveType === "word" ? children.split(/(\s+)/) : children.split("");
-
   // Map through the split text to create the wave effect
   const waveText = splitText.map((item, index) => (
     <span
@@ -2061,10 +1170,9 @@ export function WaveText({
       {item === " " ? "\u00A0" : item} {/* Handle spaces */}
     </span>
   ));
-
   return (
     <>
-      <style>{`
+      <style jsx>{`
               .WaveTextItem {
                   display: inline-block;
                   opacity: 0;
@@ -2072,7 +1180,6 @@ export function WaveText({
                   animation: waveAnimation ${speed}s forwards;
                   animation-delay: calc(var(--WaveTextItem-index) * ${delay}s);
               }
-
               @keyframes waveAnimation {
                   0% {
                       opacity: 0;
@@ -2094,7 +1201,6 @@ export function WaveText({
     </>
   );
 }
-
 export function AnimatedText({
   children,
   RoseName,
@@ -2108,7 +1214,6 @@ export function AnimatedText({
   const [animateTypeStyle, setAnimateTypeStyle] = useState(
     initialAnimateTypeStyle
   );
-
   useEffect(() => {
     // Calculate total duration of animation including delay
     const totalAnimationDuration =
@@ -2116,16 +1221,13 @@ export function AnimatedText({
     const timer = setTimeout(() => {
       setAnimateTypeStyle("word"); // Change to 'word' after the animation ends
     }, totalAnimationDuration * 1000 + 600); // Adjust timing as needed
-
     return () => clearTimeout(timer); // Cleanup timer on component unmount
   }, [speed, delay, children]);
-
   // Split the text based on animateTypeStyle (word or character)
   const splitText =
     animateTypeStyle === "word"
       ? children.split(/(\s+)/) // Split by spaces and preserve them
       : children.split("");
-
   // Map through the split text to create the animation effect
   const animatedText = splitText.map((item, index) => (
     <span
@@ -2138,7 +1240,6 @@ export function AnimatedText({
       {/* Ensure space rendering if animating words */}
     </span>
   ));
-
   const animations = {
     blur: `
           filter: blur(15px);
@@ -2159,18 +1260,15 @@ export function AnimatedText({
           animation: zoomInAnimation ${speed}s forwards;
       `,
   };
-
   const selectedAnimation = animations[animationType] || animations.blur;
-
   return (
     <>
-      <style>{`
+      <style jsx>{`
               .AnimatedTextItem {
                   display: inline-block;
                   ${selectedAnimation}
                   animation-delay: calc(var(--AnimatedTextItem-index) * ${delay}s);
               }
-
               @keyframes blurAnimation {
                   to {
                       opacity: 1;
@@ -2178,20 +1276,17 @@ export function AnimatedText({
                       filter: blur(0);
                   }
               }
-
               @keyframes fadeInAnimation {
                   to {
                       opacity: 1;
                   }
               }
-
               @keyframes slideInAnimation {
                   to {
                       opacity: 1;
                       transform: translateX(0);
                   }
               }
-
               @keyframes zoomInAnimation {
                   to {
                       opacity: 1;
@@ -2205,8 +1300,6 @@ export function AnimatedText({
     </>
   );
 }
-
-// RoseRouter
 const RouterContext = createContext();
 export const useRouter = () => useContext(RouterContext);
 export const RoseRouter = ({ children, customStyles = "" }) => {
@@ -2224,7 +1317,7 @@ export const RoseRouter = ({ children, customStyles = "" }) => {
   }, []);
   return (
     <>
-      <style>{`
+      <style jsx>{`
                 .route {
                     opacity: 0;
                     transform: translateY(20px);
@@ -2250,7 +1343,6 @@ export const Route = ({ path, element }) => {
     </div>
   );
 };
-
 export const RoseParent = ({
   children,
   edit,
@@ -2286,10 +1378,9 @@ export const RoseParent = ({
   gridArea = "",
 }) => {
   const isGrid = display === "grid";
-
   return (
     <>
-      <style>{`
+      <style jsx>{`
                 .rose-parent {
                     display: ${display};
                     ${isGrid
@@ -2320,7 +1411,6 @@ export const RoseParent = ({
                     width: ${width};
                     min-height: ${minHeight};
                 }
-
                 .rose-parent > * {
                     flex-basis: ${flexBasis};
                     flex-grow: ${flexGrow};
@@ -2329,14 +1419,12 @@ export const RoseParent = ({
                     justify-self: ${justifySelf};
                     grid-area: ${gridArea};
                 }
-
                 @media (min-width: 768px) {
                     .rose-parent {
                         flex-direction: row;
                         justify-content: space-between;
                     }
                 }
-
                 @media (max-width: 767px) {
                     .rose-parent {
                         flex-direction: ${flexDirectionMobile};
@@ -2399,25 +1487,21 @@ export function Notification({
   delay = 5000,
 }) {
   const [valueState, setValueState] = useState(false);
-
   const removeNote = () => {
     setValueState(true);
   };
-
   useEffect(() => {
     if (delay !== Infinity) {
       const timer = setTimeout(() => {
         setValueState(true);
       }, delay);
-
       // Clean up the timer on unmount
       return () => clearTimeout(timer);
     }
   }, [delay]);
-
   return (
     <>
-      <style>{`
+      <style jsx>{`
                 .${RoseName} {
           width: 20.625rem;
           height: 5rem; 
@@ -2483,7 +1567,6 @@ export function Notification({
           height: ${editCrossIconWidth}rem;
           color: ${CrossIconColor};
           cursor: pointer;
-
         }
       `}</style>
       <div
@@ -2548,7 +1631,6 @@ export function Spring({
   const [isDragging, setIsDragging] = useState(false);
   const [isDragged, setIsDragged] = useState(false);
   const [startOffset, setStartOffset] = useState({ x: 0, y: 0 });
-
   // UseEffect to set initial position based on the element's location
   useEffect(() => {
     if (elementRef.current) {
@@ -2556,7 +1638,6 @@ export function Spring({
       setPosition({ x: rect.left, y: rect.top });
     }
   }, []);
-
   const handleMouseDown = (e) => {
     if (drag) {
       const rect = e.target.getBoundingClientRect();
@@ -2568,7 +1649,6 @@ export function Spring({
       setIsDragged(true);
     }
   };
-
   const handleMouseMove = (e) => {
     if (isDragging && drag) {
       setPosition({
@@ -2577,16 +1657,14 @@ export function Spring({
       });
     }
   };
-
   const handleMouseUp = () => {
     if (drag) {
       setIsDragging(false);
     }
   };
-
   return (
     <>
-      <style>{`
+      <style jsx>{`
               .${RoseName} {
                   min-height: 7rem;
                   width: 7rem;
@@ -2603,11 +1681,9 @@ export function Spring({
                   position: relative; /* Default position */
                   cursor: ${drag ? "grab" : "default"};
               }
-              
               .${RoseName}:active {
                   cursor: ${drag ? "grabbing" : "default"};
               }
-
               @keyframes LaRoseRotatingAnimated {
                   to {
                                     translate: ${x} ${y} ${z};
@@ -2654,7 +1730,6 @@ export function Variants({
   const [isDragging, setIsDragging] = useState(false);
   const [isDragged, setIsDragged] = useState(false);
   const [startOffset, setStartOffset] = useState({ x: 0, y: 0 });
-
   // Set initial position based on the element's location
   useEffect(() => {
     if (elementRef.current) {
@@ -2662,7 +1737,6 @@ export function Variants({
       setPosition({ x: rect.left, y: rect.top });
     }
   }, []);
-
   const handleMouseDown = (e) => {
     if (drag) {
       const rect = e.target.getBoundingClientRect();
@@ -2674,7 +1748,6 @@ export function Variants({
       setIsDragged(true);
     }
   };
-
   const handleMouseMove = (e) => {
     if (isDragging && drag) {
       setPosition({
@@ -2683,16 +1756,14 @@ export function Variants({
       });
     }
   };
-
   const handleMouseUp = () => {
     if (drag) {
       setIsDragging(false);
     }
   };
-
   return (
     <>
-      <style>{`
+      <style jsx>{`
               .${RoseName} {
                   min-height: 7rem;
                   width: 7rem;
@@ -2711,11 +1782,9 @@ export function Variants({
                   position: relative; /* Default position */
                   cursor: ${drag ? "grab" : "default"};
               }
-              
               .${RoseName}:active {
                   cursor: ${drag ? "grabbing" : "default"};
               }
-
               @keyframes ${RoseName}Animated {
                   to {
                       translate: ${x} ${y} ${z};
@@ -2802,7 +1871,6 @@ export function RandomAnimate({
   AnimatedType,
 }) {
   const [animationClass, setAnimationClass] = useState("");
-
   useEffect(() => {
     // List of possible animations
     const animations = [
@@ -2817,7 +1885,6 @@ export function RandomAnimate({
       "rollIn",
       "jackInTheBox",
     ];
-
     if (AnimatedType) {
       // If AnimatedType is provided, use it as the animation class
       setAnimationClass(AnimatedType);
@@ -2828,55 +1895,45 @@ export function RandomAnimate({
       setAnimationClass(randomAnimation);
     }
   }, [AnimatedType]);
-
   return (
     <>
-      <style>{`
+      <style jsx>{`
         .random-animate {
           display: inline-block;
         }
-
         /* Add your keyframe animations here */
         /* Fade In Animation */
         @keyframes fadeIn {
           from { opacity: 0; }
           to { opacity: 1; }
         }
-
         .fadeIn {
           animation: fadeIn 1s ease-in-out;
         }
-
         /* Slide In Left Animation */
         @keyframes slideInLeft {
           from { transform: translateX(-100%); opacity: 0; }
           to { transform: translateX(0); opacity: 1; }
         }
-
         .slideInLeft {
           animation: slideInLeft 1s ease-in-out;
         }
-
         /* Zoom In Animation */
         @keyframes zoomIn {
           from { transform: scale(0.5); opacity: 0; }
           to { transform: scale(1); opacity: 1; }
         }
-
         .zoomIn {
           animation: zoomIn 1s ease-in-out;
         }
-
         /* Rotate In Animation */
         @keyframes rotateIn {
           from { transform: rotate(-200deg); opacity: 0; }
           to { transform: rotate(0); opacity: 1; }
         }
-
         .rotateIn {
           animation: rotateIn 1s ease-in-out;
         }
-
         /* Bounce In Animation */
         @keyframes bounceIn {
           0%, 20%, 40%, 60%, 80%, 100% {
@@ -2886,11 +1943,9 @@ export function RandomAnimate({
             transform: translateY(-20px);
           }
         }
-
         .bounceIn {
           animation: bounceIn 1s ease-in-out;
         }
-
         /* Flip In X Animation */
         @keyframes flipInX {
           from {
@@ -2902,11 +1957,9 @@ export function RandomAnimate({
             opacity: 1;
           }
         }
-
         .flipInX {
           animation: flipInX 1s ease-in-out;
         }
-
         /* Flip In Y Animation */
         @keyframes flipInY {
           from {
@@ -2918,31 +1971,25 @@ export function RandomAnimate({
             opacity: 1;
           }
         }
-
         .flipInY {
           animation: flipInY 1s ease-in-out;
         }
-
         /* Light Speed In Animation */
         @keyframes lightSpeedIn {
           from { transform: translateX(100%) skewX(-30deg); opacity: 0; }
           to { transform: translateX(0) skewX(0deg); opacity: 1; }
         }
-
         .lightSpeedIn {
           animation: lightSpeedIn 1s ease-out;
         }
-
         /* Roll In Animation */
         @keyframes rollIn {
           from { transform: translateX(-100%) rotate(-120deg); opacity: 0; }
           to { transform: translateX(0) rotate(0deg); opacity: 1; }
         }
-
         .rollIn {
           animation: rollIn 1s ease-in-out;
         }
-
         /* Jack In The Box Animation */
         @keyframes jackInTheBox {
           from {
@@ -2960,7 +2007,6 @@ export function RandomAnimate({
             transform: scale(1);
           }
         }
-
         .jackInTheBox {
           animation: jackInTheBox 1s ease-in-out;
         }
@@ -2984,14 +2030,12 @@ export function SideText({
 }) {
   const animationDirection =
     direction === "right" ? "sideTextRight" : "sideTextLeft";
-
   return (
     <>
-      <style>{`
+      <style jsx>{`
               .side-text {
                   display: inline-block;
               }
-
               /* SideTextLeft Animation */
               @keyframes sideTextLeft {
                   from {
@@ -3003,7 +2047,6 @@ export function SideText({
                       opacity: 1;
                   }
               }
-
               /* SideTextRight Animation */
               @keyframes sideTextRight {
                   from {
@@ -3015,11 +2058,9 @@ export function SideText({
                       opacity: 1;
                   }
               }
-
               .sideTextLeft {
                   animation: sideTextLeft 1s ease-in-out;
               }
-
               .sideTextRight {
                   animation: sideTextRight 1s ease-in-out;
               }
@@ -3036,14 +2077,12 @@ export function SideText({
 }
 export function useClipboard() {
   const [copied, setCopied] = useState(false);
-
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
   };
-
   return [copied, copyToClipboard];
 }
 export function useDocumentTitle(title) {
@@ -3061,7 +2100,6 @@ export function useLocalStorage(key, initialValue) {
       return initialValue;
     }
   });
-
   const setValue = (value) => {
     try {
       const valueToStore =
@@ -3072,37 +2110,29 @@ export function useLocalStorage(key, initialValue) {
       console.error(error);
     }
   };
-
   return [storedValue, setValue];
 }
 export function useOnlineStatus() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
-
   useEffect(() => {
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
-
     window.addEventListener("online", handleOnline);
     window.addEventListener("offline", handleOffline);
-
     return () => {
       window.removeEventListener("online", handleOnline);
       window.removeEventListener("offline", handleOffline);
     };
   }, []);
-
   return isOnline;
 }
 export function useRand(from, to) {
   const getRandomValue = () =>
     Math.floor(Math.random() * (to - from + 1)) + from;
-
   const [RandValue, setRandValue] = useState(getRandomValue());
-
   const refreshRandValue = () => {
     setRandValue(getRandomValue());
   };
-
   return [RandValue, refreshRandValue];
 }
 export function SeeMore({
@@ -3116,29 +2146,22 @@ export function SeeMore({
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const textRef = useRef(null);
-
   // Convert children to string if it's plain text
   const text =
     typeof children === 'string' ? children : children?.props?.children;
-
   // Handle the toggling of the content visibility
   const toggleExpand = () => setIsExpanded(!isExpanded);
-
   // Split children into an array if they are not already
   const childrenArray = React.Children.toArray(children);
-
   // Handle truncation for text
   let truncatedText = text;
   if (text && text.length > maxCharacters && !isExpanded) {
     truncatedText = text.slice(0, maxCharacters) + '...';
   }
-
   // Handle element visibility
   const visibleChildren = isExpanded ? childrenArray : childrenArray.slice(0, maxElements);
-
   // Determine if there's more content to show
   const hasMoreContent = text?.length > maxCharacters || childrenArray.length > maxElements;
-
   return (
     <div
       style={{ ...edit, overflow: 'hidden', transition: 'height 0.5s ease' }}
@@ -3152,7 +2175,6 @@ export function SeeMore({
         {/* Render either text or elements based on the content type */}
         {typeof children === 'string' ? truncatedText : visibleChildren}
       </div>
-
       {/* Show "Show More" button if there's more content */}
       {hasMoreContent && (
         <button
@@ -3171,37 +2193,36 @@ export function SeeMore({
     </div>
   );
 }
-
 export function SideBox({ children, direction = 'left', edit = {}, RoseID, RoseName }) {
   const [isVisible, setIsVisible] = useState(false);
   const boxRef = useRef(null);
-
   useEffect(() => {
     const handleScroll = () => {
       if (boxRef.current) {
         const boxRect = boxRef.current.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
-
         // Check if the element is within the viewport
-        if (boxRect.top <= viewportHeight && boxRect.bottom >= 0) {
+        if (
+          boxRect.top <= viewportHeight &&
+          boxRect.bottom >= 0 &&
+          boxRect.left <= window.innerWidth &&
+          boxRect.right >= 0
+        ) {
           setIsVisible(true); // Element is visible
         } else {
           setIsVisible(false); // Element is not visible
         }
       }
     };
-
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial check
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
   return (
     <>
-      <style>{`
+      <style jsx>{`
         .sideboxComponent {
           transition: transform 0.5s ease, opacity 0.5s ease;
           opacity: 0;
@@ -3243,27 +2264,12 @@ export function SideBox({ children, direction = 'left', edit = {}, RoseID, RoseN
         .sideboxComponent.bottom.visible {
           transform: translateX(-50%) translateY(0);
         }
-        .sideboxComponent.hidden {
-          opacity: 0;
-        }
-        .sideboxComponent.hidden.left {
-          transform: translateX(-100%) translateY(-50%);
-        }
-        .sideboxComponent.hidden.right {
-          transform: translateX(100%) translateY(-50%);
-        }
-        .sideboxComponent.hidden.top {
-          transform: translateX(-50%) translateY(-100%);
-        }
-        .sideboxComponent.hidden.bottom {
-          transform: translateX(-50%) translateY(100%);
-        }
       `}</style>
       <div
         ref={boxRef}
         style={edit}
         id={RoseID}
-        className={`sideboxComponent ${direction} ${isVisible ? 'visible' : 'hidden'}`}
+        className={`sideboxComponent ${direction} ${isVisible ? 'visible' : ''}`}
       >
         {RoseName && <h2>{RoseName}</h2>}
         {children}
@@ -3276,7 +2282,6 @@ export const useBatteryStatus = () => {
     level: null,
     charging: null,
   });
-
   useEffect(() => {
     // Check if the browser supports the Battery Status API
     if ('getBattery' in navigator) {
@@ -3286,7 +2291,6 @@ export const useBatteryStatus = () => {
           level: battery.level,
           charging: battery.charging,
         });
-
         // Update the battery status when it changes
         const updateBatteryInfo = () => {
           setBatteryInfo({
@@ -3294,10 +2298,8 @@ export const useBatteryStatus = () => {
             charging: battery.charging,
           });
         };
-
         battery.addEventListener('levelchange', updateBatteryInfo);
         battery.addEventListener('chargingchange', updateBatteryInfo);
-
         // Cleanup the event listeners on unmount
         return () => {
           battery.removeEventListener('levelchange', updateBatteryInfo);
@@ -3308,51 +2310,40 @@ export const useBatteryStatus = () => {
       console.log('Battery Status API is not supported in this browser.');
     }
   }, []);
-
   return batteryInfo;
 };
 export function usePreferredLanguage() {
   const [preferredLanguage, setPreferredLanguage] = useState('en');
-
   useEffect(() => {
     const language = navigator.language || navigator.userLanguage;
     setPreferredLanguage(language);
   }, []);
-
   return preferredLanguage;
 }
 export function useColorScheme() {
   const [colorScheme, setColorScheme] = useState('light');
-
   useEffect(() => {
     const matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
-
     const handleChange = (e) => {
       setColorScheme(e.matches ? 'dark' : 'light');
     };
-
     handleChange(matchMedia); // Set the initial value
     matchMedia.addEventListener('change', handleChange);
-
     return () => {
       matchMedia.removeEventListener('change', handleChange);
     };
   }, []);
-
   return colorScheme;
 }
 export function useHardwareConcurrency() {
   const [coreCount, setCoreCount] = useState(1);
-
   useEffect(() => {
     if (navigator.hardwareConcurrency) {
       setCoreCount(navigator.hardwareConcurrency);
     }
   }, []);
-
   return coreCount;
 }
-
 export const getContinent = (latitude, longitude) => {
   if (latitude && longitude) {
     if (latitude >= -34 && latitude <= 37 && longitude >= -17 && longitude <= 51) {
@@ -3375,7 +2366,6 @@ export const getContinent = (latitude, longitude) => {
 };
 export const useContinentContent = () => {
   const [continent, setContinent] = useState(null);
-
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -3393,16 +2383,12 @@ export const useContinentContent = () => {
       setContinent('Unknown');
     }
   }, []);
-
   return { continent };
 };
-
-
 export const useUserCountry = () => {
   const [country, setCountry] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   useEffect(() => {
     const fetchCountry = async () => {
       try {
@@ -3419,20 +2405,15 @@ export const useUserCountry = () => {
         setLoading(false);
       }
     };
-
     fetchCountry();
   }, []);
-
   return { country, loading, error };
 };
-
-
 export const usePhotoCapture = () => {
   const [photo, setPhoto] = useState(null);
   const [cameraError, setCameraError] = useState(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-
   // Start the camera when the hook is used
   useEffect(() => {
     const startCamera = async () => {
@@ -3440,7 +2421,6 @@ export const usePhotoCapture = () => {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
-
           // Play video after the stream metadata is loaded
           videoRef.current.onloadedmetadata = () => {
             videoRef.current.play().catch(err => {
@@ -3453,9 +2433,7 @@ export const usePhotoCapture = () => {
         setCameraError('Unable to access the camera. Please check your device settings.');
       }
     };
-
     startCamera();
-
     // Cleanup function to stop the camera when the component unmounts
     return () => {
       if (videoRef.current && videoRef.current.srcObject) {
@@ -3465,7 +2443,6 @@ export const usePhotoCapture = () => {
       }
     };
   }, []);
-
   // Capture a photo by drawing the video frame onto a canvas
   const takePhoto = () => {
     const canvas = canvasRef.current;
@@ -3476,26 +2453,21 @@ export const usePhotoCapture = () => {
       setPhoto(canvas.toDataURL('image/png'));
     }
   };
-
   return { takePhoto, photo, videoRef, canvasRef, cameraError };
 };
-
 export const useGetContacts = () => {
   const [contacts, setContacts] = useState([]);
   const [error, setError] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
-
   // Function to get contacts
   const getContacts = async () => {
     try {
       if (!('contacts' in navigator && 'ContactsManager' in window)) {
         throw new Error("Contacts API not supported on this device.");
       }
-
       // Define the properties and options for contact retrieval
       const props = ['name', 'email', 'tel'];
       const opts = { multiple: true }; // Fetch multiple contacts
-
       setIsFetching(true);
       const contactList = await navigator.contacts.select(props, opts);
       setContacts(contactList);
@@ -3505,29 +2477,126 @@ export const useGetContacts = () => {
       setIsFetching(false);
     }
   };
-
   return { contacts, error, isFetching, getContacts };
 };
-
-
-
-let CSS_PROPRTY_ROOT = () => {
+export const SmoothParent = ({ children }) => {
+  const parentRef = useRef(null);
+  useEffect(() => {
+    const childElements = parentRef.current?.children;
+    if (childElements) {
+      Array.from(childElements).forEach((child, index) => {
+        child.style.opacity = 0;
+        child.style.transform = 'translateY(20px)';
+        child.style.transition = `opacity 0.5s ease ${index * 0.2}s, transform 0.5s ease ${index * 0.2}s`;
+        setTimeout(() => {
+          child.style.opacity = 1;
+          child.style.transform = 'translateY(0)';
+        }, 50);
+      });
+    }
+  }, [children]);
   return (
     <>
-      <style>{`
-
-    @property --RoseMainColor {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #509af8;
-  }
-    @property --ShinyColor {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #111111;
-  }
-
-  `}</style>
+      <style jsx>{`
+        .smooth-parent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* space between child elements */
+}
+.smooth-parent > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+`}</style>
+      <div className="smooth-parent" ref={parentRef}>
+        {children}
+      </div>
     </>
+  );
+};
+export const SnakeMouse = ({ color = "rgba(0, 150, 255, 0.8)" }) => {
+  const canvasRef = useRef(null);
+  const ctxRef = useRef(null);
+  const trailsRef = useRef([]);
+  const maxTrailLength = 30; // Reduce the trail length for faster movement
+  const numOfTrails = 8; // Increase the number of lines for a better effect
+  const speedFactor = 0.35; // Increase this value to make the lines more responsive
+  let animationFrameId = useRef(null);
+  // Initialize trails
+  useEffect(() => {
+    trailsRef.current = Array.from({ length: numOfTrails }, () => []);
+  }, []);
+  const handleMouseMove = (event) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const rect = canvas.getBoundingClientRect();
+    const mousePosition = {
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top,
+    };
+    trailsRef.current.forEach((trail) => {
+      const lastPosition = trail[trail.length - 1] || mousePosition;
+      const interpolatedPosition = {
+        x: lastPosition.x + (mousePosition.x - lastPosition.x) * speedFactor,
+        y: lastPosition.y + (mousePosition.y - lastPosition.y) * speedFactor,
+      };
+      if (trail.length > maxTrailLength) {
+        trail.shift(); // Keep trail length constant
+      }
+      trail.push(interpolatedPosition);
+    });
+  };
+  const draw = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = ctxRef.current;
+    if (!ctx) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Draw each trail
+    trailsRef.current.forEach((trail, index) => {
+      ctx.strokeStyle = `rgba(0, 150, 255, ${0.8 - index * 0.1})`; // Add fading effect
+      ctx.lineWidth = 2.5 - index * 0.3; // Gradually thinner lines for depth
+      if (trail.length > 1) {
+        ctx.beginPath();
+        ctx.moveTo(trail[0].x, trail[0].y);
+        for (let i = 1; i < trail.length; i++) {
+          ctx.lineTo(trail[i].x, trail[i].y);
+        }
+        ctx.stroke();
+      }
+    });
+    animationFrameId.current = requestAnimationFrame(draw);
+  };
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const ctx = canvas.getContext("2d");
+    ctxRef.current = ctx;
+    // Start the drawing loop
+    draw();
+    // Cleanup to cancel animation on unmount
+    return () => {
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
+    };
+  }, []);
+  return (
+    <canvas
+      ref={canvasRef}
+      onMouseMove={handleMouseMove}
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        zIndex: -1,
+        backgroundColor: "transparent",
+      }}
+    />
   );
 };
