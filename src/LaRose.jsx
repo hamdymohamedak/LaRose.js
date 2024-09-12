@@ -802,7 +802,6 @@ export function Slider({
     </>
   );
 }
-
 export function LaRoseText({
   edit = {},
   children,
@@ -2553,10 +2552,9 @@ export const SnakeMouse = ({ color = "rgba(0, 150, 255, 0.8)" }) => {
     const ctx = ctxRef.current;
     if (!ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // Draw each trail
     trailsRef.current.forEach((trail, index) => {
-      ctx.strokeStyle = `rgba(0, 150, 255, ${0.8 - index * 0.1})`; // Add fading effect
-      ctx.lineWidth = 2.5 - index * 0.3; // Gradually thinner lines for depth
+      ctx.strokeStyle = `rgba(0, 150, 255, ${0.8 - index * 0.1})`; 
+      ctx.lineWidth = 2.5 - index * 0.3; 
       if (trail.length > 1) {
         ctx.beginPath();
         ctx.moveTo(trail[0].x, trail[0].y);
@@ -2575,9 +2573,7 @@ export const SnakeMouse = ({ color = "rgba(0, 150, 255, 0.8)" }) => {
     canvas.height = window.innerHeight;
     const ctx = canvas.getContext("2d");
     ctxRef.current = ctx;
-    // Start the drawing loop
     draw();
-    // Cleanup to cancel animation on unmount
     return () => {
       if (animationFrameId.current) {
         cancelAnimationFrame(animationFrameId.current);
@@ -2598,5 +2594,43 @@ export const SnakeMouse = ({ color = "rgba(0, 150, 255, 0.8)" }) => {
         backgroundColor: "transparent",
       }}
     />
+  );
+};
+export const ViewportContainer = ({
+  children,
+  threshold = 0.1,
+  rootMargin = '0px',
+  lazyLoad = false
+}) => {
+  const containerRef = useRef(null);
+  const [isLoaded, setIsLoaded] = useState(!lazyLoad);
+  useEffect(() => {
+    if (!lazyLoad) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsLoaded(true); 
+          observer.disconnect(); 
+        }
+      },
+      {
+        threshold,
+        rootMargin
+      }
+    );
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+    return () => {
+      if (observer && containerRef.current) {
+        observer.disconnect(); 
+      }
+    };
+  }, [threshold, rootMargin, lazyLoad]);
+  if (!isLoaded) return null; 
+  return (
+    <div ref={containerRef}>
+      {children} 
+    </div>
   );
 };
