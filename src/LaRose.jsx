@@ -2553,7 +2553,7 @@ export const SnakeMouse = ({ color = "rgba(0, 150, 255, 0.8)" }) => {
     if (!ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     trailsRef.current.forEach((trail, index) => {
-      ctx.strokeStyle = `rgba(0, 150, 255, ${0.8 - index * 0.1})`; 
+      ctx.strokeStyle = `rgba(0, 150, 255, ${0.8 - index * 0.1})`;
       ctx.lineWidth = 2.5 - index * 0.3; 
       if (trail.length > 1) {
         ctx.beginPath();
@@ -2603,9 +2603,9 @@ export const ViewportContainer = ({
   lazyLoad = false
 }) => {
   const containerRef = useRef(null);
-  const [isLoaded, setIsLoaded] = useState(!lazyLoad);
+  const [isLoaded, setIsLoaded] = useState(!lazyLoad); 
   useEffect(() => {
-    if (!lazyLoad) return;
+    if (!lazyLoad) return; 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -2619,11 +2619,11 @@ export const ViewportContainer = ({
       }
     );
     if (containerRef.current) {
-      observer.observe(containerRef.current);
+      observer.observe(containerRef.current); 
     }
     return () => {
       if (observer && containerRef.current) {
-        observer.disconnect(); 
+        observer.disconnect();
       }
     };
   }, [threshold, rootMargin, lazyLoad]);
@@ -2633,4 +2633,25 @@ export const ViewportContainer = ({
       {children} 
     </div>
   );
+};
+export const useViewportVisibility = (loadContentOnView = true) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (ref.current) {
+        const rect = ref.current.getBoundingClientRect();
+        const isInViewport = rect.top < window.innerHeight && rect.bottom >= 0;
+        setIsVisible(isInViewport);
+      }
+    };
+    handleScroll(); 
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [ref.current]);
+  return { ref, isVisible, loadContentOnView };
 };
