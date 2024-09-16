@@ -1,0 +1,83 @@
+.sideBar {
+  height: 100vh;
+  width: 15rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  transition: transform 0.3s ease-in-out;
+  z-index: 999999; /* Increased z-index to be the highest */
+  overflow-y: auto;
+  overflow-x: hidden;
+  
+}
+/* Side Bar Component Button */
+.SideBarButton {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  
+}
+/* Sidebar content */
+.sideBar ul {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start; /* Clearer intent than 'start' */
+  align-items: start;
+  padding: 1.8rem;
+  margin-top: 4rem;
+  gap: 1rem;
+  list-style: none;
+  text-transform: capitalize;
+}
+
+/* Hover effect for list items */
+.sideBar ul li:hover {
+  transform: scale(1.05); /* Slightly reduced scaling for better UX */
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out; /* Smooth transition */
+}
+
+/* Sidebar toggle button */
+.SideBarMenuBtn {
+  background: white;
+  position: absolute;
+  top: 15%;
+  right: 5%;
+  height: 3.5rem;
+  min-width: 4rem;
+  z-index: 1000000; /* Increased z-index to be the highest */
+  border-radius: 11px;
+  border: none;
+  transition: background 0.2s ease-in-out;
+}
+
+.SideBarMenuBtn:active {
+  background: gray;
+}
+
+@media (max-width: 768px) {
+  .sideBar {
+    transform: translateX(-100%);
+    position: fixed;
+    top: 0;
+  }
+
+  .SideBarMenuBtn {
+    display: block;
+  }
+
+  .sideBar ul {
+    align-items: center;
+  }
+}
+
+@media (min-width: 769px) {
+  .SideBarMenuBtn {
+    display: none;
+  }
+}
