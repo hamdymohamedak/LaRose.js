@@ -15,7 +15,7 @@ At LaRose, you'll find everything you need to speed up your development process.
 
 ## Documentation
 
-Visit [https://larosejs.vercel.app/](https://larosejs.vercel.app/) to view the full documentation.
+Visit [https://larose.vercel.app/](https://larose.vercel.app/) to view the full documentation.
 
 ## Installation
 
