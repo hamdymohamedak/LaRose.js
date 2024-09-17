@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { RoseBox } from "./LaRose";
+import { RoseBox, RandomAnimate, WaveText, useRenderTime } from "./LaRose";
 import "./App.css";
-import { useRenderTime } from "./test";
 export default function App() {
   const renderTime = useRenderTime();
   return (
     <RoseBox RoseName="App">
-      <code>Larose with bun.js</code>
-      <code>Hello world</code>
+      <WaveText>let's Start Development</WaveText>
+      <RandomAnimate edit={{}}> {/* {{}} for remove default Style */}
+        Hello world
+      </RandomAnimate>
       <div>
         {renderTime !== null && (
           <p>Render time Speed: {renderTime.toFixed(2)} ms</p>
         )}
-      </div>  
+      </div>
     </RoseBox>
   );
 }
