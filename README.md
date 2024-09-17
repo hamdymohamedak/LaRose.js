@@ -45,3 +45,12 @@ npm start
 ```sh  
 npm run dev
 ```
+## or (use Bun)
+5. Start Development for: (React)
+```sh
+bun start 
+```
+  Start Development for: (Vite)
+```sh  
+bun run dev
+```
