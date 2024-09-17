@@ -45,7 +45,7 @@ npm start
 ```sh  
 npm run dev
 ```
-## or (use Bun)
+## or (use Bun.js)
 3. Install node_modules:
 ```sh
 bun install
