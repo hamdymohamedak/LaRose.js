@@ -46,6 +46,14 @@ npm start
 npm run dev
 ```
 ## or (use Bun)
+3. Install node_modules:
+```sh
+bun install
+```
+  OR
+```sh
+bun i
+```
 5. Start Development for: (React)
 ```sh
 bun start 
