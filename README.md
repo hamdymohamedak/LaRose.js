@@ -50,10 +50,6 @@ npm run dev
 ```sh
 bun install
 ```
-  OR
-```sh
-bun i
-```
 5. Start Development for: (React)
 ```sh
 bun start 
