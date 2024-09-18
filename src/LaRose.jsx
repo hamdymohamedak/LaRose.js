@@ -2553,8 +2553,8 @@ export const SnakeMouse = ({ color = "rgba(0, 150, 255, 0.8)", display = "block"
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     // Draw each trail
     trailsRef.current.forEach((trail, index) => {
-      ctx.strokeStyle = `rgba(0, 150, 255, ${0.8 - index * 0.1})`; // Add fading effect
-      ctx.lineWidth = 2.5 - index * 0.3; // Gradually thinner lines for depth
+      ctx.strokeStyle = `rgba(0, 150, 255, ${0.8 - index * 0.1})`;
+      ctx.lineWidth = 2.5 - index * 0.3;
       if (trail.length > 1) {
         ctx.beginPath();
         ctx.moveTo(trail[0].x, trail[0].y);
@@ -2606,14 +2606,14 @@ export const ViewportContainer = ({
   lazyLoad = false
 }) => {
   const containerRef = useRef(null);
-  const [isLoaded, setIsLoaded] = useState(!lazyLoad); // بدء التحميل بناءً على قيمة lazyLoad
+  const [isLoaded, setIsLoaded] = useState(!lazyLoad);
   useEffect(() => {
-    if (!lazyLoad) return; // إذا كان lazyLoad غير مفعّل، لا حاجة لإعداد المراقب.
+    if (!lazyLoad) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsLoaded(true); // عندما يصبح العنصر مرئيًا، نقوم بتحميله
-          observer.disconnect(); // فصل المراقب بعد التحميل
+          setIsLoaded(true);
+          observer.disconnect();
         }
       },
       {
@@ -2688,4 +2688,60 @@ export const useRenderTime = () => {
     });
   }, []); // Run only once on mount
   return renderTime;
+};
+export const BlockUser = ({ blockUser, edit = {}, RoseId }) => {
+  const [ip, setIp] = useState(null);
+  const [isBlocked, setIsBlocked] = useState(false);
+  const fetchUserIP = async () => {
+    try {
+      const response = await fetch('https://api.ipify.org?format=json');
+      const data = await response.json();
+      setIp(data.ip);
+    } catch (error) {
+      console.error('Error fetching IP:', error);
+    }
+  };
+  useEffect(() => {
+    fetchUserIP();
+  }, []);
+  useEffect(() => {
+    if (blockUser && ip) {
+      setIsBlocked(true);
+    }
+  }, [blockUser, ip]);
+  if (isBlocked) {
+    return (
+      <>
+        <style jsx>{`
+                  .userBlockComponentActionEvent{
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      position: absolute;
+                      user-select: none;
+                      z-index: 9999999;
+                      height: 100dvh;
+                      font-weight: bold;
+                      font-weight: 4rem;
+                      background: #EEE;
+                      width: 100vw;
+                      color:red;
+                  }
+                  .userBlockComponentActionEventChildrenDiv{
+                      color:white;
+                      background:red;
+                      height:4rem;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      width:40rem;
+                      border-radius:10px
+                  }
+                  `}</style>
+        <div className='userBlockComponentActionEvent'>
+          <div id={RoseId} style={edit} className='userBlockComponentActionEventChildrenDiv'>Access Denied: You Are Blocked</div>
+        </div>
+      </>
+    );
+  }
 };
