@@ -2707,6 +2707,8 @@ export const BlockUser = ({ blockUser, edit = {}, RoseId }) => {
   useEffect(() => {
     if (blockUser && ip) {
       setIsBlocked(true);
+      let randomNum = Math.random();
+      window.open(`https://your-access-blocked/${randomNum}`, "_self");
     }
   }, [blockUser, ip]);
   if (isBlocked) {
