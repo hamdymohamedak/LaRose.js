@@ -17,8 +17,11 @@ At LaRose, you'll find everything you need to speed up your development process.
 
 Visit [https://larose.vercel.app/](https://larose.vercel.app/) to view the full documentation.
 
-## CLI Coming Soon
-## Installation
+## NPM
+```bash
+npm i larose
+```
+## Local Installation
 
 To get started with LaRose.js, follow these steps:
 
