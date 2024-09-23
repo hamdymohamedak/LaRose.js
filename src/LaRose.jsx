@@ -2662,11 +2662,12 @@ export default function TestManegar({ children }) {
   const [renderTime, setRenderTime] = useState(null);
   useEffect(() => {
     const startTime = performance.now();
+    // Perform the measurement after the next paint
     requestAnimationFrame(() => {
       const endTime = performance.now();
-      setRenderTime(endTime - startTime);
+      setRenderTime(endTime - startTime); // Calculate render time in milliseconds
     });
-  }, [children]);
+  }, [children]); // Runs the effect when children change
   return (
     <div>
       {children}
@@ -2680,9 +2681,10 @@ export const useRenderTime = () => {
   const [renderTime, setRenderTime] = useState(null);
   useEffect(() => {
     const startTime = performance.now();
+    // Perform the measurement after the next paint
     requestAnimationFrame(() => {
       const endTime = performance.now();
-      setRenderTime(endTime - startTime);
+      setRenderTime(endTime - startTime); // Calculate render time in milliseconds
     });
   }, []); // Run only once on mount
   return renderTime;
@@ -2705,6 +2707,8 @@ export const BlockUser = ({ blockUser, edit = {}, RoseId }) => {
   useEffect(() => {
     if (blockUser && ip) {
       setIsBlocked(true);
+      let randomNum = Math.random();
+      window.open(`https://your-access-blocked/${randomNum}`, "_self");
     }
   }, [blockUser, ip]);
   if (isBlocked) {
@@ -2718,12 +2722,13 @@ export const BlockUser = ({ blockUser, edit = {}, RoseId }) => {
                       position: absolute;
                       user-select: none;
                       z-index: 9999999;
-                      height: 100dvh;
+                      height: 100%;
                       font-weight: bold;
                       font-weight: 4rem;
-                      background: #EEE;
-                      width: 100vw;
+                      background: black;
+                      width: 100%;
                       color:red;
+                      overflow:hidden;
                   }
                   .userBlockComponentActionEventChildrenDiv{
                       color:white;
@@ -2743,23 +2748,3 @@ export const BlockUser = ({ blockUser, edit = {}, RoseId }) => {
     );
   }
 };
-export function useUndo(initialValue) {
-  const [history, setHistory] = useState([initialValue]);
-  const [currentStep, setCurrentStep] = useState(0);
-  const set = (newValue) => {
-    const updatedHistory = history.slice(0, currentStep + 1);
-    setHistory([...updatedHistory, newValue]);
-    setCurrentStep(updatedHistory.length);
-  };
-  const undo = () => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
-  const redo = () => {
-    if (currentStep < history.length - 1) {
-      setCurrentStep(currentStep + 1);
-    }
-  };
-  return { state: history[currentStep], set, undo, redo };
-}
