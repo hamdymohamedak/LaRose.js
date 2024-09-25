@@ -21,7 +21,7 @@ Visit [https://larose.vercel.app/](https://larose.vercel.app/) to view the full 
 ```bash
 npm i larose
 ```
-NPM PACKAGE [NPM](https://www.npmjs.com/package/larose)
+NPM PACKAGE [NPM](https://www.npmjs.com/package/larose-js)
 
 ## Local Installation
 
