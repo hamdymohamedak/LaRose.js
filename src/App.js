@@ -25,7 +25,7 @@ export default function App() {
           <p>Render time Speed: {renderTime.toFixed(2)} ms</p>
         )}
       </div>
-      <BlockUser blockUser={false} /> {/* user */}
+      <BlockUser blockUser={false} />
       <button onClick={handleBlock}>Click to Block</button>
     </RoseBox>
   );
