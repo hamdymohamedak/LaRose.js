@@ -5,28 +5,29 @@ import {
   useRenderTime,
   useLocalStorage,
   BlockUser,
+  ShinyText,
+  ShinyButton,
 } from "./LaRose";
 import "./App.css";
 export default function App() {
   const renderTime = useRenderTime();
-  const [user, setUser] = useLocalStorage("isBlocked", false);
-  const handleBlock = () => {
-    setUser(true);
+
+  let open_docs = () => {
+    window.open("https://larose.vercel.app");
   };
+
   return (
     <RoseBox RoseName="App">
       <WaveText>let's Start Development</WaveText>
-      <RandomAnimate edit={{}}>
-        {/* {{}} for removing default Style */}
-        Hello world
-      </RandomAnimate>
+      <RandomAnimate edit={{}}>Hello world</RandomAnimate>
+      <ShinyButton onClick={open_docs}>
+        <ShinyText edit={{ color: "white" }}>Learn LaRose</ShinyText>
+      </ShinyButton>
       <div>
         {renderTime !== null && (
           <p>Render time Speed: {renderTime.toFixed(2)} ms</p>
         )}
       </div>
-      <BlockUser blockUser={false} />
-      <button onClick={handleBlock}>Click to Block</button>
     </RoseBox>
   );
 }

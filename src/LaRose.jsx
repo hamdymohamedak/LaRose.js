@@ -53,7 +53,7 @@ export function Ak_Alert({ title, time, edit = {}, children }) {
       height: "1.1rem",
       cursor: "pointer",
       marginLeft: "auto",
-      position: "absolute", // Position close button to the right of the alert
+      position: "absolute",
       right: "0.9rem",
       top: "50%",
       transform: "translateY(-50%)",
@@ -135,6 +135,8 @@ export function Button({ h, w, event, children, edit = {} }) {
   return (
     <>
       <button
+        role="button"
+        aria-label="button"
         style={combinedStyle}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
@@ -170,7 +172,7 @@ export function CounterDown({ start, end, time, size }) {
     if (number > end) {
       const timer = setTimeout(() => {
         setNumber((prevNumber) => prevNumber - 1);
-      }, time * 1000); // time is in seconds, so convert to milliseconds
+      }, time * 1000);
       return () => clearTimeout(timer);
     }
   }, [number, end, time]);
@@ -278,7 +280,12 @@ export function ModernBtn({
           opacity: 1;
         }
       `}</style>
-      <button onClick={handleClick} className="animated-button">
+      <button
+        role="button"
+        aria-label="button"
+        onClick={handleClick}
+        className="animated-button"
+      >
         <svg
           viewBox="0 0 24 24"
           className="arr-2"
@@ -680,139 +687,6 @@ export function Loader() {
     </>
   );
 }
-export function Slider({
-  children,
-  autoplay = false,
-  autoplayInterval = 3000,
-}) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  useEffect(() => {
-    if (autoplay) {
-      const intervalId = setInterval(() => {
-        setCurrentIndex((prevIndex) =>
-          prevIndex === React.Children.count(children) - 1 ? 0 : prevIndex + 1
-        );
-      }, autoplayInterval);
-      return () => clearInterval(intervalId);
-    }
-  }, [autoplay, autoplayInterval, children]);
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? React.Children.count(children) - 1 : prevIndex - 1
-    );
-  };
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === React.Children.count(children) - 1 ? 0 : prevIndex + 1
-    );
-  };
-  return (
-    <>
-      <style jsx>{`
-        .slider-container {
-          position: relative;
-          overflow: hidden;
-          width: 100%;
-          height: 100%;
-        }
-        .slider-wrapper {
-          width: 100%;
-          min-height: 100vh;
-          overflow: hidden;
-        }
-        .slider-content {
-          display: flex;
-          transition: transform 0.5s ease-in-out;
-        }
-        .slider-slide {
-          flex: 0 0 100%;
-          box-sizing: border-box;
-          width: 100%;
-          min-height: 100vh;
-          padding: 1rem;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        .slider-button {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          background: #1193d2;
-          color: white;
-          border: none;
-          padding: 10px;
-          cursor: pointer;
-          z-index: 1;
-          height: 2rem;
-          width: 3rem;
-          border-radius: 10px;
-          box-shadow: 1px 1px 19px -1px #1193d2;
-          font-weight: bold;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        .slider-button.prev {
-          left: 10px;
-        }
-        .slider-button.next {
-          right: 10px;
-        }
-        .slider-pagination {
-          position: absolute;
-          bottom: 10px;
-          left: 50%;
-          transform: translateX(-50%);
-          display: flex;
-        }
-        .pagination-dot {
-          height: 10px;
-          width: 10px;
-          margin: 0 5px;
-          background-color: white;
-          border-radius: 50%;
-          display: inline-block;
-          cursor: pointer;
-        }
-        .pagination-dot.active {
-          background-color: black;
-        }
-      `}</style>
-      <div className="slider-container">
-        <button className="slider-button prev" onClick={handlePrev}>
-          <i className="fa-solid fa-angles-left"></i>
-        </button>
-        <button className="slider-button next" onClick={handleNext}>
-          <i className="fa-solid fa-angles-right"></i>
-        </button>
-        <div className="slider-wrapper">
-          <div
-            className="slider-content"
-            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-          >
-            {React.Children.map(children, (child, index) => (
-              <div className="slider-slide" key={index}>
-                {child}
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="slider-pagination">
-          {React.Children.map(children, (_, index) => (
-            <span
-              key={index}
-              className={`pagination-dot ${
-                index === currentIndex ? "active" : ""
-              }`}
-              onClick={() => setCurrentIndex(index)}
-            />
-          ))}
-        </div>
-      </div>
-    </>
-  );
-}
 export function LaRoseText({
   edit = {},
   children,
@@ -869,7 +743,7 @@ export function RoseBox({
     if (lazy) {
       const timer = setTimeout(() => {
         setIsLoaded(true);
-      }, 200); // Adjust the delay as needed
+      }, 200);
       return () => clearTimeout(timer);
     }
   }, [lazy]);
@@ -909,7 +783,6 @@ export function RoseBox({
         cursor: "pointer",
       }
     : {};
-  // Apply the hover class conditionally
   const hoverClass = atHover ? "rosebox-hover" : "";
   const handleClick = () => {
     if (typeof onClick === "function") {
@@ -981,21 +854,19 @@ export function SplitText({
     const fullAnimationDuration =
       speed + delay * (children.split("").length || 1);
     const timer = setTimeout(() => {
-      setAnimateTypeStyle("word"); // Change to 'word' after full animation duration
-    }, fullAnimationDuration * 1000); // Convert duration to milliseconds
-    return () => clearTimeout(timer); // Cleanup timer on component unmount
+      setAnimateTypeStyle("word");
+    }, fullAnimationDuration * 1000);
+    return () => clearTimeout(timer);
   }, [speed, delay, children]);
-  // Split the text based on animateTypeStyle (word or character)
   const splitText =
     animateTypeStyle === "word" ? children.split(/(\s+)/) : children.split("");
-  // Map through the split text to create the animation effect
   const animatedText = splitText.map((item, index) => (
     <span
       key={index}
       className="SplitTextItem"
       style={{ "--SplitTextItem-index": index }}
     >
-      {item === " " ? "\u00A0" : item} {/* Handle spaces */}
+      {item === " " ? "\u00A0" : item}
     </span>
   ));
   return (
@@ -1026,10 +897,16 @@ export function ShinyText({
   RoseName,
   RoseId,
   edit = {},
-  speed = 2, // duration of the shine effect
-  color = "#fff", // color of the shiny effect
-  backgroundColor = "#000", // background color to contrast with the shine
+  speed = 2,
+  color = "#fff",
+  backgroundColor = "#000",
+  onClick,
 }) {
+  let onClickFun = () => {
+    if (typeof onClick === "function") {
+      onClick();
+    }
+  };
   return (
     <>
       <style jsx>{`
@@ -1071,7 +948,12 @@ export function ShinyText({
           }
         }
       `}</style>
-      <div style={{ ...edit }} id={RoseId} className={`shiny-text ${RoseName}`}>
+      <div
+        onClick={onClickFun}
+        style={{ ...edit }}
+        id={RoseId}
+        className={`shiny-text ${RoseName}`}
+      >
         {children}
       </div>
     </>
@@ -1082,16 +964,16 @@ export function ShinyButton({
   RoseName,
   RoseId,
   edit = {},
-  speed = 2, // duration of the shine effect
-  color = "#fff", // text color
-  backgroundColor = "#111", // button background color
-  padding = "10px 20px", // button padding
-  borderRadius = "5px", // button border radius
-  ShinyButtonEvent,
+  speed = 2,
+  color = "#fff",
+  backgroundColor = "#111",
+  padding = "10px 20px",
+  borderRadius = "5px",
+  onClick,
 }) {
-  let ShinyButtonEventClick = () => {
-    if (typeof ShinyButtonEvent === "function") {
-      ShinyButtonEvent();
+  let onClickFun = () => {
+    if (typeof onClick === "function") {
+      onClick();
     }
   };
   return (
@@ -1149,7 +1031,9 @@ export function ShinyButton({
         }
       `}</style>
       <button
-        onClick={ShinyButtonEventClick}
+        role="button"
+        aria-label="button"
+        onClick={onClickFun}
         style={{ ...edit }}
         id={RoseId}
         className={`shiny-button ${RoseName}`}
@@ -1163,7 +1047,7 @@ export function WaveText({
   children,
   RoseName,
   RoseId,
-  initialWaveType = "character", // Initial waveType, defaults to 'character'
+  initialWaveType = "character",
   edit = {},
   speed = 0.5,
   delay = 0.05,
@@ -1175,21 +1059,19 @@ export function WaveText({
     const totalAnimationDuration =
       speed + delay * (children.split("").length || 1);
     const timer = setTimeout(() => {
-      setWaveType("word"); // Change to 'word' after the full animation duration
-    }, totalAnimationDuration * 1000 + 200); // Adjust timing to ensure it starts after animation
-    return () => clearTimeout(timer); // Cleanup timer on component unmount
+      setWaveType("word");
+    }, totalAnimationDuration * 1000 + 200);
+    return () => clearTimeout(timer);
   }, [speed, delay, children]);
-  // Split the text based on waveType (word or character)
   const splitText =
     waveType === "word" ? children.split(/(\s+)/) : children.split("");
-  // Map through the split text to create the wave effect
   const waveText = splitText.map((item, index) => (
     <span
       key={index}
       className="WaveTextItem"
       style={{ "--WaveTextItem-index": index }}
     >
-      {item === " " ? "\u00A0" : item} {/* Handle spaces */}
+      {item === " " ? "\u00A0" : item}
     </span>
   ));
   return (
@@ -1230,36 +1112,31 @@ export function AnimatedText({
   edit = {},
   speed = 0.5,
   delay = 0.05,
-  animationType = "blur", // Type of animation: 'blur', 'fadeIn', 'slideIn', 'zoomIn'
-  initialAnimateTypeStyle = "character", // Initial prop for animating by 'word' or 'character'
+  animationType = "blur",
+  initialAnimateTypeStyle = "character",
 }) {
   const [animateTypeStyle, setAnimateTypeStyle] = useState(
     initialAnimateTypeStyle
   );
   useEffect(() => {
-    // Calculate total duration of animation including delay
     const totalAnimationDuration =
       speed + delay * (children.split("").length || 1);
     const timer = setTimeout(() => {
-      setAnimateTypeStyle("word"); // Change to 'word' after the animation ends
-    }, totalAnimationDuration * 1000 + 600); // Adjust timing as needed
-    return () => clearTimeout(timer); // Cleanup timer on component unmount
+      setAnimateTypeStyle("word");
+    }, totalAnimationDuration * 1000 + 600);
+    return () => clearTimeout(timer);
   }, [speed, delay, children]);
-  // Split the text based on animateTypeStyle (word or character)
   const splitText =
-    animateTypeStyle === "word"
-      ? children.split(/(\s+)/) // Split by spaces and preserve them
-      : children.split("");
-  // Map through the split text to create the animation effect
+    animateTypeStyle === "word" ? children.split(/(\s+)/) : children.split("");
+
   const animatedText = splitText.map((item, index) => (
     <span
       key={index}
       className="AnimatedTextItem"
       style={{ "--AnimatedTextItem-index": index }}
     >
-      {item === " " ? "\u00A0" : item} {/* Handle spaces */}
-      {animateTypeStyle === "word" && item === " " && " "}{" "}
-      {/* Ensure space rendering if animating words */}
+      {item === " " ? "\u00A0" : item}
+      {animateTypeStyle === "word" && item === " " && " "}
     </span>
   ));
   const animations = {
@@ -1516,7 +1393,6 @@ export function Notification({
       const timer = setTimeout(() => {
         setValueState(true);
       }, delay);
-      // Clean up the timer on unmount
       return () => clearTimeout(timer);
     }
   }, [delay]);
@@ -1541,25 +1417,25 @@ export function Notification({
         .wave {
           position: absolute;
           transform: rotate(90deg);
-          left: -1.9375rem; /* -31px / 16 */
-          top: 2rem; /* 32px / 16 */
-          width: 5rem; /* 80px / 16 */
+          left: -1.9375rem;
+          top: 2rem;
+          width: 5rem;
           fill: #04e4003a;
         }
         .icon-container {
-          width: 2.1875rem; /* 35px / 16 */
-          height: 2.1875rem; /* 35px / 16 */
+          width: 2.1875rem;
+          height: 2.1875rem;
           display: flex;
           justify-content: center;
           align-items: center;
           background-color: #04e40048;
           border-radius: 50%;
-          margin-left: 0.5rem; /* 8px / 16 */
+          margin-left: 0.5rem;
           display: ${iconDisplay};
         }
         .icon {
-          width: 1.0625rem; /* 17px / 16 */
-          height: 1.0625rem; /* 17px / 16 */
+          width: 1.0625rem;
+          height: 1.0625rem;
           color: #269b24;
         }
         .message-text-container {
@@ -1576,11 +1452,11 @@ export function Notification({
         }
         .message-text {
           color: ${MessageColor};
-          font-size: 1.0625rem; /* 17px / 16 */
+          font-size: 1.0625rem;
           font-weight: 700;
         }
         .sub-text {
-          font-size: 0.875rem; /* 14px / 16 */
+          font-size: 0.875rem;
           color: ${DesMessageColor};
         }
         .cross-icon {
@@ -1635,24 +1511,23 @@ export function Notification({
   );
 }
 export function Spring({
-  rotate = 360, // Default rotation to 360 degrees
-  scale = 1, // Default scale to 1 (normal size)
-  speed = 0.8, // Default speed to 0.8 seconds
-  x = "0", // Default x translation
-  y = "0", // Default y translation
+  rotate = 360,
+  scale = 1,
+  speed = 0.8,
+  x = "0",
+  y = "0",
   z = "0",
   children,
   RoseID,
   RoseName = "RotatingSpringComponentStyle",
   edit,
-  drag = false, // Default to allow dragging
+  drag = false,
 }) {
   const elementRef = useRef(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [isDragged, setIsDragged] = useState(false);
   const [startOffset, setStartOffset] = useState({ x: 0, y: 0 });
-  // UseEffect to set initial position based on the element's location
   useEffect(() => {
     if (elementRef.current) {
       const rect = elementRef.current.getBoundingClientRect();
@@ -1733,25 +1608,24 @@ export function Spring({
   );
 }
 export function Variants({
-  rotate = 0, // Default rotation to 0 degrees
-  scale = 1, // Default scale to 1 (normal size)
-  speed = 0.8, // Default speed to 0.8 seconds
-  x = "0", // Default x translation
-  y = "0", // Default y translation
+  rotate = 0,
+  scale = 1,
+  speed = 0.8,
+  x = "0",
+  y = "0",
   z = "0",
   children,
   RoseID,
   RoseName = "RotatingVariantsComponentStyle",
   edit,
-  childDisplay = "grid", // Default child display
-  drag = false, // Default to allow dragging
+  childDisplay = "grid",
+  drag = false,
 }) {
   const elementRef = useRef(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [isDragged, setIsDragged] = useState(false);
   const [startOffset, setStartOffset] = useState({ x: 0, y: 0 });
-  // Set initial position based on the element's location
   useEffect(() => {
     if (elementRef.current) {
       const rect = elementRef.current.getBoundingClientRect();
@@ -1893,7 +1767,6 @@ export function RandomAnimate({
 }) {
   const [animationClass, setAnimationClass] = useState("");
   useEffect(() => {
-    // List of possible animations
     const animations = [
       "fadeIn",
       "slideInLeft",
@@ -1907,10 +1780,8 @@ export function RandomAnimate({
       "jackInTheBox",
     ];
     if (AnimatedType) {
-      // If AnimatedType is provided, use it as the animation class
       setAnimationClass(AnimatedType);
     } else {
-      // Randomly pick an animation if AnimatedType is not provided
       const randomAnimation =
         animations[Math.floor(Math.random() * animations.length)];
       setAnimationClass(randomAnimation);
@@ -2082,7 +1953,7 @@ export function SideText({
   RoseID,
   RoseName = "side-textAnimatedLarose",
   edit = {},
-  direction = "left", // Default direction is 'left'
+  direction = "left",
 }) {
   const animationDirection =
     direction === "right" ? "sideTextRight" : "sideTextLeft";
@@ -2194,7 +2065,7 @@ export function useRand(from, to) {
 export function SeeMore({
   children,
   maxCharacters = 100,
-  maxElements = 3, // Default to 3 elements
+  maxElements = 3,
   edit,
   RoseName,
   RoseId,
@@ -2202,23 +2073,17 @@ export function SeeMore({
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const textRef = useRef(null);
-  // Convert children to string if it's plain text
   const text =
     typeof children === "string" ? children : children?.props?.children;
-  // Handle the toggling of the content visibility
   const toggleExpand = () => setIsExpanded(!isExpanded);
-  // Split children into an array if they are not already
   const childrenArray = React.Children.toArray(children);
-  // Handle truncation for text
   let truncatedText = text;
   if (text && text.length > maxCharacters && !isExpanded) {
     truncatedText = text.slice(0, maxCharacters) + "...";
   }
-  // Handle element visibility
   const visibleChildren = isExpanded
     ? childrenArray
     : childrenArray.slice(0, maxElements);
-  // Determine if there's more content to show
   const hasMoreContent =
     text?.length > maxCharacters || childrenArray.length > maxElements;
   return (
@@ -2231,9 +2096,10 @@ export function SeeMore({
         {/* Render either text or elements based on the content type */}
         {typeof children === "string" ? truncatedText : visibleChildren}
       </div>
-      {/* Show "Show More" button if there's more content */}
       {hasMoreContent && (
         <button
+          role="button"
+          aria-label="button"
           style={{
             background: "none",
             border: "none",
@@ -2263,21 +2129,20 @@ export function SideBox({
       if (boxRef.current) {
         const boxRect = boxRef.current.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
-        // Check if the element is within the viewport
         if (
           boxRect.top <= viewportHeight &&
           boxRect.bottom >= 0 &&
           boxRect.left <= window.innerWidth &&
           boxRect.right >= 0
         ) {
-          setIsVisible(true); // Element is visible
+          setIsVisible(true);
         } else {
-          setIsVisible(false); // Element is not visible
+          setIsVisible(false);
         }
       }
     };
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Initial check
+    handleScroll();
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -2347,15 +2212,12 @@ export const useBatteryStatus = () => {
     charging: null,
   });
   useEffect(() => {
-    // Check if the browser supports the Battery Status API
     if ("getBattery" in navigator) {
       navigator.getBattery().then((battery) => {
-        // Set the initial battery status
         setBatteryInfo({
           level: battery.level,
           charging: battery.charging,
         });
-        // Update the battery status when it changes
         const updateBatteryInfo = () => {
           setBatteryInfo({
             level: battery.level,
@@ -2364,7 +2226,6 @@ export const useBatteryStatus = () => {
         };
         battery.addEventListener("levelchange", updateBatteryInfo);
         battery.addEventListener("chargingchange", updateBatteryInfo);
-        // Cleanup the event listeners on unmount
         return () => {
           battery.removeEventListener("levelchange", updateBatteryInfo);
           battery.removeEventListener("chargingchange", updateBatteryInfo);
@@ -2391,7 +2252,7 @@ export function useColorScheme() {
     const handleChange = (e) => {
       setColorScheme(e.matches ? "dark" : "light");
     };
-    handleChange(matchMedia); // Set the initial value
+    handleChange(matchMedia);
     matchMedia.addEventListener("change", handleChange);
     return () => {
       matchMedia.removeEventListener("change", handleChange);
@@ -2508,7 +2369,6 @@ export const usePhotoCapture = () => {
   const [cameraError, setCameraError] = useState(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-  // Start the camera when the hook is used
   useEffect(() => {
     const startCamera = async () => {
       try {
@@ -2517,7 +2377,6 @@ export const usePhotoCapture = () => {
         });
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
-          // Play video after the stream metadata is loaded
           videoRef.current.onloadedmetadata = () => {
             videoRef.current.play().catch((err) => {
               console.error("Error playing video:", err);
@@ -2532,7 +2391,6 @@ export const usePhotoCapture = () => {
       }
     };
     startCamera();
-    // Cleanup function to stop the camera when the component unmounts
     return () => {
       if (videoRef.current && videoRef.current.srcObject) {
         const stream = videoRef.current.srcObject;
@@ -2541,7 +2399,6 @@ export const usePhotoCapture = () => {
       }
     };
   }, []);
-  // Capture a photo by drawing the video frame onto a canvas
   const takePhoto = () => {
     const canvas = canvasRef.current;
     const video = videoRef.current;
@@ -2557,15 +2414,13 @@ export const useGetContacts = () => {
   const [contacts, setContacts] = useState([]);
   const [error, setError] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
-  // Function to get contacts
   const getContacts = async () => {
     try {
       if (!("contacts" in navigator && "ContactsManager" in window)) {
         throw new Error("Contacts API not supported on this device.");
       }
-      // Define the properties and options for contact retrieval
       const props = ["name", "email", "tel"];
-      const opts = { multiple: true }; // Fetch multiple contacts
+      const opts = { multiple: true };
       setIsFetching(true);
       const contactList = await navigator.contacts.select(props, opts);
       setContacts(contactList);
@@ -2655,7 +2510,6 @@ export const SnakeMouse = ({
     const ctx = ctxRef.current;
     if (!ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // Draw each trail
     trailsRef.current.forEach((trail, index) => {
       ctx.strokeStyle = `rgba(0, 150, 255, ${0.8 - index * 0.1})`;
       ctx.lineWidth = 2.5 - index * 0.3;
@@ -2677,9 +2531,7 @@ export const SnakeMouse = ({
     canvas.height = window.innerHeight;
     const ctx = canvas.getContext("2d");
     ctxRef.current = ctx;
-    // Start the drawing loop
     draw();
-    // Cleanup to cancel animation on unmount
     return () => {
       if (animationFrameId.current) {
         cancelAnimationFrame(animationFrameId.current);
@@ -2726,20 +2578,16 @@ export const ViewportContainer = ({
       }
     );
     if (containerRef.current) {
-      observer.observe(containerRef.current); // مراقبة العنصر
+      observer.observe(containerRef.current);
     }
     return () => {
       if (observer && containerRef.current) {
-        observer.disconnect(); // التأكد من فصل المراقب عند إزالة المكون
+        observer.disconnect();
       }
     };
   }, [threshold, rootMargin, lazyLoad]);
-  if (!isLoaded) return null; // إذا لم يتم تحميل المحتوى بعد، إرجاع null (لا يتم عرض أي شيء)
-  return (
-    <div ref={containerRef}>
-      {children} {/* عرض المحتوى دون أي تأثير على التصميم */}
-    </div>
-  );
+  if (!isLoaded) return null;
+  return <div ref={containerRef}>{children}</div>;
 };
 export const useViewportVisibility = (loadContentOnView = true) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -2752,7 +2600,7 @@ export const useViewportVisibility = (loadContentOnView = true) => {
         setIsVisible(isInViewport);
       }
     };
-    handleScroll(); // Initial check
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", handleScroll);
     return () => {
@@ -2766,12 +2614,11 @@ export default function TestManegar({ children }) {
   const [renderTime, setRenderTime] = useState(null);
   useEffect(() => {
     const startTime = performance.now();
-    // Perform the measurement after the next paint
     requestAnimationFrame(() => {
       const endTime = performance.now();
-      setRenderTime(endTime - startTime); // Calculate render time in milliseconds
+      setRenderTime(endTime - startTime);
     });
-  }, [children]); // Runs the effect when children change
+  }, [children]);
   return (
     <div>
       {children}
@@ -2783,12 +2630,11 @@ export const useRenderTime = () => {
   const [renderTime, setRenderTime] = useState(null);
   useEffect(() => {
     const startTime = performance.now();
-    // Perform the measurement after the next paint
     requestAnimationFrame(() => {
       const endTime = performance.now();
-      setRenderTime(endTime - startTime); // Calculate render time in milliseconds
+      setRenderTime(endTime - startTime);
     });
-  }, []); // Run only once on mount
+  }, []);
   return renderTime;
 };
 export const BlockUser = ({ blockUser, edit = {}, RoseId }) => {
@@ -2856,13 +2702,15 @@ export const BlockUser = ({ blockUser, edit = {}, RoseId }) => {
     );
   }
 };
+
 export const Image = ({
   src,
-  alt,
+  alt = "Image Tag",
   quality = 0.7,
   imageSize = false,
-  height,
-  width,
+  requireSrc,
+  height = 30,
+  width = 30,
   edit = {},
   responsiveSrc = {},
   RoseName,
@@ -2871,14 +2719,13 @@ export const Image = ({
 }) => {
   const [webpSrc, setWebpSrc] = useState(null);
   const [compressedSize, setCompressedSize] = useState(null);
-  const [placeholder, setPlaceholder] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    const loadImage = async () => {
-      const img = new window.Image();
-      img.src = src;
+    const loadImage = async (imageSrc) => {
+      const img = new window.Image(); // Accessing the global Image constructor correctly
+      img.src = imageSrc;
 
       img.onload = () => {
         compressImage(img);
@@ -2889,10 +2736,13 @@ export const Image = ({
       };
     };
 
-    if (src) {
-      loadImage();
+    // Load from requireSrc prop if available, otherwise use src
+    const imageSource = requireSrc || src;
+
+    if (imageSource) {
+      loadImage(imageSource);
     }
-  }, [src]);
+  }, [src, requireSrc]);
 
   const compressImage = (img) => {
     const canvas = document.createElement("canvas");
@@ -2903,20 +2753,18 @@ export const Image = ({
 
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
+    // Set a new image type (webp) and quality
     const webpDataUrl = canvas.toDataURL("image/webp", quality);
-
     setWebpSrc(webpDataUrl);
-    setPlaceholder(false);
 
     const webpSizeInBytes = Math.ceil((webpDataUrl.length * 3) / 4);
     const sizeInKB = (webpSizeInBytes / 1024).toFixed(2);
-
     setCompressedSize(sizeInKB);
   };
 
   return (
     <div>
-      {placeholder && !error && (
+      {!isLoaded && !error && loading && (
         <div
           style={{
             height,
@@ -2929,7 +2777,7 @@ export const Image = ({
             color: "#999",
           }}
         >
-          {loading ? "Loading..." : ""}
+          Loading...
         </div>
       )}
 
@@ -2942,7 +2790,6 @@ export const Image = ({
             type="image/jpeg"
           />
         )}
-
         <img
           className={RoseName}
           id={RoseID}
@@ -2958,18 +2805,47 @@ export const Image = ({
           loading="lazy"
           aria-label={alt}
           onLoad={() => setIsLoaded(true)}
-          onError={() => setError(true)}
+          onError={() => {
+            setError(true);
+          }}
         />
       </picture>
 
       {imageSize && compressedSize && !error && (
         <p>
-          Image Size: <span style={{ color: "blue" }}>{compressedSize} </span>{" "}
+          Image Size: <span style={{ color: "blue" }}>{compressedSize} </span>
           KB
         </p>
       )}
-
       {error && <p style={{ color: "red" }}>Failed to load image</p>}
     </div>
   );
 };
+export function Section({
+  children,
+  RoseName,
+  RoseID,
+  edit = {},
+  ariaLabelledby = "section",
+  ...props
+}) {
+  let styles = {
+    minHeight: "100vh",
+    margin: "3rem 3rem 0rem 3rem",
+    transition: "0.2s",
+    boxSizing: "border-box",
+    ...edit,
+  };
+
+  return (
+    <div
+      className={RoseName}
+      id={RoseID}
+      style={styles}
+      aria-labelledby={ariaLabelledby}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+}
