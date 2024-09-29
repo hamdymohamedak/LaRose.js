@@ -11,17 +11,11 @@
  * for compression. The original images are deleted after successful conversion
  * to free up space.
  *
- * ## Implementation Details
- * - **Source Directory:** All project images should be placed in the "./src/assets" directory.
- * - **Conversion Trigger:** The conversion process is automatically triggered when the project is run.
- * - **Quality Control:** Users can define the compression quality via a command-line argument,
- *   with a default value of 80 if not specified.
- *
  * ## Usage
  * To execute the image compression utility, run the following command in the terminal:
  *
  * ```
- * node convertToWebP.js ./src/assets [quality]
+ * node compress.js ./src/assets [quality]
  * ```
  *
  * Replace `[quality]` with a number between 1 and 100 to adjust the output quality
@@ -33,18 +27,6 @@
  * node convertToWebP.js ./src/assets 70
  * ```
  * This command compresses all images in the "./src/assets" directory to WebP format with a quality level of 70.
- *
- * ## Dependencies
- * This script utilizes the `sharp` library for image processing. Ensure that the library is installed
- * in your project by running:
- *
- * ```
- * npm install sharp
- * ```
- *
- * ## Error Handling
- * The utility includes error handling to catch and log any issues that arise during the
- * image processing workflow, ensuring that users are informed of any problems encountered.
  */
 
 const fs = require("fs");
