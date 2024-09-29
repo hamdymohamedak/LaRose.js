@@ -53,7 +53,7 @@ export function Ak_Alert({ title, time, edit = {}, children }) {
       height: "1.1rem",
       cursor: "pointer",
       marginLeft: "auto",
-      position: "absolute", // Position close button to the right of the alert
+      position: "absolute",
       right: "0.9rem",
       top: "50%",
       transform: "translateY(-50%)",
@@ -119,7 +119,7 @@ export function Button({ h, w, event, children, edit = {} }) {
     justifyContent: "center",
     alignItems: "center",
     border: "none",
-    ...edit
+    ...edit,
   };
   const hoverStyle = {
     backgroundPosition: "right center",
@@ -135,6 +135,8 @@ export function Button({ h, w, event, children, edit = {} }) {
   return (
     <>
       <button
+        role="button"
+        aria-label="button"
         style={combinedStyle}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
@@ -170,7 +172,7 @@ export function CounterDown({ start, end, time, size }) {
     if (number > end) {
       const timer = setTimeout(() => {
         setNumber((prevNumber) => prevNumber - 1);
-      }, time * 1000); // time is in seconds, so convert to milliseconds
+      }, time * 1000);
       return () => clearTimeout(timer);
     }
   }, [number, end, time]);
@@ -197,88 +199,93 @@ export function ModernBtn({
   return (
     <>
       <style jsx>{`
-                .animated-button {
-                    position: relative;
-                    display: flex;
-                    align-items: center;
-                    gap: 0.2rem;
-                    padding: 1rem 2rem;
-                    border: 4px solid transparent;
-                    font-size: ${fontSize}rem;
-                    background-color: inherit;
-                    border-radius: 100px;
-                    font-weight: 600;
-                    color: ${color};
-                    box-shadow: 0 0 0 2px ${allColor};
-                    cursor: pointer;
-                    overflow: hidden;
-                    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-                    height: ${h}rem;
-                    min-width: ${w}rem;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    font-size: 1.3rem;
-                }
-                .animated-button svg {
-                    position: absolute;
-                    width: 1.5rem;
-                    fill: ${allColor};
-                    z-index: 9;
-                    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-                }
-                .animated-button .arr-1 {
-                    right: 16px;
-                }
-                .animated-button .arr-2 {
-                    left: -25%;
-                }
-                .animated-button .circle {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    width: 1.1rem;
-                    height: 1.1rem;
-                    background-color: ${allColor};
-                    border-radius: 50%;
-                    opacity: 0;
-                    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-                }
-                .animated-button .text {
-                    position: relative;
-                    z-index: 1;
-                    transform: translateX(-12px);
-                    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-                }
-                .animated-button:hover {
-                    box-shadow: 0 0 0 12px transparent;
-                    color: ${hoverColor};
-                    border-radius: 12px;
-                }
-                .animated-button:hover .arr-1 {
-                    right: -25%;
-                }
-                .animated-button:hover .arr-2 {
-                    left: 1rem;
-                }
-                .animated-button:hover .text {
-                    transform: translateX(12px);
-                }
-                .animated-button:hover svg {
-                    fill: #212121;
-                }
-                .animated-button:active {
-                    transform: scale(0.95);
-                    box-shadow: 0 0 0 4px ${allColor};
-                }
-                .animated-button:hover .circle {
-                    width: 13.75rem;
-                    height: 13.75rem;
-                    opacity: 1;
-                }
-            `}</style>
-      <button onClick={handleClick} className="animated-button">
+        .animated-button {
+          position: relative;
+          display: flex;
+          align-items: center;
+          gap: 0.2rem;
+          padding: 1rem 2rem;
+          border: 4px solid transparent;
+          font-size: ${fontSize}rem;
+          background-color: inherit;
+          border-radius: 100px;
+          font-weight: 600;
+          color: ${color};
+          box-shadow: 0 0 0 2px ${allColor};
+          cursor: pointer;
+          overflow: hidden;
+          transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+          height: ${h}rem;
+          min-width: ${w}rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 1.3rem;
+        }
+        .animated-button svg {
+          position: absolute;
+          width: 1.5rem;
+          fill: ${allColor};
+          z-index: 9;
+          transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .animated-button .arr-1 {
+          right: 16px;
+        }
+        .animated-button .arr-2 {
+          left: -25%;
+        }
+        .animated-button .circle {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 1.1rem;
+          height: 1.1rem;
+          background-color: ${allColor};
+          border-radius: 50%;
+          opacity: 0;
+          transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .animated-button .text {
+          position: relative;
+          z-index: 1;
+          transform: translateX(-12px);
+          transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .animated-button:hover {
+          box-shadow: 0 0 0 12px transparent;
+          color: ${hoverColor};
+          border-radius: 12px;
+        }
+        .animated-button:hover .arr-1 {
+          right: -25%;
+        }
+        .animated-button:hover .arr-2 {
+          left: 1rem;
+        }
+        .animated-button:hover .text {
+          transform: translateX(12px);
+        }
+        .animated-button:hover svg {
+          fill: #212121;
+        }
+        .animated-button:active {
+          transform: scale(0.95);
+          box-shadow: 0 0 0 4px ${allColor};
+        }
+        .animated-button:hover .circle {
+          width: 13.75rem;
+          height: 13.75rem;
+          opacity: 1;
+        }
+      `}</style>
+      <button
+        role="button"
+        aria-label="button"
+        onClick={handleClick}
+        className="animated-button"
+      >
         <svg
           viewBox="0 0 24 24"
           className="arr-2"
@@ -302,89 +309,99 @@ export function ModernBtn({
 export function SwitchCase({ w, h }) {
   return (
     <>
-      <style jsx>{` 
-    .toggler {
-      width: 3rem;
-      margin: 40px auto;
-    }
-    .toggler input {
-      display: none;
-    }
-    .toggler label {
-      display: block;
-      position: relative;
-      width:${w}rem;
-      height: ${h}rem;
-      border: 1px solid #d6d6d6;
-      border-radius: 36px;
-      background: #e4e8e8;
-      cursor: pointer;
-    }
-    .toggler label::after {
-      display: block;
-      border-radius: 100%;
-      background-color: #d7062a;
-      content: '';
-      animation-name: toggler-size;
-      animation-duration: 0.15s;
-      animation-timing-function: ease-out;
-      animation-direction: forwards;
-      animation-iteration-count: 1;
-      animation-play-state: running;
-    }
-    .toggler label::after, .toggler label .toggler-on, .toggler label .toggler-off {
-      position: absolute;
-      top: 50%;
-      left: 25%;
-      width: 26px;
-      height: 26px;
-      transform: translateY(-50%) translateX(-50%);
-      transition: left 0.15s ease-in-out, background-color 0.2s ease-out, width 0.15s ease-in-out, height 0.15s ease-in-out, opacity 0.15s ease-in-out;
-    }
-    .toggler input:checked + label::after, .toggler input:checked + label .toggler-on, .toggler input:checked + label .toggler-off {
-      left: 75%;
-    }
-    .toggler input:checked + label::after {
-      background-color: #50ac5d;
-      animation-name: toggler-size2;
-    }
-    .toggler .toggler-on, .toggler .toggler-off {
-      opacity: 1;
-      z-index: 2;
-    }
-    .toggler input:checked + label .toggler-off, .toggler input:not(:checked) + label .toggler-on {
-      width: 0;
-      height: 0;
-      opacity: 0;
-    }
-    .toggler .path {
-      fill: none;
-      stroke: #fefefe;
-      stroke-width: 7px;
-      stroke-linecap: round;
-      stroke-miterlimit: 10;
-    }
-    @keyframes toggler-size {
-      0%, 100% {
-        width: 1.5rem;
-        height: 1.5rem;
-      }
-      50% {
-        width: 0.75rem;
-        height: 0.75rem;
-      }
-    }
-    @keyframes toggler-size2 {
-      0%, 100% {
-        width: 1.5rem;
-        height: 1.5rme;
-      }
-      50% {
-        width: 0.75rem;
-        height: 0.75rem;
-      }
-    }
-            `}</style>
+      <style jsx>{`
+        .toggler {
+          width: 3rem;
+          margin: 40px auto;
+        }
+        .toggler input {
+          display: none;
+        }
+        .toggler label {
+          display: block;
+          position: relative;
+          width: ${w}rem;
+          height: ${h}rem;
+          border: 1px solid #d6d6d6;
+          border-radius: 36px;
+          background: #e4e8e8;
+          cursor: pointer;
+        }
+        .toggler label::after {
+          display: block;
+          border-radius: 100%;
+          background-color: #d7062a;
+          content: "";
+          animation-name: toggler-size;
+          animation-duration: 0.15s;
+          animation-timing-function: ease-out;
+          animation-direction: forwards;
+          animation-iteration-count: 1;
+          animation-play-state: running;
+        }
+        .toggler label::after,
+        .toggler label .toggler-on,
+        .toggler label .toggler-off {
+          position: absolute;
+          top: 50%;
+          left: 25%;
+          width: 26px;
+          height: 26px;
+          transform: translateY(-50%) translateX(-50%);
+          transition: left 0.15s ease-in-out, background-color 0.2s ease-out,
+            width 0.15s ease-in-out, height 0.15s ease-in-out,
+            opacity 0.15s ease-in-out;
+        }
+        .toggler input:checked + label::after,
+        .toggler input:checked + label .toggler-on,
+        .toggler input:checked + label .toggler-off {
+          left: 75%;
+        }
+        .toggler input:checked + label::after {
+          background-color: #50ac5d;
+          animation-name: toggler-size2;
+        }
+        .toggler .toggler-on,
+        .toggler .toggler-off {
+          opacity: 1;
+          z-index: 2;
+        }
+        .toggler input:checked + label .toggler-off,
+        .toggler input:not(:checked) + label .toggler-on {
+          width: 0;
+          height: 0;
+          opacity: 0;
+        }
+        .toggler .path {
+          fill: none;
+          stroke: #fefefe;
+          stroke-width: 7px;
+          stroke-linecap: round;
+          stroke-miterlimit: 10;
+        }
+        @keyframes toggler-size {
+          0%,
+          100% {
+            width: 1.5rem;
+            height: 1.5rem;
+          }
+          50% {
+            width: 0.75rem;
+            height: 0.75rem;
+          }
+        }
+        @keyframes toggler-size2 {
+          0%,
+          100% {
+            width: 1.5rem;
+            height: 1.5rme;
+          }
+          50% {
+            width: 0.75rem;
+            height: 0.75rem;
+          }
+        }
+      `}</style>
       <div className="toggler">
         <input
           id="toggler-1"
@@ -435,224 +452,224 @@ export function Loader() {
     <>
       <style jsx>{`
         /* Assuming base font size of 16px, so 1rem = 16px */
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.loading-wide {
-    width: 17.375rem;
-    height: 17.375rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-.color {
-  background-color: #3395ff;
-}
-.l1 {
-  width: 0.9375rem; /* 15px / 16px */
-  height: 4.0625rem; /* 65px / 16px */
-  position: absolute;
-  animation: move-h 1.2s infinite cubic-bezier(0.65, 0.05, 0.36, 1);
-}
-.l2 {
-  width: 0.9375rem; /* 15px / 16px */
-  height: 3.75rem;  /* 60px / 16px */
-  position: absolute;
-  transform: rotate(90deg);
-  animation: move-v 1.2s infinite cubic-bezier(0.65, 0.05, 0.36, 1);
-}
-@keyframes move-h {
-  0% {
-    top: 0;
-    opacity: 0;
-  }
-  25% {
-    opacity: 1;
-  }
-  50% {
-    top: 30%;
-    opacity: 1;
-  }
-  75% {
-    opacity: 1;
-  }
-  100% {
-    top: 100%;
-    opacity: 0;
-  }
-}
-@keyframes move-v {
-  0% {
-    left: 0;
-    opacity: 0;
-  }
-  25% {
-    opacity: 1;
-  }
-  50% {
-    left: 45%;
-    opacity: 1;
-  }
-  75% {
-    opacity: 1;
-  }
-  100% {
-    left: 100%;
-    opacity: 0;
-  }
-}
-.animation-effect-light {
-  animation: effect 0.2s 0.1s infinite linear;
-}
-.animation-effect-light-d {
-  animation: effect 0.3s 0.2s infinite linear;
-}
-.animation-effect-rot {
-  animation: rot 0.8s infinite cubic-bezier(0.65, 0.05, 0.36, 1);
-}
-.animation-effect-scale {
-  animation: scale 0.8s infinite cubic-bezier(0.65, 0.05, 0.36, 1);
-}
-@keyframes effect {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@keyframes rot {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(180deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-@keyframes scale {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.9);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-.e1 {
-  width: 0.0625rem; /* 1px / 16px */
-  height: 2.5rem;   /* 40px / 16px */
-  opacity: 0.3;
-  position: absolute;
-  top: 0;
-  left: 0.5rem;    /* 8px / 16px */
-}
-.e2 {
-  width: 3.75rem;  /* 60px / 16px */
-  height: 0.0625rem; /* 1px / 16px */
-  opacity: 0.8;
-  position: absolute;
-  top: 0.5rem;    /* 8px / 16px */
-  left: 0;
-}
-.e3 {
-  position: absolute;
-  top: 0.625rem;  /* 10px / 16px */
-  left: 0.75rem;  /* 12px / 16px */
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: 900;
-  font-size: 1.125rem;  /* 18px / 16px */
-  color: #3395ff;
-}
-.e4 {
-  width: 0.0625rem; /* 1px / 16px */
-  height: 2.5rem;   /* 40px / 16px */
-  opacity: 0.3;
-  position: absolute;
-  top: 5.625rem;   /* 90px / 16px */
-  right: 0.625rem; /* 10px / 16px */
-}
-.e5 {
-  width: 2.5rem;   /* 40px / 16px */
-  height: 0.0625rem; /* 1px / 16px */
-  opacity: 0.3;
-  position: absolute;
-  top: 6.25rem;    /* 100px / 16px */
-  right: 0;
-}
-.e6 {
-  position: absolute;
-  top: 6.25rem;    /* 100px / 16px */
-  right: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 2rem;  /* 32px / 16px */
-  color: #3395ff;
-}
-.e7 {
-  width: 0.0625rem; /* 1px / 16px */
-  height: 1.25rem;  /* 20px / 16px */
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  transform: rotate(45deg);
-  animation: height 1s infinite cubic-bezier(0.65, 0.05, 0.36, 1);
-}
-@keyframes height {
-  0% {
-    bottom: 0%;
-    left: 0%;
-    height: 0;
-  }
-  25% {
-    height: 5.625rem; /* 90px / 16px */
-  }
-  50% {
-    bottom: 100%;
-    left: 100%;
-    height: 5.625rem; /* 90px / 16px */
-  }
-  75% {
-    height: 0;
-  }
-  100% {
-    bottom: 0%;
-    left: 0%;
-    height: 0;
-  }
-}
-.e8 {
-  width: 1.25rem;  /* 20px / 16px */
-  height: 0.0625rem; /* 1px / 16px */
-  position: absolute;
-  bottom: 50%;
-  left: 0;
-  animation: width 1.5s infinite cubic-bezier(0.65, 0.05, 0.36, 1);
-}
-@keyframes width {
-  0% {
-    left: 0%;
-    width: 0;
-  }
-  50% {
-    left: 100%;
-    width: 5.625rem; /* 90px / 16px */
-  }
-  100% {
-    left: 0%;
-    width: 0;
-  }
-}
-        `}</style>
+        .loading {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .loading-wide {
+          width: 17.375rem;
+          height: 17.375rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+        }
+        .color {
+          background-color: #3395ff;
+        }
+        .l1 {
+          width: 0.9375rem; /* 15px / 16px */
+          height: 4.0625rem; /* 65px / 16px */
+          position: absolute;
+          animation: move-h 1.2s infinite cubic-bezier(0.65, 0.05, 0.36, 1);
+        }
+        .l2 {
+          width: 0.9375rem; /* 15px / 16px */
+          height: 3.75rem; /* 60px / 16px */
+          position: absolute;
+          transform: rotate(90deg);
+          animation: move-v 1.2s infinite cubic-bezier(0.65, 0.05, 0.36, 1);
+        }
+        @keyframes move-h {
+          0% {
+            top: 0;
+            opacity: 0;
+          }
+          25% {
+            opacity: 1;
+          }
+          50% {
+            top: 30%;
+            opacity: 1;
+          }
+          75% {
+            opacity: 1;
+          }
+          100% {
+            top: 100%;
+            opacity: 0;
+          }
+        }
+        @keyframes move-v {
+          0% {
+            left: 0;
+            opacity: 0;
+          }
+          25% {
+            opacity: 1;
+          }
+          50% {
+            left: 45%;
+            opacity: 1;
+          }
+          75% {
+            opacity: 1;
+          }
+          100% {
+            left: 100%;
+            opacity: 0;
+          }
+        }
+        .animation-effect-light {
+          animation: effect 0.2s 0.1s infinite linear;
+        }
+        .animation-effect-light-d {
+          animation: effect 0.3s 0.2s infinite linear;
+        }
+        .animation-effect-rot {
+          animation: rot 0.8s infinite cubic-bezier(0.65, 0.05, 0.36, 1);
+        }
+        .animation-effect-scale {
+          animation: scale 0.8s infinite cubic-bezier(0.65, 0.05, 0.36, 1);
+        }
+        @keyframes effect {
+          0% {
+            opacity: 0;
+          }
+          50% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0;
+          }
+        }
+        @keyframes rot {
+          0% {
+            transform: rotate(0deg);
+          }
+          50% {
+            transform: rotate(180deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+        @keyframes scale {
+          0% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.9);
+          }
+          100% {
+            transform: scale(1);
+          }
+        }
+        .e1 {
+          width: 0.0625rem; /* 1px / 16px */
+          height: 2.5rem; /* 40px / 16px */
+          opacity: 0.3;
+          position: absolute;
+          top: 0;
+          left: 0.5rem; /* 8px / 16px */
+        }
+        .e2 {
+          width: 3.75rem; /* 60px / 16px */
+          height: 0.0625rem; /* 1px / 16px */
+          opacity: 0.8;
+          position: absolute;
+          top: 0.5rem; /* 8px / 16px */
+          left: 0;
+        }
+        .e3 {
+          position: absolute;
+          top: 0.625rem; /* 10px / 16px */
+          left: 0.75rem; /* 12px / 16px */
+          font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+          font-weight: 900;
+          font-size: 1.125rem; /* 18px / 16px */
+          color: #3395ff;
+        }
+        .e4 {
+          width: 0.0625rem; /* 1px / 16px */
+          height: 2.5rem; /* 40px / 16px */
+          opacity: 0.3;
+          position: absolute;
+          top: 5.625rem; /* 90px / 16px */
+          right: 0.625rem; /* 10px / 16px */
+        }
+        .e5 {
+          width: 2.5rem; /* 40px / 16px */
+          height: 0.0625rem; /* 1px / 16px */
+          opacity: 0.3;
+          position: absolute;
+          top: 6.25rem; /* 100px / 16px */
+          right: 0;
+        }
+        .e6 {
+          position: absolute;
+          top: 6.25rem; /* 100px / 16px */
+          right: 0;
+          font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+          font-size: 2rem; /* 32px / 16px */
+          color: #3395ff;
+        }
+        .e7 {
+          width: 0.0625rem; /* 1px / 16px */
+          height: 1.25rem; /* 20px / 16px */
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          transform: rotate(45deg);
+          animation: height 1s infinite cubic-bezier(0.65, 0.05, 0.36, 1);
+        }
+        @keyframes height {
+          0% {
+            bottom: 0%;
+            left: 0%;
+            height: 0;
+          }
+          25% {
+            height: 5.625rem; /* 90px / 16px */
+          }
+          50% {
+            bottom: 100%;
+            left: 100%;
+            height: 5.625rem; /* 90px / 16px */
+          }
+          75% {
+            height: 0;
+          }
+          100% {
+            bottom: 0%;
+            left: 0%;
+            height: 0;
+          }
+        }
+        .e8 {
+          width: 1.25rem; /* 20px / 16px */
+          height: 0.0625rem; /* 1px / 16px */
+          position: absolute;
+          bottom: 50%;
+          left: 0;
+          animation: width 1.5s infinite cubic-bezier(0.65, 0.05, 0.36, 1);
+        }
+        @keyframes width {
+          0% {
+            left: 0%;
+            width: 0;
+          }
+          50% {
+            left: 100%;
+            width: 5.625rem; /* 90px / 16px */
+          }
+          100% {
+            left: 0%;
+            width: 0;
+          }
+        }
+      `}</style>
       <div className="loading">
         <div className="loading-wide">
           <div className="l1 color" />
@@ -665,138 +682,6 @@ export function Loader() {
           <div className="e6 animation-effect-scale">*</div>
           <div className="e7 color" />
           <div className="e8 color" />
-        </div>
-      </div>
-    </>
-  );
-}
-export function Slider({
-  children,
-  autoplay = false,
-  autoplayInterval = 3000,
-}) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  useEffect(() => {
-    if (autoplay) {
-      const intervalId = setInterval(() => {
-        setCurrentIndex((prevIndex) =>
-          prevIndex === React.Children.count(children) - 1 ? 0 : prevIndex + 1
-        );
-      }, autoplayInterval);
-      return () => clearInterval(intervalId);
-    }
-  }, [autoplay, autoplayInterval, children]);
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? React.Children.count(children) - 1 : prevIndex - 1
-    );
-  };
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === React.Children.count(children) - 1 ? 0 : prevIndex + 1
-    );
-  };
-  return (
-    <>
-      <style jsx>{`
-      .slider-container {
-        position: relative;
-        overflow: hidden;
-        width: 100%;
-        height: 100%;
-      }
-      .slider-wrapper {
-        width: 100%;
-        min-height: 100vh;
-        overflow: hidden;
-      }
-      .slider-content {
-        display: flex;
-        transition: transform 0.5s ease-in-out;
-      }
-      .slider-slide {
-        flex: 0 0 100%;
-        box-sizing: border-box;
-        width: 100%;
-        min-height: 100vh;
-        padding: 1rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .slider-button {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: #1193d2;
-        color: white;
-        border: none;
-        padding: 10px;
-        cursor: pointer;
-        z-index: 1;
-        height: 2rem;
-        width: 3rem;
-        border-radius: 10px;
-        box-shadow: 1px 1px 19px -1px #1193d2;
-        font-weight: bold;
-        display: flex;
-        justify-content: center;
-      align-items: center;
-      }
-      .slider-button.prev {
-        left: 10px;
-      }
-      .slider-button.next {
-        right: 10px;
-      }
-      .slider-pagination {
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-      }
-      .pagination-dot {
-        height: 10px;
-        width: 10px;
-        margin: 0 5px;
-        background-color: white;
-        border-radius: 50%;
-        display: inline-block;
-        cursor: pointer;
-      }
-      .pagination-dot.active {
-        background-color: black;
-      }
-      `}</style>
-      <div className="slider-container">
-        <button className="slider-button prev" onClick={handlePrev}>
-          <i className="fa-solid fa-angles-left"></i>
-        </button>
-        <button className="slider-button next" onClick={handleNext}>
-          <i className="fa-solid fa-angles-right"></i>
-        </button>
-        <div className="slider-wrapper">
-          <div
-            className="slider-content"
-            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-          >
-            {React.Children.map(children, (child, index) => (
-              <div className="slider-slide" key={index}>
-                {child}
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="slider-pagination">
-          {React.Children.map(children, (_, index) => (
-            <span
-              key={index}
-              className={`pagination-dot ${index === currentIndex ? "active" : ""
-                }`}
-              onClick={() => setCurrentIndex(index)}
-            />
-          ))}
         </div>
       </div>
     </>
@@ -858,7 +743,7 @@ export function RoseBox({
     if (lazy) {
       const timer = setTimeout(() => {
         setIsLoaded(true);
-      }, 200); // Adjust the delay as needed
+      }, 200);
       return () => clearTimeout(timer);
     }
   }, [lazy]);
@@ -871,34 +756,33 @@ export function RoseBox({
   const aspectStyle = aspectRatio ? { aspectRatio } : {};
   const displayLayoutStyle = grid
     ? {
-      display: "grid",
-      gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
-    }
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
+      }
     : flex
-      ? { display: "flex", justifyContent: "space-between", alignItems: "center" }
-      : {};
+    ? { display: "flex", justifyContent: "space-between", alignItems: "center" }
+    : {};
   const backgroundStyle = background ? { background } : {};
   const autoHandleStyle = AutoHandling
     ? {
-      background: "#1b85db",
-      height: "3rem",
-      minWidth: "11rem",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      border: "1px solid #1b85db",
-      borderRadius: "7px",
-      fontWeight: "bold",
-      boxShadow:
-        "#1b85db 0px 50px 100px -20px, #1b85db 0px 30px 60px -30px, #1b85db 0px -2px 6px 0px inset",
-      outlineOffset: `${outlineOffset}`,
-      outlineStyle: "solid",
-      outlineColor: "#1b85db",
-      outlineWidth: "2px",
-      cursor: "pointer",
-    }
+        background: "#1b85db",
+        height: "3rem",
+        minWidth: "11rem",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        border: "1px solid #1b85db",
+        borderRadius: "7px",
+        fontWeight: "bold",
+        boxShadow:
+          "#1b85db 0px 50px 100px -20px, #1b85db 0px 30px 60px -30px, #1b85db 0px -2px 6px 0px inset",
+        outlineOffset: `${outlineOffset}`,
+        outlineStyle: "solid",
+        outlineColor: "#1b85db",
+        outlineWidth: "2px",
+        cursor: "pointer",
+      }
     : {};
-  // Apply the hover class conditionally
   const hoverClass = atHover ? "rosebox-hover" : "";
   const handleClick = () => {
     if (typeof onClick === "function") {
@@ -908,34 +792,36 @@ export function RoseBox({
   return (
     <>
       <style jsx>{`
-                .rosebox-hover {
-                    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
-                }
-                .rosebox-hover:hover {
-                    transform: scale(1.05);
-                    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-                    background-color: rgba(240, 240, 240, 0.8);
-                }
-                .rosebox-scale-animate {
-                    animation: scale-down 0.6s ease-out forwards;
-                }
-                @keyframes scale-down {
-                    0% {
-                        transform: scale(2);
-                    }
-                    100% {
-                        transform: scale(0.9);
-                    }
-                }
-            `}</style>
+        .rosebox-hover {
+          transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out,
+            background-color 0.3s ease-in-out;
+        }
+        .rosebox-hover:hover {
+          transform: scale(1.05);
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+          background-color: rgba(240, 240, 240, 0.8);
+        }
+        .rosebox-scale-animate {
+          animation: scale-down 0.6s ease-out forwards;
+        }
+        @keyframes scale-down {
+          0% {
+            transform: scale(2);
+          }
+          100% {
+            transform: scale(0.9);
+          }
+        }
+      `}</style>
       {childrenVisible && (
         <div
           aria-label={ariaLabel}
           role={role}
           onClick={handleClick}
           id={RoseID}
-          className={`${RoseName} ${hoverClass} ${scaleAnimate ? "rosebox-scale-animate" : ""
-            }`}
+          className={`${RoseName} ${hoverClass} ${
+            scaleAnimate ? "rosebox-scale-animate" : ""
+          }`}
           style={{
             ...edit,
             ...layoutStyle,
@@ -968,40 +854,38 @@ export function SplitText({
     const fullAnimationDuration =
       speed + delay * (children.split("").length || 1);
     const timer = setTimeout(() => {
-      setAnimateTypeStyle("word"); // Change to 'word' after full animation duration
-    }, fullAnimationDuration * 1000); // Convert duration to milliseconds
-    return () => clearTimeout(timer); // Cleanup timer on component unmount
+      setAnimateTypeStyle("word");
+    }, fullAnimationDuration * 1000);
+    return () => clearTimeout(timer);
   }, [speed, delay, children]);
-  // Split the text based on animateTypeStyle (word or character)
   const splitText =
     animateTypeStyle === "word" ? children.split(/(\s+)/) : children.split("");
-  // Map through the split text to create the animation effect
   const animatedText = splitText.map((item, index) => (
     <span
       key={index}
       className="SplitTextItem"
       style={{ "--SplitTextItem-index": index }}
     >
-      {item === " " ? "\u00A0" : item} {/* Handle spaces */}
+      {item === " " ? "\u00A0" : item}
     </span>
   ));
   return (
     <>
       <style jsx>{`
-              .SplitTextItem {
-                  display: inline-block;
-                  opacity: 0;
-                  transform: translateY(20px);
-                  animation: splitAnimation ${speed}s forwards;
-                  animation-delay: calc(var(--SplitTextItem-index) * ${delay}s);
-              }
-              @keyframes splitAnimation {
-                  to {
-                      opacity: 1;
-                      transform: translateY(0);
-                  }
-              }
-          `}</style>
+        .SplitTextItem {
+          display: inline-block;
+          opacity: 0;
+          transform: translateY(20px);
+          animation: splitAnimation ${speed}s forwards;
+          animation-delay: calc(var(--SplitTextItem-index) * ${delay}s);
+        }
+        @keyframes splitAnimation {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
       <div style={{ ...edit }} id={RoseId} className={RoseName}>
         {animatedText}
       </div>
@@ -1013,47 +897,63 @@ export function ShinyText({
   RoseName,
   RoseId,
   edit = {},
-  speed = 2, // duration of the shine effect
-  color = "#fff", // color of the shiny effect
-  backgroundColor = "#000", // background color to contrast with the shine
+  speed = 2,
+  color = "#fff",
+  backgroundColor = "#000",
+  onClick,
 }) {
+  let onClickFun = () => {
+    if (typeof onClick === "function") {
+      onClick();
+    }
+  };
   return (
     <>
       <style jsx>{`
-              .shiny-text {
-                  position: relative;
-                  display: inline-block;
-                  color: ${color};
-                  background-color: ${backgroundColor};
-                  overflow: hidden;
-                  font-weight: bold;
-                  background-clip: text;
-                  -webkit-background-clip: text;
-                  color: transparent;
-              }
-              .shiny-text::before {
-                  content: '';
-                  position: absolute;
-                  top: 0;
-                  left: -100%;
-                  height: 100%;
-                  width: 100%;
-                  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.7), transparent);
-                  transform: skewX(-15deg);
-              }
-              .shiny-text::before {
-                  animation: shiny-effect ${speed}s infinite;
-              }
-              @keyframes shiny-effect {
-                  0% {
-                      left: -100%;
-                  }
-                  100% {
-                      left: 100%;
-                  }
-              }
-          `}</style>
-      <div style={{ ...edit }} id={RoseId} className={`shiny-text ${RoseName}`}>
+        .shiny-text {
+          position: relative;
+          display: inline-block;
+          color: ${color};
+          background-color: ${backgroundColor};
+          overflow: hidden;
+          font-weight: bold;
+          background-clip: text;
+          -webkit-background-clip: text;
+          color: transparent;
+        }
+        .shiny-text::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -100%;
+          height: 100%;
+          width: 100%;
+          background: linear-gradient(
+            120deg,
+            transparent,
+            rgba(255, 255, 255, 0.7),
+            transparent
+          );
+          transform: skewX(-15deg);
+        }
+        .shiny-text::before {
+          animation: shiny-effect ${speed}s infinite;
+        }
+        @keyframes shiny-effect {
+          0% {
+            left: -100%;
+          }
+          100% {
+            left: 100%;
+          }
+        }
+      `}</style>
+      <div
+        onClick={onClickFun}
+        style={{ ...edit }}
+        id={RoseId}
+        className={`shiny-text ${RoseName}`}
+      >
         {children}
       </div>
     </>
@@ -1064,69 +964,76 @@ export function ShinyButton({
   RoseName,
   RoseId,
   edit = {},
-  speed = 2, // duration of the shine effect
-  color = "#fff", // text color
-  backgroundColor = "#111", // button background color
-  padding = "10px 20px", // button padding
-  borderRadius = "5px", // button border radius
-  ShinyButtonEvent,
+  speed = 2,
+  color = "#fff",
+  backgroundColor = "#111",
+  padding = "10px 20px",
+  borderRadius = "5px",
+  onClick,
 }) {
-  let ShinyButtonEventClick = () => {
-    if (typeof ShinyButtonEvent === "function") {
-      ShinyButtonEvent();
+  let onClickFun = () => {
+    if (typeof onClick === "function") {
+      onClick();
     }
   };
   return (
     <>
       <style jsx>{`
-              .shiny-button {
-                  position: relative;
-                  display: inline-block;
-                  padding: ${padding};
-                  background-color: ${backgroundColor};
-                  color: ${color};
-                  font-weight: bold;
-                  text-transform: uppercase;
-                  overflow: hidden;
-                  border-radius: ${borderRadius};
-                  cursor: pointer;
-                  transition: background-color 0.3s, color 0.3s;
-                  ursor: pointer;
-                  border: 1px solid #353535;
-                  padding: .4em 1.2em;
-                  border-radius: 50px;
-                  transition: .3s ease;
-              }
-              .shiny-button::before {
-                  content: '';
-                  position: absolute;
-                  top: -100%;
-                  left: -100%;
-                  height: 100%;
-                  width: 100%;
-                  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.7), transparent);
-                  transform: skewX(-15deg);
-                  transition: opacity 0.3s;
-              }
-              .shiny-button:hover::before {
-                  animation: shiny-effect ${speed}s infinite;
-                  opacity: 1;
-              }
-              .shiny-button:hover {
-                  background-color: ${backgroundColor};
-                  color: ${color};
-              }
-              @keyframes shiny-effect {
-                  0% {
-                      left: -100%;
-                  }
-                  100% {
-                      left: 100%;
-                  }
-              }
-          `}</style>
+        .shiny-button {
+          position: relative;
+          display: inline-block;
+          padding: ${padding};
+          background-color: ${backgroundColor};
+          color: ${color};
+          font-weight: bold;
+          text-transform: uppercase;
+          overflow: hidden;
+          border-radius: ${borderRadius};
+          cursor: pointer;
+          transition: background-color 0.3s, color 0.3s;
+          ursor: pointer;
+          border: 1px solid #353535;
+          padding: 0.4em 1.2em;
+          border-radius: 50px;
+          transition: 0.3s ease;
+        }
+        .shiny-button::before {
+          content: "";
+          position: absolute;
+          top: -100%;
+          left: -100%;
+          height: 100%;
+          width: 100%;
+          background: linear-gradient(
+            120deg,
+            transparent,
+            rgba(255, 255, 255, 0.7),
+            transparent
+          );
+          transform: skewX(-15deg);
+          transition: opacity 0.3s;
+        }
+        .shiny-button:hover::before {
+          animation: shiny-effect ${speed}s infinite;
+          opacity: 1;
+        }
+        .shiny-button:hover {
+          background-color: ${backgroundColor};
+          color: ${color};
+        }
+        @keyframes shiny-effect {
+          0% {
+            left: -100%;
+          }
+          100% {
+            left: 100%;
+          }
+        }
+      `}</style>
       <button
-        onClick={ShinyButtonEventClick}
+        role="button"
+        aria-label="button"
+        onClick={onClickFun}
         style={{ ...edit }}
         id={RoseId}
         className={`shiny-button ${RoseName}`}
@@ -1140,7 +1047,7 @@ export function WaveText({
   children,
   RoseName,
   RoseId,
-  initialWaveType = "character", // Initial waveType, defaults to 'character'
+  initialWaveType = "character",
   edit = {},
   speed = 0.5,
   delay = 0.05,
@@ -1152,48 +1059,46 @@ export function WaveText({
     const totalAnimationDuration =
       speed + delay * (children.split("").length || 1);
     const timer = setTimeout(() => {
-      setWaveType("word"); // Change to 'word' after the full animation duration
-    }, totalAnimationDuration * 1000 + 200); // Adjust timing to ensure it starts after animation
-    return () => clearTimeout(timer); // Cleanup timer on component unmount
+      setWaveType("word");
+    }, totalAnimationDuration * 1000 + 200);
+    return () => clearTimeout(timer);
   }, [speed, delay, children]);
-  // Split the text based on waveType (word or character)
   const splitText =
     waveType === "word" ? children.split(/(\s+)/) : children.split("");
-  // Map through the split text to create the wave effect
   const waveText = splitText.map((item, index) => (
     <span
       key={index}
       className="WaveTextItem"
       style={{ "--WaveTextItem-index": index }}
     >
-      {item === " " ? "\u00A0" : item} {/* Handle spaces */}
+      {item === " " ? "\u00A0" : item}
     </span>
   ));
   return (
     <>
       <style jsx>{`
-              .WaveTextItem {
-                  display: inline-block;
-                  opacity: 0;
-                  transform: translateY(${amplitude}px);
-                  animation: waveAnimation ${speed}s forwards;
-                  animation-delay: calc(var(--WaveTextItem-index) * ${delay}s);
-              }
-              @keyframes waveAnimation {
-                  0% {
-                      opacity: 0;
-                      transform: translateY(${amplitude}px);
-                  }
-                  50% {
-                      opacity: 1;
-                      transform: translateY(-${amplitude}px);
-                  }
-                  100% {
-                      opacity: 1;
-                      transform: translateY(0);
-                  }
-              }
-          `}</style>
+        .WaveTextItem {
+          display: inline-block;
+          opacity: 0;
+          transform: translateY(${amplitude}px);
+          animation: waveAnimation ${speed}s forwards;
+          animation-delay: calc(var(--WaveTextItem-index) * ${delay}s);
+        }
+        @keyframes waveAnimation {
+          0% {
+            opacity: 0;
+            transform: translateY(${amplitude}px);
+          }
+          50% {
+            opacity: 1;
+            transform: translateY(-${amplitude}px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
       <div style={{ ...edit }} id={RoseId} className={RoseName}>
         {waveText}
       </div>
@@ -1207,36 +1112,31 @@ export function AnimatedText({
   edit = {},
   speed = 0.5,
   delay = 0.05,
-  animationType = "blur", // Type of animation: 'blur', 'fadeIn', 'slideIn', 'zoomIn'
-  initialAnimateTypeStyle = "character", // Initial prop for animating by 'word' or 'character'
+  animationType = "blur",
+  initialAnimateTypeStyle = "character",
 }) {
   const [animateTypeStyle, setAnimateTypeStyle] = useState(
     initialAnimateTypeStyle
   );
   useEffect(() => {
-    // Calculate total duration of animation including delay
     const totalAnimationDuration =
       speed + delay * (children.split("").length || 1);
     const timer = setTimeout(() => {
-      setAnimateTypeStyle("word"); // Change to 'word' after the animation ends
-    }, totalAnimationDuration * 1000 + 600); // Adjust timing as needed
-    return () => clearTimeout(timer); // Cleanup timer on component unmount
+      setAnimateTypeStyle("word");
+    }, totalAnimationDuration * 1000 + 600);
+    return () => clearTimeout(timer);
   }, [speed, delay, children]);
-  // Split the text based on animateTypeStyle (word or character)
   const splitText =
-    animateTypeStyle === "word"
-      ? children.split(/(\s+)/) // Split by spaces and preserve them
-      : children.split("");
-  // Map through the split text to create the animation effect
+    animateTypeStyle === "word" ? children.split(/(\s+)/) : children.split("");
+
   const animatedText = splitText.map((item, index) => (
     <span
       key={index}
       className="AnimatedTextItem"
       style={{ "--AnimatedTextItem-index": index }}
     >
-      {item === " " ? "\u00A0" : item} {/* Handle spaces */}
-      {animateTypeStyle === "word" && item === " " && " "}{" "}
-      {/* Ensure space rendering if animating words */}
+      {item === " " ? "\u00A0" : item}
+      {animateTypeStyle === "word" && item === " " && " "}
     </span>
   ));
   const animations = {
@@ -1263,36 +1163,36 @@ export function AnimatedText({
   return (
     <>
       <style jsx>{`
-              .AnimatedTextItem {
-                  display: inline-block;
-                  ${selectedAnimation}
-                  animation-delay: calc(var(--AnimatedTextItem-index) * ${delay}s);
-              }
-              @keyframes blurAnimation {
-                  to {
-                      opacity: 1;
-                      transform: translateY(0);
-                      filter: blur(0);
-                  }
-              }
-              @keyframes fadeInAnimation {
-                  to {
-                      opacity: 1;
-                  }
-              }
-              @keyframes slideInAnimation {
-                  to {
-                      opacity: 1;
-                      transform: translateX(0);
-                  }
-              }
-              @keyframes zoomInAnimation {
-                  to {
-                      opacity: 1;
-                      transform: scale(1);
-                  }
-              }
-          `}</style>
+        .AnimatedTextItem {
+          display: inline-block;
+          ${selectedAnimation}
+          animation-delay: calc(var(--AnimatedTextItem-index) * ${delay}s);
+        }
+        @keyframes blurAnimation {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+          }
+        }
+        @keyframes fadeInAnimation {
+          to {
+            opacity: 1;
+          }
+        }
+        @keyframes slideInAnimation {
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        @keyframes zoomInAnimation {
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+      `}</style>
       <div style={{ ...edit }} id={RoseId} className={RoseName}>
         {animatedText}
       </div>
@@ -1317,17 +1217,17 @@ export const RoseRouter = ({ children, customStyles = "" }) => {
   return (
     <>
       <style jsx>{`
-                .route {
-                    opacity: 0;
-                    transform: translateY(20px);
-                    transition: opacity 0.5s ease, transform 0.5s ease;
-                }
-                .route-active {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-                ${customStyles}
-            `}</style>
+        .route {
+          opacity: 0;
+          transform: translateY(20px);
+          transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .route-active {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        ${customStyles}
+      `}</style>
       <RouterContext.Provider value={{ route, navigate }}>
         {children}
       </RouterContext.Provider>
@@ -1380,10 +1280,10 @@ export const RoseParent = ({
   return (
     <>
       <style jsx>{`
-                .rose-parent {
-                    display: ${display};
-                    ${isGrid
-          ? `
+        .rose-parent {
+          display: ${display};
+          ${isGrid
+            ? `
                         grid-template-columns: ${gridTemplateColumns};
                         grid-template-rows: ${gridTemplateRows};
                         grid-column-gap: ${gridColumnGap};
@@ -1396,41 +1296,40 @@ export const RoseParent = ({
                         grid-auto-rows: ${gridAutoRows};
                         grid-template-areas: ${gridTemplateAreas};
                     `
-          : `
+            : `
                         flex-direction: ${flexDirection};
                         justify-content: ${justifyContent};
                         align-items: ${alignItems};
                         align-content: ${alignContent};
                         flex-wrap: ${flexWrap};
                         gap: ${gap};
-                    `
+                    `}
+          padding: ${padding};
+          box-sizing: border-box;
+          width: ${width};
+          min-height: ${minHeight};
         }
-                    padding: ${padding};
-                    box-sizing: border-box;
-                    width: ${width};
-                    min-height: ${minHeight};
-                }
-                .rose-parent > * {
-                    flex-basis: ${flexBasis};
-                    flex-grow: ${flexGrow};
-                    flex-shrink: ${flexShrink};
-                    align-self: ${alignSelf};
-                    justify-self: ${justifySelf};
-                    grid-area: ${gridArea};
-                }
-                @media (min-width: 768px) {
-                    .rose-parent {
-                        flex-direction: row;
-                        justify-content: space-between;
-                    }
-                }
-                @media (max-width: 767px) {
-                    .rose-parent {
-                        flex-direction: ${flexDirectionMobile};
-                        align-items: center;
-                    }
-                }
-            `}</style>
+        .rose-parent > * {
+          flex-basis: ${flexBasis};
+          flex-grow: ${flexGrow};
+          flex-shrink: ${flexShrink};
+          align-self: ${alignSelf};
+          justify-self: ${justifySelf};
+          grid-area: ${gridArea};
+        }
+        @media (min-width: 768px) {
+          .rose-parent {
+            flex-direction: row;
+            justify-content: space-between;
+          }
+        }
+        @media (max-width: 767px) {
+          .rose-parent {
+            flex-direction: ${flexDirectionMobile};
+            align-items: center;
+          }
+        }
+      `}</style>
       <div id={RoseID} className={`rose-parent ${RoseName}`} style={edit}>
         {children}
       </div>
@@ -1494,17 +1393,16 @@ export function Notification({
       const timer = setTimeout(() => {
         setValueState(true);
       }, delay);
-      // Clean up the timer on unmount
       return () => clearTimeout(timer);
     }
   }, [delay]);
   return (
     <>
       <style jsx>{`
-                .${RoseName} {
+        .${RoseName} {
           width: 20.625rem;
-          height: 5rem; 
-          border-radius: 0.5rem; 
+          height: 5rem;
+          border-radius: 0.5rem;
           box-sizing: border-box;
           padding: 0.625rem 0.9375rem;
           background-color: #ffffff;
@@ -1519,25 +1417,25 @@ export function Notification({
         .wave {
           position: absolute;
           transform: rotate(90deg);
-          left: -1.9375rem; /* -31px / 16 */
-          top: 2rem; /* 32px / 16 */
-          width: 5rem; /* 80px / 16 */
+          left: -1.9375rem;
+          top: 2rem;
+          width: 5rem;
           fill: #04e4003a;
         }
         .icon-container {
-          width: 2.1875rem; /* 35px / 16 */
-          height: 2.1875rem; /* 35px / 16 */
+          width: 2.1875rem;
+          height: 2.1875rem;
           display: flex;
           justify-content: center;
           align-items: center;
           background-color: #04e40048;
           border-radius: 50%;
-          margin-left: 0.5rem; /* 8px / 16 */
-          display:${iconDisplay};
+          margin-left: 0.5rem;
+          display: ${iconDisplay};
         }
         .icon {
-          width: 1.0625rem; /* 17px / 16 */
-          height: 1.0625rem; /* 17px / 16 */
+          width: 1.0625rem;
+          height: 1.0625rem;
           color: #269b24;
         }
         .message-text-container {
@@ -1554,11 +1452,11 @@ export function Notification({
         }
         .message-text {
           color: ${MessageColor};
-          font-size: 1.0625rem; /* 17px / 16 */
+          font-size: 1.0625rem;
           font-weight: 700;
         }
         .sub-text {
-          font-size: 0.875rem; /* 14px / 16 */
+          font-size: 0.875rem;
           color: ${DesMessageColor};
         }
         .cross-icon {
@@ -1613,24 +1511,23 @@ export function Notification({
   );
 }
 export function Spring({
-  rotate = 360, // Default rotation to 360 degrees
-  scale = 1, // Default scale to 1 (normal size)
-  speed = 0.8, // Default speed to 0.8 seconds
-  x = "0", // Default x translation
-  y = "0", // Default y translation
+  rotate = 360,
+  scale = 1,
+  speed = 0.8,
+  x = "0",
+  y = "0",
   z = "0",
   children,
   RoseID,
   RoseName = "RotatingSpringComponentStyle",
   edit,
-  drag = false, // Default to allow dragging
+  drag = false,
 }) {
   const elementRef = useRef(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [isDragged, setIsDragged] = useState(false);
   const [startOffset, setStartOffset] = useState({ x: 0, y: 0 });
-  // UseEffect to set initial position based on the element's location
   useEffect(() => {
     if (elementRef.current) {
       const rect = elementRef.current.getBoundingClientRect();
@@ -1664,33 +1561,33 @@ export function Spring({
   return (
     <>
       <style jsx>{`
-              .${RoseName} {
-                  min-height: 7rem;
-                  width: 7rem;
-                  background: #ffffff;
-                  border-radius: 26px;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  animation: LaRoseRotatingAnimated ${speed}s ease-in-out forwards;
-                  transform: rotate(0deg) scale(0);
-                  opacity: 0;
-                  overflow: hidden;
-                  translate: ${x} ${y} ${z};
-                  position: relative; /* Default position */
-                  cursor: ${drag ? "grab" : "default"};
-              }
-              .${RoseName}:active {
-                  cursor: ${drag ? "grabbing" : "default"};
-              }
-              @keyframes LaRoseRotatingAnimated {
-                  to {
-                                    translate: ${x} ${y} ${z};
-                      transform: rotate(${rotate}deg) scale(${scale});
-                      opacity: 1;
-                  }
-              }
-          `}</style>
+        .${RoseName} {
+          min-height: 7rem;
+          width: 7rem;
+          background: #ffffff;
+          border-radius: 26px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          animation: LaRoseRotatingAnimated ${speed}s ease-in-out forwards;
+          transform: rotate(0deg) scale(0);
+          opacity: 0;
+          overflow: hidden;
+          translate: ${x} ${y} ${z};
+          position: relative; /* Default position */
+          cursor: ${drag ? "grab" : "default"};
+        }
+        .${RoseName}:active {
+          cursor: ${drag ? "grabbing" : "default"};
+        }
+        @keyframes LaRoseRotatingAnimated {
+          to {
+            translate: ${x} ${y} ${z};
+            transform: rotate(${rotate}deg) scale(${scale});
+            opacity: 1;
+          }
+        }
+      `}</style>
       <div
         ref={elementRef}
         style={{
@@ -1711,25 +1608,24 @@ export function Spring({
   );
 }
 export function Variants({
-  rotate = 0, // Default rotation to 0 degrees
-  scale = 1, // Default scale to 1 (normal size)
-  speed = 0.8, // Default speed to 0.8 seconds
-  x = "0", // Default x translation
-  y = "0", // Default y translation
+  rotate = 0,
+  scale = 1,
+  speed = 0.8,
+  x = "0",
+  y = "0",
   z = "0",
   children,
   RoseID,
   RoseName = "RotatingVariantsComponentStyle",
   edit,
-  childDisplay = "grid", // Default child display
-  drag = false, // Default to allow dragging
+  childDisplay = "grid",
+  drag = false,
 }) {
   const elementRef = useRef(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [isDragged, setIsDragged] = useState(false);
   const [startOffset, setStartOffset] = useState({ x: 0, y: 0 });
-  // Set initial position based on the element's location
   useEffect(() => {
     if (elementRef.current) {
       const rect = elementRef.current.getBoundingClientRect();
@@ -1763,35 +1659,35 @@ export function Variants({
   return (
     <>
       <style jsx>{`
-              .${RoseName} {
-                  min-height: 7rem;
-                  width: 7rem;
-                  background: #380eff;
-                  border-radius: 26px;
-                  display:grid;
-                  grid-template-columns: auto auto;
-                  grid-gap: 1rem;
-                  justify-content: center;
-                  align-items: center;
-                  animation: ${RoseName}Animated ${speed}s ease-in-out forwards;
-                  transform: rotate(${rotate}deg) scale(${scale});
-                  translate: ${x} ${y} ${z};
-                  opacity: 0;
-                  overflow: hidden;
-                  position: relative; /* Default position */
-                  cursor: ${drag ? "grab" : "default"};
-              }
-              .${RoseName}:active {
-                  cursor: ${drag ? "grabbing" : "default"};
-              }
-              @keyframes ${RoseName}Animated {
-                  to {
-                      translate: ${x} ${y} ${z};
-                      transform: rotate(${rotate}deg) scale(${scale});
-                      opacity: 1;
-                  }
-              }
-          `}</style>
+        .${RoseName} {
+          min-height: 7rem;
+          width: 7rem;
+          background: #380eff;
+          border-radius: 26px;
+          display: grid;
+          grid-template-columns: auto auto;
+          grid-gap: 1rem;
+          justify-content: center;
+          align-items: center;
+          animation: ${RoseName}Animated ${speed}s ease-in-out forwards;
+          transform: rotate(${rotate}deg) scale(${scale});
+          translate: ${x} ${y} ${z};
+          opacity: 0;
+          overflow: hidden;
+          position: relative; /* Default position */
+          cursor: ${drag ? "grab" : "default"};
+        }
+        .${RoseName}:active {
+          cursor: ${drag ? "grabbing" : "default"};
+        }
+        @keyframes ${RoseName}Animated {
+          to {
+            translate: ${x} ${y} ${z};
+            transform: rotate(${rotate}deg) scale(${scale});
+            opacity: 1;
+          }
+        }
+      `}</style>
       <div
         ref={elementRef}
         style={{
@@ -1871,7 +1767,6 @@ export function RandomAnimate({
 }) {
   const [animationClass, setAnimationClass] = useState("");
   useEffect(() => {
-    // List of possible animations
     const animations = [
       "fadeIn",
       "slideInLeft",
@@ -1885,10 +1780,8 @@ export function RandomAnimate({
       "jackInTheBox",
     ];
     if (AnimatedType) {
-      // If AnimatedType is provided, use it as the animation class
       setAnimationClass(AnimatedType);
     } else {
-      // Randomly pick an animation if AnimatedType is not provided
       const randomAnimation =
         animations[Math.floor(Math.random() * animations.length)];
       setAnimationClass(randomAnimation);
@@ -1903,39 +1796,66 @@ export function RandomAnimate({
         /* Add your keyframe animations here */
         /* Fade In Animation */
         @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
         }
         .fadeIn {
           animation: fadeIn 1s ease-in-out;
         }
         /* Slide In Left Animation */
         @keyframes slideInLeft {
-          from { transform: translateX(-100%); opacity: 0; }
-          to { transform: translateX(0); opacity: 1; }
+          from {
+            transform: translateX(-100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
         }
         .slideInLeft {
           animation: slideInLeft 1s ease-in-out;
         }
         /* Zoom In Animation */
         @keyframes zoomIn {
-          from { transform: scale(0.5); opacity: 0; }
-          to { transform: scale(1); opacity: 1; }
+          from {
+            transform: scale(0.5);
+            opacity: 0;
+          }
+          to {
+            transform: scale(1);
+            opacity: 1;
+          }
         }
         .zoomIn {
           animation: zoomIn 1s ease-in-out;
         }
         /* Rotate In Animation */
         @keyframes rotateIn {
-          from { transform: rotate(-200deg); opacity: 0; }
-          to { transform: rotate(0); opacity: 1; }
+          from {
+            transform: rotate(-200deg);
+            opacity: 0;
+          }
+          to {
+            transform: rotate(0);
+            opacity: 1;
+          }
         }
         .rotateIn {
           animation: rotateIn 1s ease-in-out;
         }
         /* Bounce In Animation */
         @keyframes bounceIn {
-          0%, 20%, 40%, 60%, 80%, 100% {
+          0%,
+          20%,
+          40%,
+          60%,
+          80%,
+          100% {
             transform: translateY(0);
           }
           50% {
@@ -1975,16 +1895,28 @@ export function RandomAnimate({
         }
         /* Light Speed In Animation */
         @keyframes lightSpeedIn {
-          from { transform: translateX(100%) skewX(-30deg); opacity: 0; }
-          to { transform: translateX(0) skewX(0deg); opacity: 1; }
+          from {
+            transform: translateX(100%) skewX(-30deg);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0) skewX(0deg);
+            opacity: 1;
+          }
         }
         .lightSpeedIn {
           animation: lightSpeedIn 1s ease-out;
         }
         /* Roll In Animation */
         @keyframes rollIn {
-          from { transform: translateX(-100%) rotate(-120deg); opacity: 0; }
-          to { transform: translateX(0) rotate(0deg); opacity: 1; }
+          from {
+            transform: translateX(-100%) rotate(-120deg);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0) rotate(0deg);
+            opacity: 1;
+          }
         }
         .rollIn {
           animation: rollIn 1s ease-in-out;
@@ -2010,11 +1942,7 @@ export function RandomAnimate({
           animation: jackInTheBox 1s ease-in-out;
         }
       `}</style>
-      <div
-        id={RoseID}
-        style={edit}
-        className={`${RoseName} ${animationClass}`}
-      >
+      <div id={RoseID} style={edit} className={`${RoseName} ${animationClass}`}>
         {children}
       </div>
     </>
@@ -2025,45 +1953,45 @@ export function SideText({
   RoseID,
   RoseName = "side-textAnimatedLarose",
   edit = {},
-  direction = "left", // Default direction is 'left'
+  direction = "left",
 }) {
   const animationDirection =
     direction === "right" ? "sideTextRight" : "sideTextLeft";
   return (
     <>
       <style jsx>{`
-              .side-text {
-                  display: inline-block;
-              }
-              /* SideTextLeft Animation */
-              @keyframes sideTextLeft {
-                  from {
-                      transform: translateX(-100%);
-                      opacity: 0;
-                  }
-                  to {
-                      transform: translateX(0);
-                      opacity: 1;
-                  }
-              }
-              /* SideTextRight Animation */
-              @keyframes sideTextRight {
-                  from {
-                      transform: translateX(100%);
-                      opacity: 0;
-                  }
-                  to {
-                      transform: translateX(0);
-                      opacity: 1;
-                  }
-              }
-              .sideTextLeft {
-                  animation: sideTextLeft 1s ease-in-out;
-              }
-              .sideTextRight {
-                  animation: sideTextRight 1s ease-in-out;
-              }
-          `}</style>
+        .side-text {
+          display: inline-block;
+        }
+        /* SideTextLeft Animation */
+        @keyframes sideTextLeft {
+          from {
+            transform: translateX(-100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+        /* SideTextRight Animation */
+        @keyframes sideTextRight {
+          from {
+            transform: translateX(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+        .sideTextLeft {
+          animation: sideTextLeft 1s ease-in-out;
+        }
+        .sideTextRight {
+          animation: sideTextRight 1s ease-in-out;
+        }
+      `}</style>
       <div
         id={RoseID}
         style={edit}
@@ -2137,7 +2065,7 @@ export function useRand(from, to) {
 export function SeeMore({
   children,
   maxCharacters = 100,
-  maxElements = 3, // Default to 3 elements
+  maxElements = 3,
   edit,
   RoseName,
   RoseId,
@@ -2145,54 +2073,55 @@ export function SeeMore({
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const textRef = useRef(null);
-  // Convert children to string if it's plain text
   const text =
-    typeof children === 'string' ? children : children?.props?.children;
-  // Handle the toggling of the content visibility
+    typeof children === "string" ? children : children?.props?.children;
   const toggleExpand = () => setIsExpanded(!isExpanded);
-  // Split children into an array if they are not already
   const childrenArray = React.Children.toArray(children);
-  // Handle truncation for text
   let truncatedText = text;
   if (text && text.length > maxCharacters && !isExpanded) {
-    truncatedText = text.slice(0, maxCharacters) + '...';
+    truncatedText = text.slice(0, maxCharacters) + "...";
   }
-  // Handle element visibility
-  const visibleChildren = isExpanded ? childrenArray : childrenArray.slice(0, maxElements);
-  // Determine if there's more content to show
-  const hasMoreContent = text?.length > maxCharacters || childrenArray.length > maxElements;
+  const visibleChildren = isExpanded
+    ? childrenArray
+    : childrenArray.slice(0, maxElements);
+  const hasMoreContent =
+    text?.length > maxCharacters || childrenArray.length > maxElements;
   return (
     <div
-      style={{ ...edit, overflow: 'hidden', transition: 'height 0.5s ease' }}
+      style={{ ...edit, overflow: "hidden", transition: "height 0.5s ease" }}
       className={RoseName}
       id={RoseId}
     >
-      <div
-        ref={textRef}
-        className="content"
-      >
+      <div ref={textRef} className="content">
         {/* Render either text or elements based on the content type */}
-        {typeof children === 'string' ? truncatedText : visibleChildren}
+        {typeof children === "string" ? truncatedText : visibleChildren}
       </div>
-      {/* Show "Show More" button if there's more content */}
       {hasMoreContent && (
         <button
+          role="button"
+          aria-label="button"
           style={{
-            background: 'none',
-            border: 'none',
-            fontWeight: 'bold',
-            color: 'blue',
+            background: "none",
+            border: "none",
+            fontWeight: "bold",
+            color: "blue",
             ...editButton,
           }}
           onClick={toggleExpand}
         >
-          {isExpanded ? 'Show Less' : 'Show More'}
+          {isExpanded ? "Show Less" : "Show More"}
         </button>
       )}
     </div>
   );
 }
-export function SideBox({ children, direction = 'left', edit = {}, RoseID, RoseName }) {
+export function SideBox({
+  children,
+  direction = "left",
+  edit = {},
+  RoseID,
+  RoseName,
+}) {
   const [isVisible, setIsVisible] = useState(false);
   const boxRef = useRef(null);
   useEffect(() => {
@@ -2200,23 +2129,22 @@ export function SideBox({ children, direction = 'left', edit = {}, RoseID, RoseN
       if (boxRef.current) {
         const boxRect = boxRef.current.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
-        // Check if the element is within the viewport
         if (
           boxRect.top <= viewportHeight &&
           boxRect.bottom >= 0 &&
           boxRect.left <= window.innerWidth &&
           boxRect.right >= 0
         ) {
-          setIsVisible(true); // Element is visible
+          setIsVisible(true);
         } else {
-          setIsVisible(false); // Element is not visible
+          setIsVisible(false);
         }
       }
     };
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
   return (
@@ -2268,7 +2196,9 @@ export function SideBox({ children, direction = 'left', edit = {}, RoseID, RoseN
         ref={boxRef}
         style={edit}
         id={RoseID}
-        className={`sideboxComponent ${direction} ${isVisible ? 'visible' : ''}`}
+        className={`sideboxComponent ${direction} ${
+          isVisible ? "visible" : ""
+        }`}
       >
         {RoseName && <h2>{RoseName}</h2>}
         {children}
@@ -2282,37 +2212,33 @@ export const useBatteryStatus = () => {
     charging: null,
   });
   useEffect(() => {
-    // Check if the browser supports the Battery Status API
-    if ('getBattery' in navigator) {
+    if ("getBattery" in navigator) {
       navigator.getBattery().then((battery) => {
-        // Set the initial battery status
         setBatteryInfo({
           level: battery.level,
           charging: battery.charging,
         });
-        // Update the battery status when it changes
         const updateBatteryInfo = () => {
           setBatteryInfo({
             level: battery.level,
             charging: battery.charging,
           });
         };
-        battery.addEventListener('levelchange', updateBatteryInfo);
-        battery.addEventListener('chargingchange', updateBatteryInfo);
-        // Cleanup the event listeners on unmount
+        battery.addEventListener("levelchange", updateBatteryInfo);
+        battery.addEventListener("chargingchange", updateBatteryInfo);
         return () => {
-          battery.removeEventListener('levelchange', updateBatteryInfo);
-          battery.removeEventListener('chargingchange', updateBatteryInfo);
+          battery.removeEventListener("levelchange", updateBatteryInfo);
+          battery.removeEventListener("chargingchange", updateBatteryInfo);
         };
       });
     } else {
-      console.log('Battery Status API is not supported in this browser.');
+      console.log("Battery Status API is not supported in this browser.");
     }
   }, []);
   return batteryInfo;
 };
 export function usePreferredLanguage() {
-  const [preferredLanguage, setPreferredLanguage] = useState('en');
+  const [preferredLanguage, setPreferredLanguage] = useState("en");
   useEffect(() => {
     const language = navigator.language || navigator.userLanguage;
     setPreferredLanguage(language);
@@ -2320,16 +2246,16 @@ export function usePreferredLanguage() {
   return preferredLanguage;
 }
 export function useColorScheme() {
-  const [colorScheme, setColorScheme] = useState('light');
+  const [colorScheme, setColorScheme] = useState("light");
   useEffect(() => {
-    const matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
+    const matchMedia = window.matchMedia("(prefers-color-scheme: dark)");
     const handleChange = (e) => {
-      setColorScheme(e.matches ? 'dark' : 'light');
+      setColorScheme(e.matches ? "dark" : "light");
     };
-    handleChange(matchMedia); // Set the initial value
-    matchMedia.addEventListener('change', handleChange);
+    handleChange(matchMedia);
+    matchMedia.addEventListener("change", handleChange);
     return () => {
-      matchMedia.removeEventListener('change', handleChange);
+      matchMedia.removeEventListener("change", handleChange);
     };
   }, []);
   return colorScheme;
@@ -2345,23 +2271,53 @@ export function useHardwareConcurrency() {
 }
 export const getContinent = (latitude, longitude) => {
   if (latitude && longitude) {
-    if (latitude >= -34 && latitude <= 37 && longitude >= -17 && longitude <= 51) {
-      return 'Africa';
-    } else if (latitude >= 10 && latitude <= 82 && longitude >= 25 && longitude <= 180) {
-      return 'Asia';
-    } else if (latitude >= 10 && latitude <= 83 && longitude >= -168 && longitude <= -52) {
-      return 'North America';
-    } else if (latitude >= -56 && latitude <= 13 && longitude >= -93 && longitude <= -32) {
-      return 'South America';
-    } else if (latitude >= -48 && latitude <= -12 && longitude >= 110 && longitude <= 180) {
-      return 'Australia';
-    } else if (latitude >= 35 && latitude <= 72 && longitude >= -25 && longitude <= 45) {
-      return 'Europe';
+    if (
+      latitude >= -34 &&
+      latitude <= 37 &&
+      longitude >= -17 &&
+      longitude <= 51
+    ) {
+      return "Africa";
+    } else if (
+      latitude >= 10 &&
+      latitude <= 82 &&
+      longitude >= 25 &&
+      longitude <= 180
+    ) {
+      return "Asia";
+    } else if (
+      latitude >= 10 &&
+      latitude <= 83 &&
+      longitude >= -168 &&
+      longitude <= -52
+    ) {
+      return "North America";
+    } else if (
+      latitude >= -56 &&
+      latitude <= 13 &&
+      longitude >= -93 &&
+      longitude <= -32
+    ) {
+      return "South America";
+    } else if (
+      latitude >= -48 &&
+      latitude <= -12 &&
+      longitude >= 110 &&
+      longitude <= 180
+    ) {
+      return "Australia";
+    } else if (
+      latitude >= 35 &&
+      latitude <= 72 &&
+      longitude >= -25 &&
+      longitude <= 45
+    ) {
+      return "Europe";
     } else if (latitude >= -90 && latitude <= -60) {
-      return 'Antarctica';
+      return "Antarctica";
     }
   }
-  return 'Unknown';
+  return "Unknown";
 };
 export const useContinentContent = () => {
   const [continent, setContinent] = useState(null);
@@ -2375,11 +2331,11 @@ export const useContinentContent = () => {
         },
         (error) => {
           console.error("Error getting location:", error);
-          setContinent('Unknown');
+          setContinent("Unknown");
         }
       );
     } else {
-      setContinent('Unknown');
+      setContinent("Unknown");
     }
   }, []);
   return { continent };
@@ -2391,15 +2347,15 @@ export const useUserCountry = () => {
   useEffect(() => {
     const fetchCountry = async () => {
       try {
-        const response = await fetch('https://ipapi.co/json/');
+        const response = await fetch("https://ipapi.co/json/");
         if (!response.ok) {
-          throw new Error('Failed to fetch country data');
+          throw new Error("Failed to fetch country data");
         }
         const data = await response.json();
         setCountry(data.country_name);
       } catch (err) {
         console.error("Error fetching the user's country:", err);
-        setError('Could not determine your country.');
+        setError("Could not determine your country.");
       } finally {
         setLoading(false);
       }
@@ -2413,43 +2369,43 @@ export const usePhotoCapture = () => {
   const [cameraError, setCameraError] = useState(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-  // Start the camera when the hook is used
   useEffect(() => {
     const startCamera = async () => {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+        });
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
-          // Play video after the stream metadata is loaded
           videoRef.current.onloadedmetadata = () => {
-            videoRef.current.play().catch(err => {
-              console.error('Error playing video:', err);
+            videoRef.current.play().catch((err) => {
+              console.error("Error playing video:", err);
             });
           };
         }
       } catch (err) {
-        console.error('Error accessing the camera: ', err);
-        setCameraError('Unable to access the camera. Please check your device settings.');
+        console.error("Error accessing the camera: ", err);
+        setCameraError(
+          "Unable to access the camera. Please check your device settings."
+        );
       }
     };
     startCamera();
-    // Cleanup function to stop the camera when the component unmounts
     return () => {
       if (videoRef.current && videoRef.current.srcObject) {
         const stream = videoRef.current.srcObject;
         const tracks = stream.getTracks();
-        tracks.forEach(track => track.stop());
+        tracks.forEach((track) => track.stop());
       }
     };
   }, []);
-  // Capture a photo by drawing the video frame onto a canvas
   const takePhoto = () => {
     const canvas = canvasRef.current;
     const video = videoRef.current;
     if (canvas && video) {
-      const context = canvas.getContext('2d');
+      const context = canvas.getContext("2d");
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
-      setPhoto(canvas.toDataURL('image/png'));
+      setPhoto(canvas.toDataURL("image/png"));
     }
   };
   return { takePhoto, photo, videoRef, canvasRef, cameraError };
@@ -2458,15 +2414,13 @@ export const useGetContacts = () => {
   const [contacts, setContacts] = useState([]);
   const [error, setError] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
-  // Function to get contacts
   const getContacts = async () => {
     try {
-      if (!('contacts' in navigator && 'ContactsManager' in window)) {
+      if (!("contacts" in navigator && "ContactsManager" in window)) {
         throw new Error("Contacts API not supported on this device.");
       }
-      // Define the properties and options for contact retrieval
-      const props = ['name', 'email', 'tel'];
-      const opts = { multiple: true }; // Fetch multiple contacts
+      const props = ["name", "email", "tel"];
+      const opts = { multiple: true };
       setIsFetching(true);
       const contactList = await navigator.contacts.select(props, opts);
       setContacts(contactList);
@@ -2485,11 +2439,13 @@ export const SmoothParent = ({ children }) => {
     if (childElements) {
       Array.from(childElements).forEach((child, index) => {
         child.style.opacity = 0;
-        child.style.transform = 'translateY(20px)';
-        child.style.transition = `opacity 0.5s ease ${index * 0.2}s, transform 0.5s ease ${index * 0.2}s`;
+        child.style.transform = "translateY(20px)";
+        child.style.transition = `opacity 0.5s ease ${
+          index * 0.2
+        }s, transform 0.5s ease ${index * 0.2}s`;
         setTimeout(() => {
           child.style.opacity = 1;
-          child.style.transform = 'translateY(0)';
+          child.style.transform = "translateY(0)";
         }, 50);
       });
     }
@@ -2498,23 +2454,26 @@ export const SmoothParent = ({ children }) => {
     <>
       <style jsx>{`
         .smooth-parent {
-  display: flex;
-  flex-direction: column;
-  gap: 20px; /* space between child elements */
-}
-.smooth-parent > * {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-`}</style>
+          display: flex;
+          flex-direction: column;
+          gap: 20px; /* space between child elements */
+        }
+        .smooth-parent > * {
+          opacity: 0;
+          transform: translateY(20px);
+          transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+      `}</style>
       <div className="smooth-parent" ref={parentRef}>
         {children}
       </div>
     </>
   );
 };
-export const SnakeMouse = ({ color = "rgba(0, 150, 255, 0.8)", display = "block" }) => {
+export const SnakeMouse = ({
+  color = "rgba(0, 150, 255, 0.8)",
+  display = "block",
+}) => {
   const canvasRef = useRef(null);
   const ctxRef = useRef(null);
   const trailsRef = useRef([]);
@@ -2551,7 +2510,6 @@ export const SnakeMouse = ({ color = "rgba(0, 150, 255, 0.8)", display = "block"
     const ctx = ctxRef.current;
     if (!ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // Draw each trail
     trailsRef.current.forEach((trail, index) => {
       ctx.strokeStyle = `rgba(0, 150, 255, ${0.8 - index * 0.1})`;
       ctx.lineWidth = 2.5 - index * 0.3;
@@ -2573,9 +2531,7 @@ export const SnakeMouse = ({ color = "rgba(0, 150, 255, 0.8)", display = "block"
     canvas.height = window.innerHeight;
     const ctx = canvas.getContext("2d");
     ctxRef.current = ctx;
-    // Start the drawing loop
     draw();
-    // Cleanup to cancel animation on unmount
     return () => {
       if (animationFrameId.current) {
         cancelAnimationFrame(animationFrameId.current);
@@ -2602,8 +2558,8 @@ export const SnakeMouse = ({ color = "rgba(0, 150, 255, 0.8)", display = "block"
 export const ViewportContainer = ({
   children,
   threshold = 0.1,
-  rootMargin = '0px',
-  lazyLoad = false
+  rootMargin = "0px",
+  lazyLoad = false,
 }) => {
   const containerRef = useRef(null);
   const [isLoaded, setIsLoaded] = useState(!lazyLoad);
@@ -2618,24 +2574,20 @@ export const ViewportContainer = ({
       },
       {
         threshold,
-        rootMargin
+        rootMargin,
       }
     );
     if (containerRef.current) {
-      observer.observe(containerRef.current); // مراقبة العنصر
+      observer.observe(containerRef.current);
     }
     return () => {
       if (observer && containerRef.current) {
-        observer.disconnect(); // التأكد من فصل المراقب عند إزالة المكون
+        observer.disconnect();
       }
     };
   }, [threshold, rootMargin, lazyLoad]);
-  if (!isLoaded) return null; // إذا لم يتم تحميل المحتوى بعد، إرجاع null (لا يتم عرض أي شيء)
-  return (
-    <div ref={containerRef}>
-      {children} {/* عرض المحتوى دون أي تأثير على التصميم */}
-    </div>
-  );
+  if (!isLoaded) return null;
+  return <div ref={containerRef}>{children}</div>;
 };
 export const useViewportVisibility = (loadContentOnView = true) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -2648,12 +2600,12 @@ export const useViewportVisibility = (loadContentOnView = true) => {
         setIsVisible(isInViewport);
       }
     };
-    handleScroll(); // Initial check
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
   }, [ref.current]);
   return { ref, isVisible, loadContentOnView };
@@ -2662,18 +2614,15 @@ export default function TestManegar({ children }) {
   const [renderTime, setRenderTime] = useState(null);
   useEffect(() => {
     const startTime = performance.now();
-    // Perform the measurement after the next paint
     requestAnimationFrame(() => {
       const endTime = performance.now();
-      setRenderTime(endTime - startTime); // Calculate render time in milliseconds
+      setRenderTime(endTime - startTime);
     });
-  }, [children]); // Runs the effect when children change
+  }, [children]);
   return (
     <div>
       {children}
-      {renderTime !== null && (
-        <p>Render time: {renderTime.toFixed(2)} ms</p>
-      )}
+      {renderTime !== null && <p>Render time: {renderTime.toFixed(2)} ms</p>}
     </div>
   );
 }
@@ -2681,12 +2630,11 @@ export const useRenderTime = () => {
   const [renderTime, setRenderTime] = useState(null);
   useEffect(() => {
     const startTime = performance.now();
-    // Perform the measurement after the next paint
     requestAnimationFrame(() => {
       const endTime = performance.now();
-      setRenderTime(endTime - startTime); // Calculate render time in milliseconds
+      setRenderTime(endTime - startTime);
     });
-  }, []); // Run only once on mount
+  }, []);
   return renderTime;
 };
 export const BlockUser = ({ blockUser, edit = {}, RoseId }) => {
@@ -2694,11 +2642,11 @@ export const BlockUser = ({ blockUser, edit = {}, RoseId }) => {
   const [isBlocked, setIsBlocked] = useState(false);
   const fetchUserIP = async () => {
     try {
-      const response = await fetch('https://api.ipify.org?format=json');
+      const response = await fetch("https://api.ipify.org?format=json");
       const data = await response.json();
       setIp(data.ip);
     } catch (error) {
-      console.error('Error fetching IP:', error);
+      console.error("Error fetching IP:", error);
     }
   };
   useEffect(() => {
@@ -2715,36 +2663,189 @@ export const BlockUser = ({ blockUser, edit = {}, RoseId }) => {
     return (
       <>
         <style jsx>{`
-                  .userBlockComponentActionEvent{
-                      display: flex;
-                      justify-content: center;
-                      align-items: center;
-                      position: absolute;
-                      user-select: none;
-                      z-index: 9999999;
-                      height: 100%;
-                      font-weight: bold;
-                      font-weight: 4rem;
-                      background: black;
-                      width: 100%;
-                      color:red;
-                      overflow:hidden;
-                  }
-                  .userBlockComponentActionEventChildrenDiv{
-                      color:white;
-                      background:red;
-                      height:4rem;
-                      display: flex;
-                      justify-content: center;
-                      align-items: center;
-                      width:40rem;
-                      border-radius:10px
-                  }
-                  `}</style>
-        <div className='userBlockComponentActionEvent'>
-          <div id={RoseId} style={edit} className='userBlockComponentActionEventChildrenDiv'>Access Denied: You Are Blocked</div>
+          .userBlockComponentActionEvent {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            user-select: none;
+            z-index: 9999999;
+            height: 100%;
+            font-weight: bold;
+            font-weight: 4rem;
+            background: black;
+            width: 100%;
+            color: red;
+            overflow: hidden;
+          }
+          .userBlockComponentActionEventChildrenDiv {
+            color: white;
+            background: red;
+            height: 4rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40rem;
+            border-radius: 10px;
+          }
+        `}</style>
+        <div className="userBlockComponentActionEvent">
+          <div
+            id={RoseId}
+            style={edit}
+            className="userBlockComponentActionEventChildrenDiv"
+          >
+            Access Denied: You Are Blocked
+          </div>
         </div>
       </>
     );
   }
 };
+
+export const Image = ({
+  src,
+  alt = "Image Tag",
+  quality = 0.7,
+  imageSize = false,
+  requireSrc,
+  height = 30,
+  width = 30,
+  edit = {},
+  responsiveSrc = {},
+  RoseName,
+  RoseID,
+  loading = false,
+}) => {
+  const [webpSrc, setWebpSrc] = useState(null);
+  const [compressedSize, setCompressedSize] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    const loadImage = async (imageSrc) => {
+      const img = new window.Image(); // Accessing the global Image constructor correctly
+      img.src = imageSrc;
+
+      img.onload = () => {
+        compressImage(img);
+      };
+
+      img.onerror = () => {
+        setError(true);
+      };
+    };
+
+    // Load from requireSrc prop if available, otherwise use src
+    const imageSource = requireSrc || src;
+
+    if (imageSource) {
+      loadImage(imageSource);
+    }
+  }, [src, requireSrc]);
+
+  const compressImage = (img) => {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = width || img.width;
+    canvas.height = height || img.height;
+
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+    // Set a new image type (webp) and quality
+    const webpDataUrl = canvas.toDataURL("image/webp", quality);
+    setWebpSrc(webpDataUrl);
+
+    const webpSizeInBytes = Math.ceil((webpDataUrl.length * 3) / 4);
+    const sizeInKB = (webpSizeInBytes / 1024).toFixed(2);
+    setCompressedSize(sizeInKB);
+  };
+
+  return (
+    <div>
+      {!isLoaded && !error && loading && (
+        <div
+          style={{
+            height,
+            width,
+            backgroundColor: "#f0f0f0",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            fontSize: "14px",
+            color: "#999",
+          }}
+        >
+          Loading...
+        </div>
+      )}
+
+      <picture>
+        {webpSrc && <source srcSet={webpSrc} type="image/webp" />}
+        {responsiveSrc && (
+          <source
+            srcSet={responsiveSrc.srcSet}
+            sizes={responsiveSrc.sizes}
+            type="image/jpeg"
+          />
+        )}
+        <img
+          className={RoseName}
+          id={RoseID}
+          style={{
+            filter: isLoaded ? "none" : "blur(10px)",
+            transition: "filter 0.3s ease-in-out",
+            ...edit,
+          }}
+          height={height}
+          width={width}
+          src={webpSrc || src}
+          alt={alt}
+          loading="lazy"
+          aria-label={alt}
+          onLoad={() => setIsLoaded(true)}
+          onError={() => {
+            setError(true);
+          }}
+        />
+      </picture>
+
+      {imageSize && compressedSize && !error && (
+        <p>
+          Image Size: <span style={{ color: "blue" }}>{compressedSize} </span>
+          KB
+        </p>
+      )}
+      {error && <p style={{ color: "red" }}>Failed to load image</p>}
+    </div>
+  );
+};
+export function Section({
+  children,
+  RoseName,
+  RoseID,
+  edit = {},
+  ariaLabelledby = "section",
+  ...props
+}) {
+  let styles = {
+    minHeight: "100vh",
+    margin: "3rem 3rem 0rem 3rem",
+    transition: "0.2s",
+    boxSizing: "border-box",
+    ...edit,
+  };
+
+  return (
+    <div
+      className={RoseName}
+      id={RoseID}
+      style={styles}
+      aria-labelledby={ariaLabelledby}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+}
