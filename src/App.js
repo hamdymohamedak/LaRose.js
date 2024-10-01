@@ -3,11 +3,6 @@ import {
   RandomAnimate,
   WaveText,
   useRenderTime,
-<<<<<<< HEAD
-=======
-  useLocalStorage,
-  BlockUser,
->>>>>>> origin/main
   ShinyText,
   ShinyButton,
 } from "larose-js";
