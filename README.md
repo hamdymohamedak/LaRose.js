@@ -54,7 +54,7 @@ OR
 npm i
 ```
 
-4. Start Development for: (React)
+4. Start Development
 
 ```sh
 npm start
