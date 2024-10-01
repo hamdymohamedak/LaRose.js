@@ -6,7 +6,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "concurrently": "^9.0.1",
+    "larose-js": "^1.0.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
@@ -14,7 +14,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "concurrently \"npm run start-react\" \"node compress.js ./src/assets  \"",
+    "start": "node runner.js",
     "start-react": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

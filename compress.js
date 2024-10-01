@@ -72,3 +72,17 @@ if (!folderPath) {
 }
 
 convertImagesToWebP(folderPath, quality);
+
+console.log(`_    
+  
+  _          ____                    _     
+ | |    __ _|  _ \\ ___  ___  ___    (_)___ 
+ | |   / _\` | |_) / _ \\/ __|/ _ \\   | / __|
+ | |__| (_| |  _ < (_) \\__ \\  __/   | \\__ \\
+ |_____\\__,_|_| \\_\\___/|___/\\___|  _/ |___/
+                                  |__/     
+                                   
+                                   `);
+console.log(`author:`);
+console.log("https://github.com/hamdymohamedak");
+console.log("https://hamdymohamedak.vercel.app");

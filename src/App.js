@@ -3,11 +3,9 @@ import {
   RandomAnimate,
   WaveText,
   useRenderTime,
-  useLocalStorage,
-  BlockUser,
   ShinyText,
   ShinyButton,
-} from "./LaRose";
+} from "larose-js";
 import "./App.css";
 export default function App() {
   const renderTime = useRenderTime();
@@ -20,7 +18,7 @@ export default function App() {
     <RoseBox RoseName="App">
       <WaveText>let's Start Development</WaveText>
       <RandomAnimate edit={{}}>Hello world</RandomAnimate>
-      <ShinyButton onClick={open_docs}>
+      <ShinyButton ShinyButtonEvent={open_docs}>
         <ShinyText edit={{ color: "white" }}>Learn LaRose</ShinyText>
       </ShinyButton>
       <div>
