@@ -72,7 +72,6 @@ if (!folderPath) {
 }
 
 convertImagesToWebP(folderPath, quality);
-<<<<<<< HEAD
 
 console.log(`_    
   
@@ -87,5 +86,3 @@ console.log(`_
 console.log(`author:`);
 console.log("https://github.com/hamdymohamedak");
 console.log("https://hamdymohamedak.vercel.app");
-=======
->>>>>>> origin/main
