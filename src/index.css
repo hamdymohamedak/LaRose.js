@@ -10,12 +10,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  /* outline: none; */
   transition: 0.2s;
 }
 
